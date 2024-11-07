@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* boilerplateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* boilerplateTests.m */; };
+		00E356F31AD99517003FC87E /* MySmartVocabularyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* MySmartVocabularyTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		23E9CDFA1EAB9F3C15B93533 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 93BBB2EA197960CB9007E16B /* PrivacyInfo.xcprivacy */; };
-		636054D7FC01DBA5FD8B9D16 /* libPods-boilerplate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6674952BE812C94294177A /* libPods-boilerplate.a */; };
+		636054D7FC01DBA5FD8B9D16 /* libPods-MySmartVocabulary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6674952BE812C94294177A /* libPods-MySmartVocabulary.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		92A3E97F7348CB2AAAC05B99 /* libPods-boilerplate-boilerplateTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45BC00B2CE79A109A5DB5D5D /* libPods-boilerplate-boilerplateTests.a */; };
+		92A3E97F7348CB2AAAC05B99 /* libPods-MySmartVocabulary-MySmartVocabularyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45BC00B2CE79A109A5DB5D5D /* libPods-MySmartVocabulary-MySmartVocabularyTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,29 +23,29 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = boilerplate;
+			remoteInfo = "MySmartVocabulary";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00E356EE1AD99517003FC87E /* boilerplateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = boilerplateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* MySmartVocabularyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MySmartVocabularyTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* boilerplateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = boilerplateTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* boilerplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = boilerplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = boilerplate/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = boilerplate/AppDelegate.mm; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = boilerplate/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = boilerplate/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = boilerplate/main.m; sourceTree = "<group>"; };
-		45BC00B2CE79A109A5DB5D5D /* libPods-boilerplate-boilerplateTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-boilerplate-boilerplateTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7C6674952BE812C94294177A /* libPods-boilerplate.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-boilerplate.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = boilerplate/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		82DA40E1A31F1A2A809133E0 /* Pods-boilerplate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-boilerplate.debug.xcconfig"; path = "Target Support Files/Pods-boilerplate/Pods-boilerplate.debug.xcconfig"; sourceTree = "<group>"; };
-		93BBB2EA197960CB9007E16B /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = boilerplate/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		ADFAB53123448D45A8208103 /* Pods-boilerplate-boilerplateTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-boilerplate-boilerplateTests.debug.xcconfig"; path = "Target Support Files/Pods-boilerplate-boilerplateTests/Pods-boilerplate-boilerplateTests.debug.xcconfig"; sourceTree = "<group>"; };
-		E3BEA91898D0A62B3EBF52C5 /* Pods-boilerplate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-boilerplate.release.xcconfig"; path = "Target Support Files/Pods-boilerplate/Pods-boilerplate.release.xcconfig"; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* MySmartVocabularyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "MySmartVocabularyTests.m"; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* MySmartVocabulary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MySmartVocabulary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "MySmartVocabulary/AppDelegate.h"; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = "MySmartVocabulary/AppDelegate.mm"; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "MySmartVocabulary/Images.xcassets"; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "MySmartVocabulary/Info.plist"; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "MySmartVocabulary/main.m"; sourceTree = "<group>"; };
+		45BC00B2CE79A109A5DB5D5D /* libPods-MySmartVocabulary-MySmartVocabularyTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MySmartVocabulary-MySmartVocabularyTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C6674952BE812C94294177A /* libPods-MySmartVocabulary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MySmartVocabulary.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "MySmartVocabulary/LaunchScreen.storyboard"; sourceTree = "<group>"; };
+		82DA40E1A31F1A2A809133E0 /* Pods-MySmartVocabulary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MySmartVocabulary.debug.xcconfig"; path = "Target Support Files/Pods-MySmartVocabulary/Pods-MySmartVocabulary.debug.xcconfig"; sourceTree = "<group>"; };
+		93BBB2EA197960CB9007E16B /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = MySmartVocabulary/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		ADFAB53123448D45A8208103 /* Pods-MySmartVocabulary-MySmartVocabularyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MySmartVocabulary-MySmartVocabularyTests.debug.xcconfig"; path = "Target Support Files/Pods-MySmartVocabulary-MySmartVocabularyTests/Pods-MySmartVocabulary-MySmartVocabularyTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E3BEA91898D0A62B3EBF52C5 /* Pods-MySmartVocabulary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MySmartVocabulary.release.xcconfig"; path = "Target Support Files/Pods-MySmartVocabulary/Pods-MySmartVocabulary.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		FC978117D4451BC295FAF541 /* Pods-boilerplate-boilerplateTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-boilerplate-boilerplateTests.release.xcconfig"; path = "Target Support Files/Pods-boilerplate-boilerplateTests/Pods-boilerplate-boilerplateTests.release.xcconfig"; sourceTree = "<group>"; };
+		FC978117D4451BC295FAF541 /* Pods-MySmartVocabulary-MySmartVocabularyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MySmartVocabulary-MySmartVocabularyTests.release.xcconfig"; path = "Target Support Files/Pods-MySmartVocabulary-MySmartVocabularyTests/Pods-MySmartVocabulary-MySmartVocabularyTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92A3E97F7348CB2AAAC05B99 /* libPods-boilerplate-boilerplateTests.a in Frameworks */,
+				92A3E97F7348CB2AAAC05B99 /* libPods-MySmartVocabulary-MySmartVocabularyTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,20 +61,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				636054D7FC01DBA5FD8B9D16 /* libPods-boilerplate.a in Frameworks */,
+				636054D7FC01DBA5FD8B9D16 /* libPods-MySmartVocabulary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* boilerplateTests */ = {
+		00E356EF1AD99517003FC87E /* MySmartVocabularyTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* boilerplateTests.m */,
+				00E356F21AD99517003FC87E /* MySmartVocabularyTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = boilerplateTests;
+			path = "MySmartVocabularyTests";
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -85,7 +85,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* boilerplate */ = {
+		13B07FAE1A68108700A75B9A /* MySmartVocabulary */ = {
 			isa = PBXGroup;
 			children = (
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -96,15 +96,15 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 				93BBB2EA197960CB9007E16B /* PrivacyInfo.xcprivacy */,
 			);
-			name = boilerplate;
+			name = "MySmartVocabulary";
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				7C6674952BE812C94294177A /* libPods-boilerplate.a */,
-				45BC00B2CE79A109A5DB5D5D /* libPods-boilerplate-boilerplateTests.a */,
+				7C6674952BE812C94294177A /* libPods-MySmartVocabulary.a */,
+				45BC00B2CE79A109A5DB5D5D /* libPods-MySmartVocabulary-MySmartVocabularyTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -119,9 +119,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* boilerplate */,
+				13B07FAE1A68108700A75B9A /* MySmartVocabulary */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* boilerplateTests */,
+				00E356EF1AD99517003FC87E /* MySmartVocabularyTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
@@ -134,8 +134,8 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* boilerplate.app */,
-				00E356EE1AD99517003FC87E /* boilerplateTests.xctest */,
+				13B07F961A680F5B00A75B9A /* MySmartVocabulary.app */,
+				00E356EE1AD99517003FC87E /* MySmartVocabularyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -143,10 +143,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				82DA40E1A31F1A2A809133E0 /* Pods-boilerplate.debug.xcconfig */,
-				E3BEA91898D0A62B3EBF52C5 /* Pods-boilerplate.release.xcconfig */,
-				ADFAB53123448D45A8208103 /* Pods-boilerplate-boilerplateTests.debug.xcconfig */,
-				FC978117D4451BC295FAF541 /* Pods-boilerplate-boilerplateTests.release.xcconfig */,
+				82DA40E1A31F1A2A809133E0 /* Pods-MySmartVocabulary.debug.xcconfig */,
+				E3BEA91898D0A62B3EBF52C5 /* Pods-MySmartVocabulary.release.xcconfig */,
+				ADFAB53123448D45A8208103 /* Pods-MySmartVocabulary-MySmartVocabularyTests.debug.xcconfig */,
+				FC978117D4451BC295FAF541 /* Pods-MySmartVocabulary-MySmartVocabularyTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -154,9 +154,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* boilerplateTests */ = {
+		00E356ED1AD99517003FC87E /* MySmartVocabularyTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "boilerplateTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "MySmartVocabularyTests" */;
 			buildPhases = (
 				CCDB2C6624A274CA63032AC4 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -170,14 +170,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = boilerplateTests;
-			productName = boilerplateTests;
-			productReference = 00E356EE1AD99517003FC87E /* boilerplateTests.xctest */;
+			name = MySmartVocabularyTests;
+			productName = MySmartVocabularyTests;
+			productReference = 00E356EE1AD99517003FC87E /* MySmartVocabularyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* boilerplate */ = {
+		13B07F861A680F5B00A75B9A /* MySmartVocabulary */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "boilerplate" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "MySmartVocabulary" */;
 			buildPhases = (
 				E20138B9AC104BFF4A6D4FB7 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -192,9 +192,9 @@
 			);
 			dependencies = (
 			);
-			name = boilerplate;
-			productName = boilerplate;
-			productReference = 13B07F961A680F5B00A75B9A /* boilerplate.app */;
+			name = "MySmartVocabulary";
+			productName = "MySmartVocabulary";
+			productReference = 13B07F961A680F5B00A75B9A /* MySmartVocabulary.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -214,7 +214,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "boilerplate" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "MySmartVocabulary" */;
 			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -227,8 +227,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* boilerplate */,
-				00E356ED1AD99517003FC87E /* boilerplateTests */,
+				13B07F861A680F5B00A75B9A /* MySmartVocabulary */,
+				00E356ED1AD99517003FC87E /* MySmartVocabularyTests */,
 			);
 		};
 /* End PBXProject section */
@@ -276,15 +276,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-boilerplate/Pods-boilerplate-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-MySmartVocabulary/Pods-MySmartVocabulary-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-boilerplate/Pods-boilerplate-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-MySmartVocabulary/Pods-MySmartVocabulary-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-boilerplate/Pods-boilerplate-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MySmartVocabulary/Pods-MySmartVocabulary-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		52F9BC38A009FDF1FFDF3409 /* [CP] Copy Pods Resources */ = {
@@ -293,15 +293,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-boilerplate-boilerplateTests/Pods-boilerplate-boilerplateTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-MySmartVocabulary-MySmartVocabularyTests/Pods-MySmartVocabulary-MySmartVocabularyTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-boilerplate-boilerplateTests/Pods-boilerplate-boilerplateTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-MySmartVocabulary-MySmartVocabularyTests/Pods-MySmartVocabulary-MySmartVocabularyTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-boilerplate-boilerplateTests/Pods-boilerplate-boilerplateTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MySmartVocabulary-MySmartVocabularyTests/Pods-MySmartVocabulary-MySmartVocabularyTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		72CA37EF243BAD46B9BB632D /* [CP] Embed Pods Frameworks */ = {
@@ -310,15 +310,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-boilerplate/Pods-boilerplate-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-MySmartVocabulary/Pods-MySmartVocabulary-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-boilerplate/Pods-boilerplate-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-MySmartVocabulary/Pods-MySmartVocabulary-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-boilerplate/Pods-boilerplate-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MySmartVocabulary/Pods-MySmartVocabulary-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		75B81A693B1C3E984E09ACC8 /* [CP] Embed Pods Frameworks */ = {
@@ -327,15 +327,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-boilerplate-boilerplateTests/Pods-boilerplate-boilerplateTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-MySmartVocabulary-MySmartVocabularyTests/Pods-MySmartVocabulary-MySmartVocabularyTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-boilerplate-boilerplateTests/Pods-boilerplate-boilerplateTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-MySmartVocabulary-MySmartVocabularyTests/Pods-MySmartVocabulary-MySmartVocabularyTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-boilerplate-boilerplateTests/Pods-boilerplate-boilerplateTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MySmartVocabulary-MySmartVocabularyTests/Pods-MySmartVocabulary-MySmartVocabularyTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CCDB2C6624A274CA63032AC4 /* [CP] Check Pods Manifest.lock */ = {
@@ -353,7 +353,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-boilerplate-boilerplateTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-MySmartVocabulary-MySmartVocabularyTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -375,7 +375,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-boilerplate-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-MySmartVocabulary-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -408,7 +408,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* boilerplateTests.m in Sources */,
+				00E356F31AD99517003FC87E /* MySmartVocabularyTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,7 +426,7 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* boilerplate */;
+			target = 13B07F861A680F5B00A75B9A /* MySmartVocabulary */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -434,14 +434,14 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ADFAB53123448D45A8208103 /* Pods-boilerplate-boilerplateTests.debug.xcconfig */;
+			baseConfigurationReference = ADFAB53123448D45A8208103 /* Pods-MySmartVocabulary-MySmartVocabularyTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = boilerplateTests/Info.plist;
+				INFOPLIST_FILE = "MySmartVocabularyTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -453,19 +453,19 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.boilerplate;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.my.smart.vocabulary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/boilerplate.app/boilerplate";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MySmartVocabulary.app/MySmartVocabulary";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FC978117D4451BC295FAF541 /* Pods-boilerplate-boilerplateTests.release.xcconfig */;
+			baseConfigurationReference = FC978117D4451BC295FAF541 /* Pods-MySmartVocabulary-MySmartVocabularyTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = boilerplateTests/Info.plist;
+				INFOPLIST_FILE = "MySmartVocabularyTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -477,23 +477,24 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.boilerplate;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.my.smart.vocabulary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/boilerplate.app/boilerplate";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MySmartVocabulary.app/MySmartVocabulary";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82DA40E1A31F1A2A809133E0 /* Pods-boilerplate.debug.xcconfig */;
+			baseConfigurationReference = 82DA40E1A31F1A2A809133E0 /* Pods-MySmartVocabulary.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 32ZADCJE3R;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = boilerplate/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = boilerplate;
+				INFOPLIST_FILE = "MySmartVocabulary/Info.plist";
+             INFOPLIST_KEY_CFBundleDisplayName = "My Smart Vocabulary";
+				INFOPLIST_KEY_CFBundleDisplayName = MySmartVocabulary;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -504,8 +505,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.boilerplate;
-				PRODUCT_NAME = boilerplate;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.my.smart.vocabulary";
+				PRODUCT_NAME = "MySmartVocabulary";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -514,14 +515,15 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E3BEA91898D0A62B3EBF52C5 /* Pods-boilerplate.release.xcconfig */;
+			baseConfigurationReference = E3BEA91898D0A62B3EBF52C5 /* Pods-MySmartVocabulary.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 32ZADCJE3R;
-				INFOPLIST_FILE = boilerplate/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = boilerplate;
+				INFOPLIST_FILE = "MySmartVocabulary/Info.plist";
+             INFOPLIST_KEY_CFBundleDisplayName = "My Smart Vocabulary";
+				INFOPLIST_KEY_CFBundleDisplayName = MySmartVocabulary;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -532,8 +534,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.boilerplate;
-				PRODUCT_NAME = boilerplate;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.my.smart.vocabulary";
+				PRODUCT_NAME = "MySmartVocabulary";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -699,7 +701,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "boilerplateTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "MySmartVocabularyTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -708,7 +710,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "boilerplate" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "MySmartVocabulary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -717,7 +719,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "boilerplate" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "MySmartVocabulary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

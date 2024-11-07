@@ -1,4 +1,4 @@
-package com.boilerplate;
+package com.my.smart.vocabulary;
 
 import android.app.Application
 import com.facebook.react.PackageList
