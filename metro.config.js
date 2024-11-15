@@ -17,8 +17,9 @@ const config = {
       'react-native-svg-transformer/react-native',
     ),
   },
+
   resolver: {
-    assetExts: assetExts.filter(ext => ext !== 'svg'),
+    assetExts: [...assetExts.filter(ext => ext !== 'svg'), 'lottie'],
     sourceExts: [...sourceExts, 'svg'],
   },
 }

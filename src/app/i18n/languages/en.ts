@@ -13,4 +13,7 @@ export default {
     number_in_use: 'The given phone number is already in use!',
     integer: 'This field must contain an integer numeric value',
   },
+  home: {
+    title: 'Home',
+  },
 }

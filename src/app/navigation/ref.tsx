@@ -13,7 +13,6 @@ export const Navigation = {
   ref: navigationRef,
   navigate: (name: EScreens, params?: never) => {
     if (navigationRef.isReady()) {
-      // @ts-ignore
       navigationRef.navigate(name, params)
     }
   },
