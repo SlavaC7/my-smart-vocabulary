@@ -10,8 +10,8 @@ export const useTabs = () => {
   const tabs: Record<KeysOfEStacks, TUseTabs> = {
     [EStacks.Home]: {
       title: 'First page',
-      Icon: 'Index',
-      ActiveIcon: 'Index',
+      Icon: 'OpenBook',
+      ActiveIcon: 'OpenBook',
     },
     [EStacks.Main]: {
       title: '',

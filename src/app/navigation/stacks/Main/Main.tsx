@@ -2,8 +2,9 @@ import React from 'react'
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import { ETab, MainTab } from '../../tabs'
 import { NativeScreenNavigationOptions } from '../options'
+
+import { ETab, TabsStack } from '../Tabs'
 
 import { TMainStack } from './types'
 
@@ -17,7 +18,7 @@ export const MainStack = () => {
         ...NativeScreenNavigationOptions,
       }}>
       {/* also using EStacks */}
-      <Stack.Screen component={MainTab} name={ETab.Main} />
+      <Stack.Screen component={TabsStack} name={ETab.Main} />
     </Stack.Navigator>
   )
 }

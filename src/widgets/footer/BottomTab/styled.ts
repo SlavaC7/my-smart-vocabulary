@@ -11,10 +11,16 @@ export const styles = StyleSheet.create({
 })
 
 export const Container = styled(View)`
+  padding: 11px 16px 8px 16px;
+  background-color: ${EColors.red};
+`
+
+export const TabContainer = styled(View)`
   flex-direction: row;
-  padding-top: 11px;
-  padding-bottom: 8px;
-  background-color: ${EColors.white};
+  background-color: ${EColors.primary};
+  border-radius: 32px;
+  padding: 8px 20px;
+  width: 100%;
 `
 
 export const StyledTabButton = styled(TouchableOpacity)`

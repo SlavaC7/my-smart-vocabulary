@@ -1,12 +1,11 @@
-import * as Stacks from '../../stacks'
-import { EStacks } from '../../stacks'
+import * as Stacks from '..'
+import { EStacks } from '..'
 import { TNavigatorScreenParams } from '../../types'
-import { TNotificationStack } from '../Notification'
 
 export type TTabsStack = {
   [EStacks.Home]: TNavigatorScreenParams<Stacks.THomeStack>
-  [EStacks.Wallet]: undefined
-  [EStacks.Notification]: TNavigatorScreenParams<TNotificationStack>
-  [EStacks.Profile]: TNavigatorScreenParams<Stacks.TProfileStack>
-  [EStacks.Chats]: TNavigatorScreenParams<Stacks.TChatStack>
+}
+
+export enum ETab {
+  Main = 'MainTab',
 }

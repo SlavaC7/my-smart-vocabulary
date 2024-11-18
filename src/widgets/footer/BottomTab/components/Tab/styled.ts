@@ -12,7 +12,7 @@ export const Container = styled(View)`
 `
 
 export const Title = styled(Typography.CaptionR)`
-  font-size: 11px;
+  font-size: 12px;
   margin-top: 7px;
 `
 

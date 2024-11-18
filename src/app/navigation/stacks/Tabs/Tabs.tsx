@@ -7,13 +7,9 @@ import {
 
 import { Footer } from '@/widgets/footer'
 
-import { EStacks, HomeStack, ProfileStack } from '..'
+import { EStacks, HomeStack } from '..'
 
-import { ChatStack } from '../Chat'
-import { NotificationStack } from '../Notification'
-import { ScreenTabOptions } from '../options'
-
-import { WalletStack } from '../Wallet'
+import { ScreenTabOptions } from './options'
 
 import { TTabsStack } from './types'
 
@@ -31,10 +27,6 @@ export const TabsStack = () => {
       screenOptions={ScreenTabOptions}
       tabBar={tabBar}>
       <Tab.Screen name={EStacks.Home} component={HomeStack} />
-      <Tab.Screen name={EStacks.Chats} component={ChatStack} />
-      <Tab.Screen name={EStacks.Wallet} component={WalletStack} />
-      <Tab.Screen name={EStacks.Notification} component={NotificationStack} />
-      <Tab.Screen name={EStacks.Profile} component={ProfileStack} />
     </Tab.Navigator>
   )
 }

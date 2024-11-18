@@ -2,9 +2,11 @@ export enum EColors {
   white = '#fff',
   black = '#000',
   gray_999 = '#999',
-  translation = 'transparent',
+  transparent = 'transparent',
 
-  primary = '#265DE9',
+  neutral_878787 = '#878787',
+
+  primary = '#0F0F0F',
 
   red = 'red',
 }

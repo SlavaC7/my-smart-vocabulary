@@ -16,7 +16,7 @@ export type TTab = {
 }
 
 export const Tab = ({ title, icon, active, activeIcon, count }: TTab) => {
-  const color = active ? EColors.primary : EColors.gray_999
+  const color = active ? EColors.white : EColors.gray_999
 
   const CurrentIcon = active ? activeIcon : icon
 
