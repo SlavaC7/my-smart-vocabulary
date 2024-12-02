@@ -1,9 +1,5 @@
-import * as Components from './Styled'
-import * as Text from './Text'
-
 export * from './types'
 export * from './colors'
+export * as Styled from './Styled'
 
-export const Styled = Components
-
-export const Typography = Text
+export * as Typography from './Text'

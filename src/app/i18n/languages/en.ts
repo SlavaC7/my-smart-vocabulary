@@ -16,4 +16,25 @@ export default {
   home: {
     title: 'Home',
   },
+  search: {
+    title: 'Search',
+  },
+  tests: {
+    title: 'Tests',
+  },
+  common: {
+    other: 'Other',
+  },
+
+  own_translation: {
+    title: 'Own translation',
+    create: 'Create own translation',
+    add: 'Add translation',
+    translation: 'Translation',
+    your_word: 'Your word',
+  },
+  button: {
+    save: 'Save',
+    remove: 'Remove',
+  },
 }

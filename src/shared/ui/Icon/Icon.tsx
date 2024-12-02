@@ -2,8 +2,9 @@ import React from 'react'
 
 import { Svg } from '@assets/svg'
 
-import { TIconProps } from './types'
 import { EColors } from '../styled'
+
+import { TIconProps } from './types'
 
 export const Icon = ({
   name,

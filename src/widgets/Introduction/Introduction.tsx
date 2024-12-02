@@ -12,12 +12,9 @@ export const Introduction = () => {
       height={'100%'}>
       <Typography.H1>H1</Typography.H1>
       <Typography.H2>H1</Typography.H2>
-      <Typography.Body1SB>Body1SB</Typography.Body1SB>
-      <Typography.Body1R>Body1R</Typography.Body1R>
-      <Typography.Body2SB>Body2SB</Typography.Body2SB>
+      <Typography.Body1R>Body1SB</Typography.Body1R>
       <Typography.Body2R>Body2R</Typography.Body2R>
-      <Typography.CaptionSB>CaptionSB</Typography.CaptionSB>
-      <Typography.CaptionR>CaptionR</Typography.CaptionR>
+      <Typography.Caption1R>Caption1R</Typography.Caption1R>
 
       <Typography.Body2R mTop={'20px'}>Hr</Typography.Body2R>
       <Styled.Hr mBottom={'20px'} />
@@ -30,7 +27,6 @@ export const Introduction = () => {
 
       <Input.Standard
         label={'Input with error'}
-        notRequired
         placeholder={'placeholder'}
         error={'Error'}
       />
@@ -40,12 +36,11 @@ export const Introduction = () => {
       <Button.Standard
         mTop={'16px'}
         width={'50%'}
-        textColor={EColors.red}
         text={'Button 50%, and color'}
       />
 
       <Button.Standard mTop={'16px'}>
-        <Typography.H2 color={EColors.white}>Button H1 text</Typography.H2>
+        <Typography.H2 color="white">Button H1 text</Typography.H2>
       </Button.Standard>
 
       <Button.Standard

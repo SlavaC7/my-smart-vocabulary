@@ -1,32 +1,55 @@
-import { FC } from 'react'
-import { StyleProp, TextInputProps, ViewStyle } from 'react-native'
+import {
+  KeyboardTypeOptions,
+  StyleProp,
+  TextInputProps,
+  TextStyle,
+  ViewStyle,
+} from 'react-native'
 
-import { SvgProps } from 'react-native-svg'
+import { MaskInputProps } from 'react-native-mask-input'
 
+import { TIconsKeys } from '@assets/svg'
+
+import { TIconProps } from '../../Icon/types'
 import { TMargin } from '../../utils'
 
-export type TStandard = {
-  label?: string
+export type TStandardInputProps = {
   style?: StyleProp<ViewStyle>
   inputContainerStyle?: StyleProp<ViewStyle>
   placeholder?: string
   error?: string
+  isError?: boolean
   value?: string
-  LeftIcon?: FC<SvgProps>
-  RightIcon?: FC<SvgProps>
-  onChange?: (text: string) => void
+  rightIcon?: TIconsKeys
+  leftIcon?: TIconsKeys
+  rightIconProps?: Partial<Omit<TIconProps, 'name'>>
+  leftIconProps?: Partial<Omit<TIconProps, 'name'>>
+  rightAction?: React.ReactElement
+  topLabelAction?: React.ReactElement
+  leftAction?: React.ReactElement
+  onChange?: MaskInputProps['onChangeText']
   onPress?: () => void
   onPressRightIcon?: () => void
-  notRequired?: boolean
-  leftIconProps?: FC<SvgProps>
-  rightIconProps?: FC<SvgProps>
   withSwitch?: boolean
-  keyboardType?: TextInputProps['keyboardType']
   disabled?: boolean
   multiline?: boolean
   autoFocus?: boolean
   onSubmitEditing?: () => void
-  autoComplete?: TextInputProps['autoComplete']
+  withoutDisabledStyles?: boolean
+  mask?: Array<string | RegExp>
+  editable?: boolean
+  testID?: string
+  maxSigns?: number
+  maxLength?: number
+  label?: string
+  hideBorder?: boolean
+  inputProps?: TextInputProps
+  inputStyle?: StyleProp<TextStyle>
+  keyboardType?: KeyboardTypeOptions
+  isBottomSheet?: boolean
+  withClear?: boolean
+  onBlur?: () => void
+  onFocus?: () => void
 } & Partial<TContainer> &
   Pick<Partial<TStyledInputContainer>, 'height'>
 
@@ -39,6 +62,7 @@ export type TStyledInputContainer = {
   height: string
   hasError: boolean
   disabled: boolean
+  multiline: boolean
 }
 
 export type TStyledInput = {

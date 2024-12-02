@@ -1,4 +1,3 @@
-export * from './BottomBar'
 export * from './Icon'
 export * from './background'
 export * from './button'

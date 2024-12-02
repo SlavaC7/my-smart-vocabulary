@@ -1,41 +1,62 @@
-import React, { createContext, useMemo } from 'react'
+import React, { createContext } from 'react'
+
+import { StyleSheet } from 'react-native'
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { ThemeProvider } from 'styled-components'
+
+import { EColors } from '@/shared'
 
 import { TThemeContextProps, TThemeProps } from './types'
 
 export const ThemeContext = createContext<TThemeContextProps>({})
 
 export const ThemeWrapper = ({ children }: TThemeProps) => {
-  const { top, bottom } = useSafeAreaInsets()
+  const insets = useSafeAreaInsets()
 
-  const value = useMemo(
-    () => ({ instTop: top, instBottom: bottom }),
-    [top, bottom],
-  )
+  const SHADOWS = StyleSheet.create({
+    card: {
+      backgroundColor: EColors.black,
+      shadowColor: EColors.black,
+      shadowOffset: {
+        width: 0,
+        height: 1,
+      },
+      shadowOpacity: 0.22,
+      shadowRadius: 2.22,
+
+      elevation: 3,
+    },
+    footer: {
+      backgroundColor: EColors.black,
+      shadowColor: EColors.black,
+      shadowOffset: {
+        width: 0,
+        height: 3,
+      },
+      shadowOpacity: 0.27,
+      shadowRadius: 4.65,
+
+      elevation: 6,
+    },
+    toast: {
+      shadowColor: EColors.black,
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.27,
+      shadowRadius: 2,
+
+      elevation: 6,
+    },
+  })
 
   return (
     <ThemeContext.Provider value={{}}>
-      <ThemeProvider theme={value}>{children}</ThemeProvider>
+      <ThemeProvider theme={{ COLORS: EColors, SHADOWS, insets }}>
+        {children}
+      </ThemeProvider>
     </ThemeContext.Provider>
   )
 }
-
-//This logic fir change theme
-
-// const [theme, setTheme] = useState<ETheme>(ETheme.black)
-
-//   useEffect(() => {
-//     Service.Theme.getTheme().then(
-//       response => response && setTheme(response as ETheme),
-//     )
-//   }, [])
-
-//   useEffect(() => {
-//     Service.Theme.setTheme(theme)
-//   }, [theme])
-
-//   const value = useMemo(() => ({ theme, setTheme }), [theme])
-
-//   const isWhite = theme === ETheme.white

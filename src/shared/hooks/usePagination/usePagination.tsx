@@ -89,7 +89,7 @@ export const usePagination = ({
     if (loadMoreLoading && canGetMoreItems) {
       return (
         <Styled.FlexWrapper mBottom={'16px'} mTop={'16px'}>
-          <ActivityIndicator size="small" color={EColors.primary} />
+          <ActivityIndicator size="small" color={EColors.black} />
         </Styled.FlexWrapper>
       )
     }
@@ -101,7 +101,7 @@ export const usePagination = ({
       <RefreshControl
         onRefresh={refresh}
         refreshing={refreshing}
-        tintColor={EColors.primary}
+        tintColor={EColors.black}
       />
     ),
     [refreshing, refresh],

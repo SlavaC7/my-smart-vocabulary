@@ -4,8 +4,6 @@ import { TNavigatorScreenParams } from '../../types'
 
 export type TTabsStack = {
   [EStacks.Home]: TNavigatorScreenParams<Stacks.THomeStack>
-}
-
-export enum ETab {
-  Main = 'MainTab',
+  [EStacks.Search]: TNavigatorScreenParams<Stacks.TSearchStack>
+  [EStacks.Tests]: TNavigatorScreenParams<Stacks.TTestsStack>
 }

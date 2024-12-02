@@ -3,4 +3,9 @@
 export enum EScreens {
   // Home screens
   HomeMain = 'HomeMainScreen',
+
+  SearchMain = 'SearchMainScreen',
+  SearchOwnTranslation = 'SearchOwnTranslationScreen',
+
+  TestsMain = 'TestsMainScreen',
 }

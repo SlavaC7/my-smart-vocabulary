@@ -1,11 +1,13 @@
 import React from 'react'
 
+import { useTheme } from 'styled-components'
+
 import { TIconsKeys } from '@assets/svg'
 
 import { Icon } from '@/shared/ui/Icon'
-import { EColors, Styled, Typography } from '@/shared/ui/styled'
+import { Styled, Typography } from '@/shared/ui/styled'
 
-import { Container, Title, CountContainer, styles } from './styled'
+import { Container, Title, CountContainer, styles } from './styles'
 
 export type TTab = {
   active?: boolean
@@ -16,7 +18,8 @@ export type TTab = {
 }
 
 export const Tab = ({ title, icon, active, activeIcon, count }: TTab) => {
-  const color = active ? EColors.white : EColors.gray_999
+  const { COLORS } = useTheme()
+  const color = active ? COLORS.white : COLORS.neutral_300
 
   const CurrentIcon = active ? activeIcon : icon
 
@@ -29,12 +32,12 @@ export const Tab = ({ title, icon, active, activeIcon, count }: TTab) => {
           width={'auto'}>
           {!!count && (
             <CountContainer>
-              <Typography.CaptionR
+              <Typography.Caption1R
                 align={'center'}
                 style={styles.text}
-                color={EColors.white}>
+                color="white">
                 {count}
-              </Typography.CaptionR>
+              </Typography.Caption1R>
             </CountContainer>
           )}
 

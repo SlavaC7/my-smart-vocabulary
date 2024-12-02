@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react'
+
 import { StyleProp, ViewStyle } from 'react-native'
 
 import { EColors } from '../../styled'
@@ -6,7 +7,7 @@ import { EColors } from '../../styled'
 import { Background } from './styled'
 
 type TStandard = {
-  color?: EColors
+  color?: keyof typeof EColors
   children?: ReactNode
   style?: StyleProp<ViewStyle>
   pHorizontal?: number
@@ -14,7 +15,7 @@ type TStandard = {
 
 export const Standard = ({
   children,
-  color = EColors.white,
+  color = 'transparent',
   pHorizontal = 0,
   ...props
 }: TStandard) => {

@@ -4,16 +4,23 @@ import {
   RouteProp,
 } from '@react-navigation/native'
 
-import { TMainTab } from './tabs/Main/types'
-
-import type { THomeStack, TMainStack } from './stacks'
+import type {
+  THomeStack,
+  TMainStack,
+  TSearchStack,
+  TTestsStack,
+} from './stacks'
 import type {
   NativeStackNavigationProp,
   NativeStackScreenProps,
 } from '@react-navigation/native-stack'
 
 // TMainTab optional
-export type TScreens = TMainStack & TMainTab & THomeStack
+export type TScreens = TMainStack &
+  TMainStack &
+  THomeStack &
+  TSearchStack &
+  TTestsStack
 
 /**
  * Description: use for Screens props

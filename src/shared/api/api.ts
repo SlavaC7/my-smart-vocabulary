@@ -1,60 +1,72 @@
+import { Platform } from 'react-native'
+
 import { HOST } from '@env'
-import axios, { InternalAxiosRequestConfig } from 'axios'
-import i18next from 'i18next'
+import axios from 'axios'
+import DeviceInfo from 'react-native-device-info'
 
-import { ELanguages } from '@/app/i18n'
+const timeout = 1000 * 60
 
-// if Firebase token
-// import auth from '@react-native-firebase/auth'
+const version = `${DeviceInfo.getVersion()}${
+  Platform.OS === 'ios'
+    ? ` (${DeviceInfo.getBuildNumber()})`
+    : `.${DeviceInfo.getBuildNumber()}`
+}`
+
+const headerDeviceData = {
+  'App-Version': version,
+  'System-Version': `${Platform.OS} ${DeviceInfo.getSystemVersion()}`,
+  Device: `${DeviceInfo.getBrand()} ${DeviceInfo.getModel()}`,
+}
 
 const privateInstance = axios.create({
   baseURL: HOST,
   headers: {
     'Content-Type': 'application/json',
+    ...headerDeviceData,
   },
+  timeout,
 })
 
 const publicInstance = axios.create({
   baseURL: HOST,
   headers: {
     'Content-Type': 'application/json',
+    ...headerDeviceData,
   },
+  timeout,
 })
-
-const langConfig = (config: InternalAxiosRequestConfig<unknown>) => {
-  // Append current lang
-  const lang = i18next.language || ELanguages.en
-
-  // If get method
-  if (['get'].includes(config.method as string)) {
-    config.params = { lang, ...config.params }
-    return config
-  }
-
-  return config
-}
 
 privateInstance.interceptors.request.use(
   async config => {
-    // if Firebase token
-    // const token = await auth().currentUser?.getIdToken(true)
-
-    const token = ''
+    const token = null
 
     if (token && config.headers) {
       config.headers.Authorization = 'Bearer ' + token
     }
 
-    return langConfig(config)
+    return config
   },
   error => {
     return Promise.reject(error)
   },
 )
 
+privateInstance.interceptors.response.use(
+  response => {
+    return response
+  },
+  async error => {
+    if (error?.response?.status === 401) {
+      // Logout
+    }
+
+    return Promise.reject(error)
+  },
+)
+
 publicInstance.interceptors.request.use(
   async config => {
-    return langConfig(config)
+    return config
   },
   error => {
     return Promise.reject(error)
@@ -62,4 +74,4 @@ publicInstance.interceptors.request.use(
 )
 
 export const apiPrivate = privateInstance
-export const publicPrivate = publicInstance
+export const apiPublic = publicInstance

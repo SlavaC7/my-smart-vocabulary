@@ -11,9 +11,7 @@ export const useNavigationBarColorAndroid = () => {
           'light',
           'navigation',
         ))
-    } catch (e) {
-      console.log('useNavigationBarColorAndroid error =>', e)
-    }
+    } catch (e) {}
   }
   return { changeNavigationBarColorAndroid }
 }

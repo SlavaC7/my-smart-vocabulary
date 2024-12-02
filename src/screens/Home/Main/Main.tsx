@@ -9,7 +9,7 @@ import { Background } from '@/shared/ui/background'
 export const Main = () => {
   return (
     <>
-      <Header.Standard title={'Standard header'} />
+      <Header.Standard title={'Standard header'} hasShadow topInset />
 
       <Background.Scroll pHorizontal={16}>
         <Introduction />

@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native'
 
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Provider } from 'react-redux'
 
 import { PersistGate } from 'redux-persist/integration/react'
@@ -12,7 +13,6 @@ import { persistor, store } from '../store'
 
 import { LanguageProvider } from './Language'
 import { LoaderWrapper } from './Loader'
-import { SafeAreaWrapper } from './SafeArea'
 import { ThemeWrapper } from './Theme'
 import { ToastWrapper } from './Toast'
 
@@ -28,7 +28,7 @@ export const Contexts = ({ children }: TContext) => {
         {/* Persist store */}
         <PersistGate loading={null} persistor={persistor}>
           {/*  SaveAreaView */}
-          <SafeAreaWrapper>
+          <SafeAreaProvider>
             {/* GestureHandler */}
             <GestureHandlerRootView style={styles.gestureHandlerContainer}>
               <ThemeWrapper>
@@ -42,7 +42,7 @@ export const Contexts = ({ children }: TContext) => {
                 </LoaderWrapper>
               </ThemeWrapper>
             </GestureHandlerRootView>
-          </SafeAreaWrapper>
+          </SafeAreaProvider>
         </PersistGate>
       </Provider>
     </>

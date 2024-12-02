@@ -7,7 +7,7 @@ import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
 import { EScreens, EStacks, whiteList } from '@/app/navigation'
 
 import { Component } from './components'
-import * as S from './styled'
+import * as S from './styles'
 import { useTabs } from './useTabs'
 
 export const BottomTab = ({

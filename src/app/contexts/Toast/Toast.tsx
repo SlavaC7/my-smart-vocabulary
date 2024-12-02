@@ -9,7 +9,7 @@ import Toast, {
   ToastConfig,
 } from 'react-native-toast-message'
 
-import { styles } from './styled'
+import { styles } from './styles'
 import {
   EToastType,
   TToastContext,

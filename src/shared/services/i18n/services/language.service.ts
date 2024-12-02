@@ -1,4 +1,4 @@
-import { NativeModules, Platform } from 'react-native'
+// import { NativeModules, Platform } from 'react-native'
 
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
@@ -10,18 +10,18 @@ export class Language {
   private static KEY = 'language'
   private static storage = AsyncStorage
 
-  public static DEFAULT_LANGUAGE = ELanguages.en
+  public static DEFAULT_LANGUAGE = ELanguages.cs
 
   // Get device language
-  private static getDeviceLang() {
-    const appLanguage =
-      Platform.OS === 'ios'
-        ? NativeModules.SettingsManager.settings.AppleLocale ||
-          NativeModules.SettingsManager.settings.AppleLanguages[0]
-        : NativeModules.I18nManager.localeIdentifier
+  // private static getDeviceLang() {
+  //   const appLanguage =
+  //     Platform.OS === 'ios'
+  //       ? NativeModules.SettingsManager.settings.AppleLocale ||
+  //         NativeModules.SettingsManager.settings.AppleLanguages[0]
+  //       : NativeModules.I18nManager.localeIdentifier
 
-    return appLanguage.slice(0, 2)
-  }
+  //   return appLanguage.slice(0, 2)
+  // }
 
   private static async getLocalStorageLanguage() {
     return this.storage.getItem(this.KEY)
@@ -29,20 +29,20 @@ export class Language {
 
   // Get app language
   static async getLanguage(): Promise<ELanguages> {
-    const localLangauge = await this.getLocalStorageLanguage()
+    // const localLangauge = await this.getLocalStorageLanguage()
 
-    // If local storage lang set
-    if (localLangauge) {
-      return localLangauge as ELanguages
-    }
+    // // If local storage lang set
+    // if (localLangauge) {
+    //   return localLangauge as ELanguages
+    // }
 
-    const deviceLang = this.getDeviceLang()
+    // const deviceLang = this.getDeviceLang()
 
-    // If device lang exist
-    if (Object.values(Language).includes(deviceLang)) {
-      this.setLanguage(deviceLang)
-      return deviceLang
-    }
+    // // If device lang exist
+    // if (Object.values(Language).includes(deviceLang)) {
+    //   this.setLanguage(deviceLang)
+    //   return deviceLang
+    // }
 
     return this.DEFAULT_LANGUAGE
   }

@@ -1,118 +1,189 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useRef } from 'react'
+
+import { TextInput } from 'react-native'
 
 import { useTranslation } from 'react-i18next'
-
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
-import { EColors, Typography } from '../../styled'
+import { useTheme } from 'styled-components'
+
+import { useBottomSheetKeyboard } from '@/shared/hooks'
+
+import { Icon } from '../../Icon'
+import { Styled, Typography } from '../../styled'
 
 import {
   Container,
-  StyledTextInputContainer,
-  StyledTextInput,
+  ErrorWrapper,
   InputContainer,
+  StyledTextInput,
+  StyledTextInputContainer,
   styles,
 } from './styled'
-import { TStandard } from './types'
-
-const NEUTRAL_COLOR = EColors.gray_999
+import { TStandardInputProps } from './types'
 
 export const Standard = ({
-  label = '',
   width = '100%',
-  height = '50px',
+  height = '36px',
   value = '',
   style,
-  notRequired,
   placeholder,
-  error,
-  RightIcon,
-  LeftIcon,
-  leftIconProps,
-  rightIconProps,
+  error = '',
+  leftIcon,
+  rightIcon,
+  leftIconProps = {},
+  rightIconProps = {},
   onChange,
   onPressRightIcon,
   disabled = false,
   onPress,
-  keyboardType = 'default',
   multiline = false,
   inputContainerStyle = {},
   autoFocus = false,
   onSubmitEditing = () => {},
-  autoComplete,
+  withoutDisabledStyles = false,
+  mask,
+  editable = true,
+  isError = false,
+  maxSigns,
+  rightAction,
+  leftAction,
+  maxLength,
+  label,
+  topLabelAction,
+  inputProps = {},
+  hideBorder = true,
+  inputStyle = {},
+  keyboardType,
+  onBlur,
+  onFocus,
+  isBottomSheet = false,
+  withClear = true,
   ...props
-}: TStandard) => {
-  const [inputValue, setInputValue] = useState<string>(value)
+}: TStandardInputProps) => {
+  const inputRef = useRef<TextInput | null>(null)
+  const { COLORS } = useTheme()
+  const { keys, t } = useTranslation()
+  const {
+    onBlur: onBottomSheetBlur,
+    onFocus: onBottomSheetFocus,
+    isFocused,
+  } = useBottomSheetKeyboard({
+    isBottomSheet,
+  })
 
-  const { t } = useTranslation()
-
-  const onValueChange = (changeValue: string) => {
-    onChange && onChange(changeValue)
-    setInputValue(changeValue)
-  }
-
-  useEffect(() => {
-    setInputValue(value)
-  }, [value])
+  const _onPress = useCallback(() => {
+    if (onPress) {
+      onPress()
+      return
+    }
+    inputRef.current?.focus()
+  }, [])
 
   return (
-    <Container disabled={disabled} style={style} width={width} {...props}>
-      {/* Label */}
-      {label && (
-        <Typography.Body2SB mLeft={'10px'} mBottom={'12px'}>
-          {label}
-          <Typography.Body2SB color={EColors.primary}>
-            {!notRequired && '*'}
-          </Typography.Body2SB>
-        </Typography.Body2SB>
+    <Container
+      disabled={!withoutDisabledStyles ? disabled : false}
+      style={style}
+      width={width}
+      {...props}>
+      {/* Input container*/}
+
+      {!!label && (
+        <Styled.FlexWrapper justify="space-between">
+          <Typography.Body2R mBottom="8px" color="neutral_500">
+            {label}
+          </Typography.Body2R>
+
+          {topLabelAction}
+        </Styled.FlexWrapper>
       )}
 
-      {/* Input container*/}
       <StyledTextInputContainer
+        multiline={!!multiline}
         disabled={disabled}
-        onPress={onPress}
+        isFocused={isFocused}
+        onPress={_onPress}
         height={height}
         activeOpacity={1}
         style={inputContainerStyle}
-        hasError={!!error}>
+        hideBorder={hideBorder}
+        hasError={!!error || isError}>
         {/*  Left icon*/}
-        {!!LeftIcon && <LeftIcon fill={NEUTRAL_COLOR} {...leftIconProps} />}
+        {!!leftIcon && <Icon name={leftIcon} {...leftIconProps} />}
+        {leftAction}
 
-        <InputContainer>
+        <InputContainer pointerEvents={onPress ? 'none' : 'auto'}>
           {/* Input */}
 
           <StyledTextInput
-            placeholder={placeholder}
-            placeholderTextColor={NEUTRAL_COLOR}
-            value={inputValue}
-            editable={!disabled}
-            hasLeftIcon={!!LeftIcon}
-            hasRightIcon={!!RightIcon}
-            onChangeText={onValueChange}
-            keyboardType={keyboardType}
+            ref={inputRef}
+            mask={mask}
+            style={[{}, inputStyle]}
+            placeholder={!value?.length ? placeholder : ''}
+            textAlignVertical={'center'}
+            placeholderTextColor={COLORS.placeholder_light}
+            value={value}
+            editable={!disabled && editable}
+            hasLeftIcon={!!leftIcon || !!leftAction}
+            hasRightIcon={!!rightIcon || !!rightAction}
+            onChangeText={onChange}
             multiline={multiline}
             onSubmitEditing={onSubmitEditing}
             autoFocus={autoFocus}
-            autoComplete={autoComplete}
+            onFocus={() => {
+              onFocus?.()
+              onBottomSheetFocus()
+            }}
+            keyboardType={keyboardType}
+            onBlur={() => {
+              onBlur?.()
+              onBottomSheetBlur()
+            }}
+            cursorColor={COLORS.neutral_300}
+            maxLength={maxLength || maxSigns}
+            {...inputProps}
           />
         </InputContainer>
 
         {/* Right icon */}
-        {!!RightIcon && (
-          <TouchableOpacity style={styles.padding} onPress={onPressRightIcon}>
-            <RightIcon fill={NEUTRAL_COLOR} {...rightIconProps} />
+        {!!rightIcon && (
+          <TouchableOpacity
+            style={styles.padding}
+            onPress={onPressRightIcon}
+            activeOpacity={onPressRightIcon ? 0.8 : 1}>
+            <Icon
+              name={rightIcon}
+              fill={COLORS.neutral_700}
+              {...rightIconProps}
+            />
           </TouchableOpacity>
         )}
+
+        {!!withClear && (
+          <TouchableOpacity
+            style={styles.padding}
+            onPress={() => onChange?.('', '', '')}
+            activeOpacity={0.8}>
+            <Icon name="CloseFilled" fill={COLORS.neutral_700} size={18} />
+          </TouchableOpacity>
+        )}
+        {rightAction}
+
+        {/* {!!maxSigns && (
+          <SignsWrapper>
+            <Typography.Caption1R color="neutral_500">{`${
+              value?.length || 0
+            } / ${maxSigns}`}</Typography.Caption1R>
+          </SignsWrapper>
+        )} */}
       </StyledTextInputContainer>
 
-      {error && (
-        <Typography.Body2R
-          mTop={'10px'}
-          mLeft={'8px'}
-          mBottom={'10px'}
-          color={EColors.red}>
-          {t(`${error}`)}
-        </Typography.Body2R>
+      {!!error && (
+        <ErrorWrapper>
+          <Typography.Body2R color="red_300">
+            {t(error as keyof typeof keys)}
+          </Typography.Body2R>
+        </ErrorWrapper>
       )}
     </Container>
   )
