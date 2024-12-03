@@ -49,6 +49,9 @@ export default {
   },
   statistics: {
     title: 'Statistics',
+    total: 'Total words',
+    last_adding: 'The last time you added a word',
+    total_folder: 'Total folders',
   },
   folder: {
     folders: 'Folders',

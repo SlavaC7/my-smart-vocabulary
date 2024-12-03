@@ -31,7 +31,7 @@ export const Main = () => {
   const [searchText, setSearchText] = useState('')
 
   const { data: translateData } = useQuery(TranslateService.postTranslate, {
-    toLang: 'russian',
+    toLang: 'ukrainian',
     fromLang: 'english',
     text: searchText,
     disableInitialCall: !searchText,

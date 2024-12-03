@@ -71,10 +71,7 @@ export const Word = () => {
         <S.TranslationContainer mTop="8px" mBottom="24px">
           <Icon name="Translate" size={16} />
           <Typography.Body1R mLeft="12px" style={{ flex: 1 }}>
-            {word.transaltions
-              ?.map(item => _.capitalize(item))
-              ?.slice(1)
-              ?.join(' • ')}
+            {word.transaltions?.map(item => _.capitalize(item))?.join(' • ')}
           </Typography.Body1R>
         </S.TranslationContainer>
 

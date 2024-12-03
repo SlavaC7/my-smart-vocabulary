@@ -17,7 +17,7 @@ export const WordItem = ({ data, ...props }: TWordItemProps) => {
 
   const wordSaved = existInAnyFolder(data.text)
 
-  const translations = data?.transaltions?.slice(1) || []
+  const translations = data?.transaltions || []
 
   return (
     <S.Container {...props}>

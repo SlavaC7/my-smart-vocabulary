@@ -26,10 +26,7 @@ export const MyCard = ({ word }: { word: TWord }) => {
       </Styled.FlexWrapper>
 
       <Typography.Body2R color="neutral_500">
-        {word.transaltions
-          ?.map(item => _.capitalize(item))
-          ?.slice(1)
-          ?.join(', ')}
+        {word.transaltions?.map(item => _.capitalize(item))?.join(', ')}
       </Typography.Body2R>
     </S.Container>
   )
