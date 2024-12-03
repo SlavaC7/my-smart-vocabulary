@@ -8,6 +8,7 @@ import type {
   THomeStack,
   TMainStack,
   TSearchStack,
+  TStatisticsStack,
   TTestsStack,
 } from './stacks'
 import type {
@@ -20,7 +21,8 @@ export type TScreens = TMainStack &
   TMainStack &
   THomeStack &
   TSearchStack &
-  TTestsStack
+  TTestsStack &
+  TStatisticsStack
 
 /**
  * Description: use for Screens props

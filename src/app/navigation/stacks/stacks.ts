@@ -3,5 +3,7 @@ export enum EStacks {
   Home = 'HomeStack',
   Tabs = 'TabsStack',
   Search = 'SearchStack',
+  Statistics = 'StatisticsStack',
+
   Tests = 'TestsStack',
 }

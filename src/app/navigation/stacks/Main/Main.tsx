@@ -2,6 +2,9 @@ import React from 'react'
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
+import { CommonScreens } from '@/screens/Common'
+
+import { EScreens } from '../../screens'
 import { NativeScreenNavigationOptions } from '../options'
 
 import { EStacks } from '../stacks'
@@ -20,6 +23,8 @@ export const MainStack = () => {
       }}>
       {/* also using EStacks */}
       <Stack.Screen component={TabsStack} name={EStacks.Tabs} />
+
+      <Stack.Screen component={CommonScreens.Word} name={EScreens.WordMain} />
     </Stack.Navigator>
   )
 }

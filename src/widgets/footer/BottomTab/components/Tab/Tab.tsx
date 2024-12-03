@@ -41,7 +41,12 @@ export const Tab = ({ title, icon, active, activeIcon, count }: TTab) => {
             </CountContainer>
           )}
 
-          <Icon name={CurrentIcon} size={24} fill={color} />
+          <Icon
+            name={CurrentIcon}
+            size={24}
+            fill={color}
+            stroke={activeIcon === 'Waterfall' ? color : undefined}
+          />
         </Styled.FlexWrapper>
 
         <Title color={color}>{title}</Title>

@@ -21,10 +21,15 @@ export const useQuery = <T, P>(
 
   const getAction = useCallback(async () => {
     try {
+      console.log('start')
       setLoading(true)
       const result = await action(props as P)
+      console.log('end')
+
       setData(result.data)
     } catch (e) {
+      console.log('e: ', e)
+
       console.error(`useQuery [${debug || 'none'}] error:`, e)
       Sentry.captureException(e)
     }

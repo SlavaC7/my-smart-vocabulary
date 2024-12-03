@@ -15,13 +15,13 @@ export const useTabs = () => {
     },
     [EStacks.Search]: {
       title: t('search.title'),
-      Icon: 'OpenBook',
-      ActiveIcon: 'OpenBook',
+      Icon: 'SearchMain',
+      ActiveIcon: 'SearchMain',
     },
-    [EStacks.Tests]: {
-      title: t('tests.title'),
-      Icon: 'OpenBook',
-      ActiveIcon: 'OpenBook',
+    [EStacks.Statistics]: {
+      title: t('statistics.title'),
+      Icon: 'Waterfall',
+      ActiveIcon: 'Waterfall',
     },
   }
 

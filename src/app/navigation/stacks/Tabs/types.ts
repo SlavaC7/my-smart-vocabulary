@@ -5,5 +5,5 @@ import { TNavigatorScreenParams } from '../../types'
 export type TTabsStack = {
   [EStacks.Home]: TNavigatorScreenParams<Stacks.THomeStack>
   [EStacks.Search]: TNavigatorScreenParams<Stacks.TSearchStack>
-  [EStacks.Tests]: TNavigatorScreenParams<Stacks.TTestsStack>
+  [EStacks.Statistics]: TNavigatorScreenParams<Stacks.TStatisticsStack>
 }

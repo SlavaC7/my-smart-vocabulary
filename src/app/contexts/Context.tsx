@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react'
 
 import { StyleSheet } from 'react-native'
 
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 import { SafeAreaProvider } from 'react-native-safe-area-context'
@@ -37,7 +38,11 @@ export const Contexts = ({ children }: TContext) => {
                   {/* Language */}
                   <LanguageProvider>
                     {/* Toast */}
-                    <ToastWrapper>{children}</ToastWrapper>
+                    <ToastWrapper>
+                      <BottomSheetModalProvider>
+                        {children}
+                      </BottomSheetModalProvider>
+                    </ToastWrapper>
                   </LanguageProvider>
                 </LoaderWrapper>
               </ThemeWrapper>

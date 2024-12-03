@@ -1,39 +1,18 @@
-import { Platform } from 'react-native'
-
 import { HOST } from '@env'
 import axios from 'axios'
-import DeviceInfo from 'react-native-device-info'
-
-const timeout = 1000 * 60
-
-const version = `${DeviceInfo.getVersion()}${
-  Platform.OS === 'ios'
-    ? ` (${DeviceInfo.getBuildNumber()})`
-    : `.${DeviceInfo.getBuildNumber()}`
-}`
-
-const headerDeviceData = {
-  'App-Version': version,
-  'System-Version': `${Platform.OS} ${DeviceInfo.getSystemVersion()}`,
-  Device: `${DeviceInfo.getBrand()} ${DeviceInfo.getModel()}`,
-}
-
+console.log('HOST: ', HOST)
 const privateInstance = axios.create({
   baseURL: HOST,
   headers: {
     'Content-Type': 'application/json',
-    ...headerDeviceData,
   },
-  timeout,
 })
 
 const publicInstance = axios.create({
   baseURL: HOST,
   headers: {
     'Content-Type': 'application/json',
-    ...headerDeviceData,
   },
-  timeout,
 })
 
 privateInstance.interceptors.request.use(

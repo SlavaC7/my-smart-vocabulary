@@ -8,4 +8,8 @@ export enum EScreens {
   SearchOwnTranslation = 'SearchOwnTranslationScreen',
 
   TestsMain = 'TestsMainScreen',
+
+  StatisticsMain = 'StatisticsMainScreen',
+
+  WordMain = 'WordMainScreen',
 }
