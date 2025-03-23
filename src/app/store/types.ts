@@ -14,6 +14,7 @@ export type TSetStatePayload<TInitialState = {}> = Partial<TInitialState>
 export enum EStoreReducer {
   user = 'user',
   word = 'word',
+  test = 'test',
 }
 
 export type TSagaResponse<Res = unknown> = AxiosResponse<Res>

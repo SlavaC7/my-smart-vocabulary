@@ -46,8 +46,8 @@ export const Touchable = styled(TouchableOpacity).attrs({
 
 export const Hr = styled(View)<THr>`
   width: 100%;
-  height: 1px;
-  background-color: ${EColors.neutral_300};
+  height: ${({ height }) => height || 1}px;
+  background-color: ${({ color }) => color || EColors.neutral_300};
 
   ${({ vertical }) =>
     vertical &&

@@ -21,6 +21,7 @@ export type TFlexWrapper = {
 } & TMargin
 
 export type THr = TMargin & {
+  height?: number
   color?: EColors
   vertical?: boolean
 }

@@ -7,17 +7,17 @@
 
 import React, { useEffect } from 'react'
 
-import { SENTRY_DNS } from '@env'
+// import { SENTRY_DNS } from '@env'
 import SplashScreen from 'react-native-splash-screen'
 
 import { Navigator } from '@/app/navigation'
 
-import { Sentry } from '@/shared/lib'
+// import { Sentry } from '@/shared/lib'
 
-Sentry.init({
-  dsn: SENTRY_DNS,
-  tracesSampleRate: 1.0,
-})
+// Sentry.init({
+//   dsn: SENTRY_DNS,
+//   tracesSampleRate: 1.0,
+// })
 
 const App = () => {
   useEffect(() => {
@@ -29,4 +29,5 @@ const App = () => {
   return <Navigator />
 }
 
-export default Sentry.wrap(App)
+// export default Sentry.wrap(App)
+export default App

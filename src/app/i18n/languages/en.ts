@@ -23,6 +23,10 @@ export default {
   },
   tests: {
     title: 'Tests',
+    test_your_knowledge: 'Test your knowledge',
+    total_answers: 'Total answers',
+    correct_answers: 'Correct answers',
+    incorrect_answers: 'Incorrect answers',
   },
   common: {
     other: 'Other',
@@ -46,6 +50,7 @@ export default {
     hide: 'Hide',
     move: 'Move',
     delete: 'Delete',
+    start: 'Start',
   },
   statistics: {
     title: 'Statistics',
