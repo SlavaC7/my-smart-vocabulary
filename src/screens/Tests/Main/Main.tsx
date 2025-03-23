@@ -2,18 +2,28 @@ import React from 'react'
 
 import { useTranslation } from 'react-i18next'
 
+import { EScreens } from '@/app/navigation'
 import { useTypedSelector } from '@/app/store'
 
 import { Header } from '@/widgets/header'
 
 import { getTestSelector } from '@/entities/test'
 
-import { Background, Button, EColors, Icon, Styled, Typography } from '@/shared'
+import {
+  Background,
+  Button,
+  EColors,
+  Icon,
+  Styled,
+  Typography,
+  useNavigation,
+} from '@/shared'
 
 import { styles } from './styles'
 
 export const Main = () => {
   const { t } = useTranslation()
+  const { navigate } = useNavigation()
   const { correctAnswers, incorrectAnswers, totalAnswers } =
     useTypedSelector(getTestSelector)
 
@@ -23,6 +33,10 @@ export const Main = () => {
     !!incorrectAnswers && totalAnswers
       ? (incorrectAnswers / totalAnswers) * 100
       : 0
+
+  const onGoConfiguring = () => {
+    navigate(EScreens.TestsConfig)
+  }
   return (
     <Background.Container>
       <Header.Standard goBack />
@@ -36,6 +50,7 @@ export const Main = () => {
           <Button.Standard
             width={'auto'}
             mTop={'16px'}
+            onPress={onGoConfiguring}
             text={t('button.start')}
           />
         </Styled.FlexWrapper>

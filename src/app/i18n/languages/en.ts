@@ -23,6 +23,7 @@ export default {
   },
   tests: {
     title: 'Tests',
+    configuring: 'Configuring',
     test_your_knowledge: 'Test your knowledge',
     total_answers: 'Total answers',
     correct_answers: 'Correct answers',

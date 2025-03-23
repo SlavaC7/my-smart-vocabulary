@@ -19,6 +19,10 @@ export const TestsStack = () => {
         ...NativeScreenNavigationOptions,
       }}>
       <Stack.Screen component={TestsScreens.Main} name={EScreens.TestsMain} />
+      <Stack.Screen
+        component={TestsScreens.Config}
+        name={EScreens.TestsConfig}
+      />
     </Stack.Navigator>
   )
 }
