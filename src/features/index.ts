@@ -6,3 +6,5 @@
 // // // slice (tolkit) - slice in store logic
 // // // saga for auth
 // // // ui components - (form with valifation), which components are use auth
+
+export * as TestFeatures from './test'

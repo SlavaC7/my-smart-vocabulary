@@ -1,1 +1,1 @@
-export const TestsFeatures = {}
+export * from './ConfiguringForm'

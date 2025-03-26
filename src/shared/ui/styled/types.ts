@@ -3,9 +3,10 @@ import { FlexStyle, TextStyle } from 'react-native'
 import { TMargin } from '../utils'
 
 import { EColors } from './colors'
+
 export type TStyledTextProps = {
   size?: string
-  color?: keyof typeof EColors | string
+  color?: TEColors
   align?: TextStyle['textAlign']
   textTransform?: TextStyle['textTransform']
 } & TMargin
@@ -33,3 +34,5 @@ export type TDivider = {
 }
 
 export type TVisibilityContainer = { visible: boolean } & TMargin
+
+export type TEColors = keyof typeof EColors | string

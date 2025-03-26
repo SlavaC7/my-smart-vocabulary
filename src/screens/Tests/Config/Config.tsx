@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next'
 
 import { Header } from '@/widgets/header'
 
+import { TestFeatures } from '@/features'
+
 import { Background } from '@/shared'
 
 export const Config = () => {
@@ -13,7 +15,7 @@ export const Config = () => {
       <Header.Standard title={t('tests.configuring')} goBack />
 
       <Background.Scroll>
-        <></>
+        <TestFeatures.ConfiguringForm />
       </Background.Scroll>
     </Background.Container>
   )
