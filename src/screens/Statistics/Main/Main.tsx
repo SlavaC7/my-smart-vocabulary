@@ -30,7 +30,10 @@ export const Main = () => {
 
   const renderFolders = (item: TFolder) => {
     return (
-      <Styled.FlexWrapper mTop={'16px'} justify={'space-between'}>
+      <Styled.FlexWrapper
+        mTop={'16px'}
+        justify={'space-between'}
+        key={item._id}>
         <Typography.H3Bold>{item.name}:</Typography.H3Bold>
         <Typography.H3Bold>
           {getFoldersWords(item._id).length}

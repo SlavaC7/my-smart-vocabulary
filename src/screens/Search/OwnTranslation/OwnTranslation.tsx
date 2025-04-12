@@ -103,11 +103,11 @@ export const OwnTranslation = () => {
                 value={value}
                 onChange={onChange}
               />
-              <WordFeature.SpeechToText
+              {/* <WordFeature.SpeechToText
                 mTop="22px"
                 mLeft="12px"
                 onChange={onChange}
-              />
+              /> */}
             </Styled.FlexWrapper>
           )}
         />

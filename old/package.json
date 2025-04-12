@@ -1,0 +1,30 @@
+{
+  "name": "mysmartvocabulary",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "lint": "eslint . --fix",
+    "start": "react-native start",
+    "install-modules": "pnpm install",
+    "pod-install": "pnpx pod-install",
+    "pod-deintegrate": "cd ios && pod deintegrate",
+    "adb-reverse-start": "adb reverse tcp:8081 tcp:8081 & react-native start",
+    "rn-generator": "node rn-generator.js"
+  },
+  "dependencies": {
+    "react-native-splash-screen": "^3.3.0"
+  },
+  "devDependencies": {
+    "@react-native/eslint-config": "^0.74.87",
+    "@typescript-eslint/parser": "^7.1.1",
+    "metro-react-native-babel-preset": "0.76.7"
+  },
+  "resolutions": {
+    "styled-components": "^5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

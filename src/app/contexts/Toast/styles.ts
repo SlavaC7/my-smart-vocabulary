@@ -1,7 +1,5 @@
 import { Dimensions, StyleSheet } from 'react-native'
 
-import { RFValue } from 'react-native-responsive-fontsize'
-
 import { EColors } from '@/shared/ui/styled'
 
 const { height } = Dimensions.get('window')
@@ -23,11 +21,11 @@ export const styles = StyleSheet.create({
     backgroundColor: EColors.white,
   },
   text1: {
-    fontSize: RFValue(18, height),
+    fontSize: height,
     color: EColors.black,
   },
   text2: {
-    fontSize: RFValue(16, height),
+    fontSize: height,
     marginTop: 5,
     color: EColors.neutral_300,
   },

@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react'
 
+import Voice from '@react-native-voice/voice'
 import { useIsFocused } from '@react-navigation/native'
-import Voice from '@wdragon/react-native-voice'
 import { useTheme } from 'styled-components'
 
 import { Icon, Styled } from '@/shared'
@@ -56,29 +56,6 @@ export const SpeechToText = ({
     } else {
       onEnd()
     }
-
-    // if (isFocused) {
-    //   // Handler for speech results
-    //   const onSpeechResults = (event: { value?: string[] }) => {
-    //     const lastValue = event?.value?.slice(-1)?.[0]
-    //     if (lastValue) {
-    //       console.log('onSpeechResults: ', lastValue)
-    //       onChange?.(lastValue) // Pass the recognized speech to the parent
-    //     }
-    //   }
-
-    //   // Register voice handlers
-    //   Voice.onSpeechResults = onSpeechResults
-    //   Voice.onSpeechError = error => {
-    //     console.error('Speech error:', error)
-    //     setListen(false)
-    //   }
-
-    //   // Cleanup handlers on unmount
-    //   return () => {
-    //     Voice.destroy().catch(err => console.error('Voice destroy error:', err))
-    //   }
-    // }
   }, [isFocused])
 
   return (

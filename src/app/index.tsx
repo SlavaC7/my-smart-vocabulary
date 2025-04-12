@@ -8,7 +8,7 @@
 import React, { useEffect } from 'react'
 
 // import { SENTRY_DNS } from '@env'
-import SplashScreen from 'react-native-splash-screen'
+// import SplashScreen from 'react-native-splash-screen'
 
 import { Navigator } from '@/app/navigation'
 
@@ -22,7 +22,7 @@ import { Navigator } from '@/app/navigation'
 const App = () => {
   useEffect(() => {
     setTimeout(() => {
-      SplashScreen.hide()
+      // SplashScreen.hide()
     }, 1000)
   }, [])
 
