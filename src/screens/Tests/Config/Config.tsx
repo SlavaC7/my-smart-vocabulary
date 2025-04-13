@@ -10,13 +10,12 @@ import { Background } from '@/shared'
 
 export const Config = () => {
   const { t } = useTranslation()
+
   return (
     <Background.Container>
       <Header.Standard title={t('tests.configuring')} goBack />
 
-      <Background.Scroll>
-        <TestFeatures.ConfiguringForm />
-      </Background.Scroll>
+      <TestFeatures.ConfiguringForm />
     </Background.Container>
   )
 }

@@ -9,6 +9,7 @@ import { TAnsweredPayload, TInitialState } from './types'
 const initialState: TInitialState = {
   loading: false,
   test: [],
+  testAnswers: [],
   config: {
     count: 0,
     folders: [],

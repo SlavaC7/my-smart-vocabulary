@@ -1,5 +1,5 @@
 import { sliceActions } from './reducer'
 
-export const wordActions = {
+export const testsActions = {
   ...sliceActions,
 }

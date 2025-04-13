@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Styled } from '@/shared'
 
 export const Item = styled(Styled.Touchable).attrs({
-  width: 'auth',
+  width: 'auto',
 })<{ active: boolean }>`
   padding: 5px 10px;
 

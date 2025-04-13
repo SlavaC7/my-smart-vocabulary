@@ -1,5 +1,7 @@
 import React, { useMemo } from 'react'
 
+import { useTranslation } from 'react-i18next'
+
 import { useTypedSelector } from '@/app/store'
 
 import { getWordSelector, TFolder } from '@/entities/word'
@@ -13,6 +15,7 @@ export const SelectFolders = ({
   value = [],
   onChange = () => {},
 }: TSelectFoldersProps) => {
+  const { t } = useTranslation()
   const { folders } = useTypedSelector(getWordSelector)
 
   const array = useMemo(
@@ -21,6 +24,10 @@ export const SelectFolders = ({
   )
 
   const onSelect = (id: string, active: boolean) => {
+    if (id === '1') {
+      onChange([])
+      return
+    }
     if (active) {
       onChange(value.filter(item => item !== id))
       return
@@ -30,7 +37,8 @@ export const SelectFolders = ({
   }
 
   const renderItem = (item: TFolder) => {
-    const isActive = value.includes(item._id)
+    const isAll = item._id === '1'
+    const isActive = isAll ? !value.length : value.includes(item._id)
     const colors: TEColors = isActive ? 'white' : 'black'
 
     return (
@@ -44,8 +52,13 @@ export const SelectFolders = ({
     )
   }
   return (
-    <Styled.FlexWrapper wrap={'wrap'} justify={'flex-start'}>
-      {array.map(renderItem)}
-    </Styled.FlexWrapper>
+    <>
+      <Typography.H3 mBottom={'16px'} mLeft={'10px'}>
+        {t('tests.select_folders')}
+      </Typography.H3>
+      <Styled.FlexWrapper wrap={'wrap'} justify={'flex-start'}>
+        {array.map(renderItem)}
+      </Styled.FlexWrapper>
+    </>
   )
 }

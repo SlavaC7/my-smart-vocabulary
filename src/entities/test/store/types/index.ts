@@ -1,9 +1,10 @@
-import { TConfig, TTestItem } from '../../models'
+import { TAnswer, TConfig, TTestItem } from '../../models'
 
 export type TInitialState = {
   loading: boolean
   config: TConfig
   test: TTestItem[]
+  testAnswers: TAnswer[]
 
   incorrectAnswers: number
   correctAnswers: number

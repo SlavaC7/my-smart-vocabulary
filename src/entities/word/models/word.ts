@@ -6,7 +6,6 @@ export type TWord = {
   transaltions: Array<string>
   forderId?: string | null
   createdAt?: string
-
   examples?: Array<TTranslationExample>
   voice?: string
 }

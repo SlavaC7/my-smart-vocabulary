@@ -28,6 +28,8 @@ export default {
     total_answers: 'Total answers',
     correct_answers: 'Correct answers',
     incorrect_answers: 'Incorrect answers',
+    select_folders: 'Select a folders',
+    count: 'Count',
   },
   common: {
     other: 'Other',
