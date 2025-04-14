@@ -23,6 +23,10 @@ export const TestsStack = () => {
         component={TestsScreens.Config}
         name={EScreens.TestsConfig}
       />
+      <Stack.Screen
+        component={TestsScreens.Questions}
+        name={EScreens.TestsQuestion}
+      />
     </Stack.Navigator>
   )
 }

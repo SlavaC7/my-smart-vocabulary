@@ -5,23 +5,25 @@ import { Controller, useForm } from 'react-hook-form'
 
 import { useTranslation } from 'react-i18next'
 
+import { EScreens } from '@/app/navigation'
 import { useTypedSelector } from '@/app/store'
 
 import { Footer } from '@/widgets/footer'
 
+import { useGenerateTest } from '@/entities/test'
 import { getWordSelector } from '@/entities/word'
 
-import { Background, Button, Styled } from '@/shared'
+import { Background, Button, Styled, useNavigation } from '@/shared'
 
 import * as C from './components'
 import { TConfiguringForm } from './types'
 import { createConfigSchema } from './validation'
-import { useGenerateTest } from '@/entities/test'
 
 export const ConfiguringForm = () => {
   const { t } = useTranslation()
   const { words } = useTypedSelector(getWordSelector)
   const { onGenerate } = useGenerateTest()
+  const { navigate } = useNavigation()
 
   const [maxCount, setMaxCount] = useState(words.length)
 
@@ -53,7 +55,9 @@ export const ConfiguringForm = () => {
   }
 
   useEffect(() => {
-    const formWatch = watch(data => onHandleMaxCount(data.folders || []))
+    const formWatch = watch(
+      data => data.folders && onHandleMaxCount(data.folders || []),
+    )
 
     return () => {
       formWatch.unsubscribe()
@@ -62,6 +66,8 @@ export const ConfiguringForm = () => {
 
   const onSubmit = () => {
     onGenerate(words)
+
+    navigate(EScreens.TestsQuestion)
   }
 
   return (
