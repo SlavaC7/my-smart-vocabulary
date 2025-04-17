@@ -48,9 +48,9 @@ export const SearchInput = ({
         placeholder={t('search.placeholder')}
       />
 
-      <S.SpeechContainer>
+      {/* <S.SpeechContainer>
         <WordFeature.SpeechToText onChange={setValue} />
-      </S.SpeechContainer>
+      </S.SpeechContainer> */}
     </Styled.FlexWrapper>
   )
 }

@@ -1,5 +1,3 @@
-import { Platform, NativeModules } from 'react-native'
-
 import i18n, {
   LanguageDetectorAsyncModule,
   Services,
@@ -13,18 +11,6 @@ import { ELanguages } from './types'
 
 const DEFAULT_LANG = ELanguages.en
 
-const getDeviceLang = () => {
-  const appLanguage =
-    Platform.OS === 'ios'
-      ? NativeModules.SettingsManager.settings.AppleLocale ||
-        NativeModules.SettingsManager.settings.AppleLanguages[0]
-      : NativeModules.I18nManager.localeIdentifier
-
-  return appLanguage.search(/-|_/g) !== -1
-    ? appLanguage.slice(0, 2)
-    : appLanguage
-}
-
 const languageDetector: LanguageDetectorAsyncModule = {
   type: 'languageDetector',
   async: true,
@@ -34,13 +20,7 @@ const languageDetector: LanguageDetectorAsyncModule = {
     _i18nextOptions: InitOptions,
   ) => {},
   detect: callback => {
-    const deviceLang = getDeviceLang()
-
-    let lang = deviceLang
-
-    if (!Object.keys(resources).includes(lang)) {
-      lang = DEFAULT_LANG
-    }
+    const lang = DEFAULT_LANG
 
     callback(lang)
   },
@@ -52,7 +32,6 @@ export const resources = {
 }
 
 i18n.use(initReactI18next).use(languageDetector).init({
-  compatibilityJSON: 'v3',
   resources,
   fallbackLng: DEFAULT_LANG,
 })

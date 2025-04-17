@@ -1,6 +1,6 @@
-import { KeyboardAwareScrollViewProps } from 'react-native-keyboard-aware-scroll-view'
+import { ScrollViewProps } from 'react-native'
 
-export const keyboardAwareViewProps: KeyboardAwareScrollViewProps = {
+export const scrollViewProps: ScrollViewProps = {
   showsVerticalScrollIndicator: false,
   bounces: false,
 }

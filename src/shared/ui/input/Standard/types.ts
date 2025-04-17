@@ -6,8 +6,6 @@ import {
   ViewStyle,
 } from 'react-native'
 
-import { MaskInputProps } from 'react-native-mask-input'
-
 import { TIconsKeys } from '@assets/svg'
 
 import { TIconProps } from '../../Icon/types'
@@ -27,7 +25,7 @@ export type TStandardInputProps = {
   rightAction?: React.ReactElement
   topLabelAction?: React.ReactElement
   leftAction?: React.ReactElement
-  onChange?: MaskInputProps['onChangeText']
+  onChange?: TextInputProps['onChangeText']
   onPress?: () => void
   onPressRightIcon?: () => void
   withSwitch?: boolean

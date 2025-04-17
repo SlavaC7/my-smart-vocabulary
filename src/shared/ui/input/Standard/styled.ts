@@ -1,6 +1,5 @@
-import { StyleSheet, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, TouchableOpacity, TextInput } from 'react-native'
 
-import MaskInput from 'react-native-mask-input'
 import styled, { css } from 'styled-components'
 
 import { FONT, MARGIN } from '../../utils'
@@ -43,7 +42,7 @@ export const StyledTextInputContainer = styled(TouchableOpacity)<
       border-color: ${({ theme: { COLORS } }) => COLORS.red_300};
     `}
 `
-export const StyledTextInput = styled(MaskInput)<TStyledInput>`
+export const StyledTextInput = styled(TextInput)<TStyledInput>`
   ${FONT({})};
   width: 100%;
   margin-left: ${({ hasLeftIcon }) => (hasLeftIcon ? '8px' : '0px')};

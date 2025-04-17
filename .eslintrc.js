@@ -2,7 +2,7 @@ module.exports = {
   env: {
     jest: true,
   },
-  plugins: ['import', '@typescript-eslint', 'prettier', 'prefer-arrow'],
+  plugins: ['import', '@typescript-eslint'],
   extends: [
     '@react-native-community',
     'prettier',
@@ -51,14 +51,6 @@ module.exports = {
     'jest/no-disabled-tests': 'off',
     'no-shadow': 'off',
     'no-var': 'error',
-    'prefer-arrow/prefer-arrow-functions': [
-      'error',
-      {
-        classPropertiesAllowed: false,
-        disallowPrototype: true,
-        singleReturnOnly: false,
-      },
-    ],
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
     'react-native/no-inline-styles': 'error',
     'react/self-closing-comp': 'error',
