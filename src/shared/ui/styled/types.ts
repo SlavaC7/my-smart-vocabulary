@@ -35,4 +35,4 @@ export type TDivider = {
 
 export type TVisibilityContainer = { visible: boolean } & TMargin
 
-export type TEColors = keyof typeof EColors | string
+export type TEColors = keyof typeof EColors

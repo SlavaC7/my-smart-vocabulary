@@ -2,12 +2,15 @@ import React from 'react'
 
 import { useTranslation } from 'react-i18next'
 
+import { Confetti } from 'react-native-fast-confetti'
+import { useDispatch } from 'react-redux'
+
 import { EScreens } from '@/app/navigation'
 import { useTypedSelector } from '@/app/store'
 
 import { Header } from '@/widgets/header'
 
-import { getTestSelector } from '@/entities/test'
+import { getTestSelector, testsActions } from '@/entities/test'
 
 import {
   Background,
@@ -26,6 +29,7 @@ export const Main = () => {
   const { navigate } = useNavigation()
   const { correctAnswers, incorrectAnswers, totalAnswers } =
     useTypedSelector(getTestSelector)
+  const dispatch = useDispatch()
 
   const correctPercent =
     !!correctAnswers && totalAnswers ? (correctAnswers / totalAnswers) * 100 : 0
@@ -36,6 +40,16 @@ export const Main = () => {
 
   const onGoConfiguring = () => {
     navigate(EScreens.TestsConfig)
+  }
+
+  const onClear = () => {
+    dispatch(
+      testsActions.setState({
+        correctAnswers: 0,
+        incorrectAnswers: 0,
+        totalAnswers: 0,
+      }),
+    )
   }
   return (
     <Background.Container>
@@ -54,6 +68,8 @@ export const Main = () => {
             text={t('button.start')}
           />
         </Styled.FlexWrapper>
+
+        <Confetti />
 
         <Styled.Hr mTop={'16px'} height={6} color={EColors.neutral_200} />
 
@@ -74,7 +90,7 @@ export const Main = () => {
               </Typography.H3>{' '}
               (
               <Typography.H3 color={'green_300'}>
-                {correctPercent} %
+                {correctPercent.toFixed(1)} %
               </Typography.H3>
               )
             </Typography.H3>
@@ -85,11 +101,13 @@ export const Main = () => {
               </Typography.H3>{' '}
               (
               <Typography.H3 color={'red_400'}>
-                {incorrectPercent} %
+                {incorrectPercent.toFixed(1)} %
               </Typography.H3>
               )
             </Typography.H3>
           </Styled.FlexWrapper>
+
+          <Button.Standard text={'Clear Stats (text)'} onPress={onClear} />
         </Styled.FlexWrapper>
       </Background.Standard>
     </Background.Container>

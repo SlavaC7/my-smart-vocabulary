@@ -8,19 +8,21 @@ import { useTypedSelector } from '@/app/store'
 
 import { getTestSelector, TTestItem } from '@/entities/test'
 
-import { Background } from '@/shared'
+import { Background, Icon, Styled, useNavigation } from '@/shared'
 
 import { QuestionCard } from '../QuestionCard'
 
-import { PurpleContainer } from './styled'
+import { PurpleContainer, styles } from './styled'
 import { TQuestionListProps } from './types'
 
 const { width: viewportWidth, height } = Dimensions.get('window')
 
 export const QuestionList = ({}: TQuestionListProps) => {
   const { test } = useTypedSelector(getTestSelector)
-  // const ref = useRef<Carousel<TTestItem>>(null)
+  const ref = useRef<Carousel<TTestItem>>(null)
   const [disable, setDisable] = useState<boolean>(false)
+
+  const { goBack } = useNavigation()
 
   useEffect(() => {
     if (disable) {
@@ -54,21 +56,33 @@ export const QuestionList = ({}: TQuestionListProps) => {
   //   },
   // ).current
 
+  const onPress = () => {
+    setTimeout(() => {
+      ref.current?.snapToNext()
+    }, 500)
+  }
+
   const renderItem: ListRenderItem<TTestItem> = useCallback(({ item }) => {
-    return <QuestionCard {...item} />
+    return <QuestionCard {...item} onPressItem={onPress} />
   }, [])
 
   return (
     <>
-      {/* <Header.Question
-        question={currentList.find(item => item.id === viewedId)}
-        totalCount={totalCount}
-        activeItem={activeIndex + 1}
-      /> */}
       <PurpleContainer />
 
       <Background.Standard color={'transparent'}>
+        <Styled.FlexWrapper justify={'space-between'} style={styles.header}>
+          <Styled.Touchable width={'auto'} onPress={goBack}>
+            <Icon name={'AngleArrowLeft'} size={32} />
+          </Styled.Touchable>
+
+          <Styled.Touchable width={'auto'} onPress={goBack}>
+            <Icon name={'AngleArrowLeft'} size={32} />
+          </Styled.Touchable>
+        </Styled.FlexWrapper>
+
         <Carousel
+          ref={ref}
           data={test}
           renderItem={renderItem}
           // onSnapToItem={setActiveSlide}

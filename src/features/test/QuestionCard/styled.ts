@@ -33,6 +33,9 @@ export const styles = StyleSheet.create({
   text: {
     width: '100%',
   },
+  title: {
+    fontSize: 38,
+  },
 })
 
 export const SmileContainer = styled(Styled.FlexWrapper).attrs({

@@ -55,6 +55,7 @@ export const useGenerateTest = () => {
     console.log('test =>', test)
 
     dispatch(testsActions.setState({ test }))
+    dispatch(testsActions.setState({ testAnswers: [] }))
   }
 
   return {

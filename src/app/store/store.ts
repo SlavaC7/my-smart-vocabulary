@@ -9,7 +9,11 @@ import rootSaga from './saga'
 
 import { EStoreReducer } from './types'
 
-const whitelist: string[] = [EStoreReducer.user, EStoreReducer.word]
+const whitelist: string[] = [
+  EStoreReducer.user,
+  EStoreReducer.word,
+  // EStoreReducer.test,
+]
 
 const persistedReducer = persistReducer(
   {

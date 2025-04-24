@@ -14,7 +14,7 @@ export const PurpleContainer = styled(Styled.FlexWrapper).attrs({
   position: absolute;
   align-self: center;
   top: 0px;
-  background-color: ${({ theme: { COLORS } }) => COLORS.primary_400};
+  background-color: ${({ theme: { COLORS } }) => COLORS.black};
 `
 
 export const EmptyView = styled(Styled.FlexWrapper).attrs({
@@ -23,7 +23,8 @@ export const EmptyView = styled(Styled.FlexWrapper).attrs({
 })``
 
 export const styles = StyleSheet.create({
-  button: {
-    opacity: 0.5,
+  header: {
+    paddingHorizontal: 16,
+    paddingVertical: 10,
   },
 })

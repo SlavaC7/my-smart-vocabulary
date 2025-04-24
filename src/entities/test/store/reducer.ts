@@ -4,6 +4,8 @@ import { Reducers } from '@/app/store/tools'
 
 import { EStoreReducer } from '@/app/store/types'
 
+import { TAnswer } from '../models'
+
 import { TAnsweredPayload, TInitialState } from './types'
 
 const initialState: TInitialState = {
@@ -34,6 +36,16 @@ export const slice = createSlice({
         state.incorrectAnswers + (payload.type === 'incorrect' ? 1 : 0)
       state.totalAnswers = ++state.totalAnswers
       //TODO: make a test mutation
+    },
+
+    clearStats: (state, {}: PayloadAction<void>) => {
+      state.correctAnswers = 0
+      state.incorrectAnswers = 0
+      state.totalAnswers = 0
+    },
+
+    setAnswer: (state, { payload }: PayloadAction<TAnswer>) => {
+      state.testAnswers = [...state.testAnswers, payload]
     },
   },
 })

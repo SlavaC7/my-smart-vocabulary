@@ -8,7 +8,12 @@ import * as C from './components'
 import * as S from './styled'
 import { TQuestionCardProps } from './types'
 
-export const QuestionCard = ({}: TQuestionCardProps) => {
+export const QuestionCard = ({
+  answers,
+  word,
+  _id,
+  onPressItem,
+}: TQuestionCardProps) => {
   // const dispatch = useDispatch()
   return (
     <View style={S.styles.container}>
@@ -19,9 +24,11 @@ export const QuestionCard = ({}: TQuestionCardProps) => {
         <S.ContentContainer>
           {/* <C.Progress count={totalCount} page={itemPosition} /> */}
           {/* <Icon name={'QuestionCircle'} size={56} /> */}
-          <Typography.H4 style={S.styles.text} mTop={'12px'} align={'center'}>
-            {/* {getTranslate(text)} */}
-          </Typography.H4>
+          <Typography.H1 style={S.styles.title} mTop={'12px'} align={'center'}>
+            {word}
+          </Typography.H1>
+
+          <C.Answers {...{ _id, answers, onPressItem }} />
         </S.ContentContainer>
       </S.SVGContainer>
 
@@ -29,7 +36,7 @@ export const QuestionCard = ({}: TQuestionCardProps) => {
         style={S.styles.backgroundLayer}
         circle={2}
         minusWidth={40}
-        color={EColors.white}
+        color={EColors.blue_opacity}
       />
       <S.SmileContainer>
         {/* <Typography.H2>{emoji}</Typography.H2> */}

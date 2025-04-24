@@ -14,7 +14,7 @@ export const SvgComponent = ({
   style,
   circle = 0,
   minusWidth = 0,
-  color = EColors.primary_300,
+  color = EColors.white,
 }: TSvgComponentProps) => {
   const modificationWidth = Sizes.CARD_WIDTH - minusWidth
   const sameProps = {

@@ -6,7 +6,7 @@ import { Background } from '@/shared/ui/background'
 
 export const Questions = () => {
   return (
-    <Background.SafeArea>
+    <Background.SafeArea edges={['top']}>
       <TestFeatures.QuestionList />
     </Background.SafeArea>
   )
