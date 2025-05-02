@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 
 import { useTypedSelector } from '@/app/store'
 
-import { WordFeature } from '@/features/word'
+import { WordFeature } from '@/features'
 
 import { getWordSelector, TFolder, WordEntity } from '@/entities/word'
 

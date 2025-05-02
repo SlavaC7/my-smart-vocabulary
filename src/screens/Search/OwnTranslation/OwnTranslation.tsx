@@ -9,9 +9,9 @@ import { useTheme } from 'styled-components'
 
 import { Header } from '@/widgets/header'
 
-import { WordFeature } from '@/features/word'
+import { WordFeature } from '@/features'
 
-import { wordActions } from '@/entities/word'
+import { EWordType, wordActions } from '@/entities/word'
 
 import {
   Background,
@@ -43,6 +43,7 @@ export const OwnTranslation = () => {
     resolver: createOwnTranslationSchema(t),
     defaultValues: {
       word: '',
+      type: EWordType.word,
       translations: [''],
     },
   })
@@ -63,7 +64,9 @@ export const OwnTranslation = () => {
       wordActions.addWord({
         _id: uuid.v4(),
         text: formData.word,
-        transaltions: [formData.translations[0], ...formData.translations],
+        // translations: [formData.translations[0], ...formData.translations],
+        translations: formData.translations,
+        type: formData.type,
       }),
     )
 
@@ -99,9 +102,10 @@ export const OwnTranslation = () => {
               <Input.Standard
                 label={t('own_translation.your_word')}
                 inputContainerStyle={styles.inputContainer}
-                style={{ flex: 1 }}
+                style={styles.flex1}
                 value={value}
                 onChange={onChange}
+                mBottom={'20px'}
               />
               {/* <WordFeature.SpeechToText
                 mTop="22px"
@@ -109,6 +113,14 @@ export const OwnTranslation = () => {
                 onChange={onChange}
               /> */}
             </Styled.FlexWrapper>
+          )}
+        />
+
+        <Controller
+          control={control}
+          name="type"
+          render={({ field: { value, onChange } }) => (
+            <WordFeature.TypePicker {...{ value, onChange }} />
           )}
         />
 
@@ -122,7 +134,7 @@ export const OwnTranslation = () => {
                   key={idx.toString()}
                   mTop="20px"
                   align="center">
-                  <Styled.FlexWrapper width="auto" style={{ flex: 1 }}>
+                  <Styled.FlexWrapper width="auto" style={styles.flex1}>
                     <Input.Standard
                       style={styles.flex1}
                       label={t('own_translation.translation')}

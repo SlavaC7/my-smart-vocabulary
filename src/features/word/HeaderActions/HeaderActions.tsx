@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { useTheme } from 'styled-components'
 
+import { WordFeature } from '@/features'
+
 import { TFolder, wordActions } from '@/entities/word'
 
 import { delay } from '@/shared'
@@ -13,8 +15,6 @@ import { Common } from '@/shared/ui/common'
 import { TPopoverRef } from '@/shared/ui/common/Popover'
 import { Icon } from '@/shared/ui/Icon'
 import { Styled, Typography } from '@/shared/ui/styled'
-
-import { WordFeature } from '..'
 
 import * as S from './styles'
 import { THeaderActionsProps } from './types'
@@ -70,7 +70,7 @@ export const HeaderActions = ({ wordId, folderId }: THeaderActionsProps) => {
         <S.Item onPress={onPressMove}>
           <Icon name="Forward" stroke={COLORS.black} />
 
-          <Typography.Body2R mLeft="8px" color={COLORS.black}>
+          <Typography.Body2R mLeft="8px" color={'black'}>
             {t('button.move')}
           </Typography.Body2R>
         </S.Item>
@@ -78,7 +78,7 @@ export const HeaderActions = ({ wordId, folderId }: THeaderActionsProps) => {
         <S.Item onPress={onPressDelete}>
           <Icon name="Trash" stroke={COLORS.red_300} />
 
-          <Typography.Body2R mLeft="8px" color={COLORS.red_300}>
+          <Typography.Body2R mLeft="8px" color={'red_300'}>
             {t('button.delete')}
           </Typography.Body2R>
         </S.Item>

@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useTranslation } from 'react-i18next'
 
-import { Confetti } from 'react-native-fast-confetti'
+// import { Confetti } from 'react-native-fast-confetti'
 import { useDispatch } from 'react-redux'
 
 import { EScreens } from '@/app/navigation'
@@ -68,8 +68,6 @@ export const Main = () => {
             text={t('button.start')}
           />
         </Styled.FlexWrapper>
-
-        <Confetti />
 
         <Styled.Hr mTop={'16px'} height={6} color={EColors.neutral_200} />
 

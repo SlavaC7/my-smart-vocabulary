@@ -20,15 +20,15 @@ export const useGenerateTest = () => {
 
   const onGenerate = (words: TWord[]) => {
     const test: TTestItem[] = words.map(word => {
-      const correctTranslation = getRandomElement(word.transaltions)
+      const correctTranslation = getRandomElement(word.translations)
 
       const otherWords = words.filter(
-        w => w._id !== word._id && w.transaltions.length > 0,
+        w => w._id !== word._id && w.translations.length > 0,
       )
 
       const incorrectTranslations = shuffleArray(otherWords)
         .slice(0, 3)
-        .map(w => getRandomElement(w.transaltions))
+        .map(w => getRandomElement(w.translations))
 
       const answers: TAnswer[] = shuffleArray([
         {

@@ -6,7 +6,7 @@ export const formatTranslationToWord = (translation: TTranslation): TWord => {
   return {
     _id: uuid.v4(),
     text: translation.text,
-    transaltions: translation.translations,
+    translations: translation.translations,
     voice: translation?.voice,
     examples: translation?.context?.examples,
   }

@@ -13,7 +13,7 @@ import { useTypedSelector } from '@/app/store'
 
 import { Header } from '@/widgets/header'
 
-import { WordFeature } from '@/features/word'
+import { WordFeature } from '@/features'
 
 import {
   getWordSelector,
@@ -71,7 +71,7 @@ export const Word = () => {
         <S.TranslationContainer mTop="8px" mBottom="24px">
           <Icon name="Translate" size={16} />
           <Typography.Body1R mLeft="12px" style={{ flex: 1 }}>
-            {word.transaltions?.map(item => _.capitalize(item))?.join(' • ')}
+            {word.translations?.map(item => _.capitalize(item))?.join(' • ')}
           </Typography.Body1R>
         </S.TranslationContainer>
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 import _ from 'lodash'
 
-import { WordFeature } from '@/features/word'
+import { WordFeature } from '@/features'
 
 import { useWordControl } from '@/entities/word'
 
@@ -17,7 +17,7 @@ export const WordItem = ({ data, ...props }: TWordItemProps) => {
 
   const wordSaved = existInAnyFolder(data.text)
 
-  const translations = data?.transaltions || []
+  const translations = data?.translations || []
 
   return (
     <S.Container {...props}>

@@ -41,6 +41,7 @@ export default {
     add: 'Add translation',
     translation: 'Translation',
     your_word: 'Your word',
+    type: 'Type of word',
   },
   word: {
     synonyms: 'Synonyms',
@@ -66,5 +67,10 @@ export default {
     my_words: 'My words',
     new_folder: 'New folder',
     enter_folder_name: 'Enter folder name',
+  },
+
+  word_type: {
+    word: 'Word',
+    phrase: 'Phrase',
   },
 }

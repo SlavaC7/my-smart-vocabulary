@@ -11,3 +11,10 @@ export const Container = styled(Styled.Touchable)`
   justify-content: flex-start;
   align-items: flex-start;
 `
+
+export const TypeContainer = styled(Styled.FlexWrapper)`
+  width: auto;
+  background-color: ${({ theme: { COLORS } }) => COLORS.black};
+  border-radius: 20px;
+  padding: 5px 7px;
+`

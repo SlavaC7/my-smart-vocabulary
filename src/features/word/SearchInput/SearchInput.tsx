@@ -2,11 +2,8 @@ import React, { useState, useEffect } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
-import { WordFeature } from '@/features/word'
-
 import { Input, Styled } from '@/shared'
 
-import * as S from './styles'
 import { TSearchInputProps } from './types'
 
 const useDebounce = (value: string, delay: number): string => {

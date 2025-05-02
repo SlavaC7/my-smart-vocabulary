@@ -20,6 +20,7 @@ const persistedReducer = persistReducer(
     key: REDUX_KEY,
     storage: AsyncStorage,
     whitelist,
+    version: 1,
   },
   rootReducer,
 )

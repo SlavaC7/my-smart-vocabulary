@@ -5,7 +5,7 @@ import { useTheme } from 'styled-components'
 
 import { EScreens } from '@/app/navigation'
 
-import { WordFeature } from '@/features/word'
+import { WordFeature } from '@/features'
 
 import { TranslateService } from '@/entities/word'
 
