@@ -10,6 +10,7 @@ export enum EScreens {
   TestsMain = 'TestsMainScreen',
   TestsConfig = 'TestsConfigScreen',
   TestsQuestion = 'TestsQuestionScreen',
+  TestsSuccess = 'TestsSuccessScreen',
 
   StatisticsMain = 'StatisticsMainScreen',
 

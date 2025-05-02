@@ -27,6 +27,10 @@ export const TestsStack = () => {
         component={TestsScreens.Questions}
         name={EScreens.TestsQuestion}
       />
+      <Stack.Screen
+        component={TestsScreens.Success}
+        name={EScreens.TestsSuccess}
+      />
     </Stack.Navigator>
   )
 }

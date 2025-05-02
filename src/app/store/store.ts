@@ -12,7 +12,7 @@ import { EStoreReducer } from './types'
 const whitelist: string[] = [
   EStoreReducer.user,
   EStoreReducer.word,
-  // EStoreReducer.test,
+  EStoreReducer.test,
 ]
 
 const persistedReducer = persistReducer(

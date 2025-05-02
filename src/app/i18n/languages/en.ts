@@ -74,4 +74,23 @@ export default {
     word: 'Word',
     phrase: 'Phrase',
   },
+
+  test_success: {
+    congratulations: 'Congratulations!',
+    new_quiz: 'Add new words and consolidate your score in a new quiz!',
+    excellent: {
+      title: '🥶Like a god!😱',
+      description: 'Are you sure you need this app?',
+    },
+    good: {
+      title: '😎Great!✌️',
+      description:
+        'You showed a good result!\nTime to add new words and consolidate the result',
+    },
+    norm: {
+      title: '😏Way to go!😍',
+      description:
+        ' But you can do better!\nTake the test again to memorize more words.',
+    },
+  },
 }

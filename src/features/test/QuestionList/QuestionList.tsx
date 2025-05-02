@@ -4,6 +4,7 @@ import { Dimensions, ListRenderItem } from 'react-native'
 
 import Carousel, { CarouselProperties } from 'react-native-snap-carousel'
 
+import { EScreens } from '@/app/navigation'
 import { useTypedSelector } from '@/app/store'
 
 import { getTestSelector, TTestItem } from '@/entities/test'
@@ -21,8 +22,9 @@ export const QuestionList = ({}: TQuestionListProps) => {
   const { test } = useTypedSelector(getTestSelector)
   const ref = useRef<Carousel<TTestItem>>(null)
   const [disable, setDisable] = useState<boolean>(false)
+  const activeIndex = useRef(0)
 
-  const { goBack } = useNavigation()
+  const { goBack, navigate } = useNavigation()
 
   useEffect(() => {
     if (disable) {
@@ -57,7 +59,16 @@ export const QuestionList = ({}: TQuestionListProps) => {
   // ).current
 
   const onPress = () => {
+    console.log('NEXT', activeIndex.current + 1, test.length)
+
     setTimeout(() => {
+      if (activeIndex.current + 1 === test.length) {
+        console.log('NEXT')
+        navigate(EScreens.TestsSuccess)
+        return
+      }
+      console.log('snapToNext')
+
       ref.current?.snapToNext()
     }, 500)
   }
@@ -66,6 +77,9 @@ export const QuestionList = ({}: TQuestionListProps) => {
     return <QuestionCard {...item} onPressItem={onPress} />
   }, [])
 
+  const onSetActiveIndex = (index: number) => {
+    activeIndex.current = index
+  }
   return (
     <>
       <PurpleContainer />
@@ -86,7 +100,7 @@ export const QuestionList = ({}: TQuestionListProps) => {
           data={test}
           renderItem={renderItem}
           scrollEnabled={false}
-          // onSnapToItem={setActiveSlide}
+          onSnapToItem={onSetActiveIndex}
           pagingEnabled
           // ListEmptyComponent={renderEmpty}
           {...sliderParams}
