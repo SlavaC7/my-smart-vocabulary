@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native'
 
 import styled from 'styled-components'
 
-import { Styled } from '@/shared'
+import { Styled, Typography } from '@/shared'
 
 import * as Sizes from './config'
 
@@ -79,4 +79,8 @@ export const Placeholder = styled(Styled.FlexWrapper).attrs({
   height: 25px;
   border-radius: 35px;
   background-color: ${({ theme: { COLORS } }) => COLORS.primary_200};
+`
+
+export const Flag = styled(Typography.H2)`
+  font-size: 50px;
 `

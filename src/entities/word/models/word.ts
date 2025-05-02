@@ -8,7 +8,7 @@ export type TWord = {
   createdAt?: string
   examples?: Array<TTranslationExample>
   voice?: string
-  type?: EWordType
+  type: EWordType
   code: string
   flag: string
 }

@@ -76,15 +76,16 @@ export const QuestionList = ({}: TQuestionListProps) => {
             <Icon name={'AngleArrowLeft'} size={32} />
           </Styled.Touchable>
 
-          <Styled.Touchable width={'auto'} onPress={goBack}>
+          {/* <Styled.Touchable width={'auto'} onPress={goBack}>
             <Icon name={'AngleArrowLeft'} size={32} />
-          </Styled.Touchable>
+          </Styled.Touchable> */}
         </Styled.FlexWrapper>
 
         <Carousel
           ref={ref}
           data={test}
           renderItem={renderItem}
+          scrollEnabled={false}
           // onSnapToItem={setActiveSlide}
           pagingEnabled
           // ListEmptyComponent={renderEmpty}

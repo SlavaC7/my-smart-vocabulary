@@ -49,6 +49,8 @@ export const useGenerateTest = () => {
         _id: word._id,
         word: word.text,
         answers,
+        flag: word.flag,
+        type: word.type,
       }
     })
 

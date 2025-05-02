@@ -2,19 +2,18 @@ import React, { useCallback } from 'react'
 
 import _ from 'lodash'
 
-import { useTranslation } from 'react-i18next'
-
 import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable'
 
 import { EScreens } from '@/app/navigation'
 
 import { Icon, Styled, Typography, useNavigation } from '@/shared'
 
+import { WordEntity } from '../..'
+
 import * as S from './styles'
 import { TMyCardProps } from './types'
 
 export const MyCard = ({ word, rightAction }: TMyCardProps) => {
-  const { t } = useTranslation()
   const navigation = useNavigation()
 
   const onPress = useCallback(() => {
@@ -35,13 +34,7 @@ export const MyCard = ({ word, rightAction }: TMyCardProps) => {
           </Styled.FlexWrapper>
         </Styled.FlexWrapper>
 
-        {!!word.type && (
-          <S.TypeContainer>
-            <Typography.Caption1R color={'white'}>
-              {t(`word_type.${word.type}`)}
-            </Typography.Caption1R>
-          </S.TypeContainer>
-        )}
+        {!!word.type && <WordEntity.TypeCard active type={word.type} />}
 
         <Typography.Body2R mTop={'5px'} color="neutral_500">
           {word.translations?.map(item => _.capitalize(item))?.join(', ')}

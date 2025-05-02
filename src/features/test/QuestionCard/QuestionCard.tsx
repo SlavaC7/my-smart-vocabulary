@@ -2,6 +2,8 @@ import React from 'react'
 
 import { View } from 'react-native'
 
+import { WordEntity } from '@/entities/word'
+
 import { EColors, Typography } from '@/shared'
 
 import * as C from './components'
@@ -13,6 +15,8 @@ export const QuestionCard = ({
   word,
   _id,
   onPressItem,
+  flag,
+  type,
 }: TQuestionCardProps) => {
   // const dispatch = useDispatch()
   return (
@@ -28,6 +32,8 @@ export const QuestionCard = ({
             {word}
           </Typography.H1>
 
+          <WordEntity.TypeCard type={type} mTop={'8px'} active />
+
           <C.Answers {...{ _id, answers, onPressItem }} />
         </S.ContentContainer>
       </S.SVGContainer>
@@ -39,7 +45,7 @@ export const QuestionCard = ({
         color={EColors.blue_opacity}
       />
       <S.SmileContainer>
-        {/* <Typography.H2>{emoji}</Typography.H2> */}
+        <S.Flag>{flag}</S.Flag>
       </S.SmileContainer>
     </View>
   )

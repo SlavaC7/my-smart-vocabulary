@@ -19,6 +19,7 @@ import {
   getWordSelector,
   TranslateService,
   useWordControl,
+  WordEntity,
 } from '@/entities/word'
 
 import { Background, Icon, Styled, Typography, useQuery } from '@/shared'
@@ -71,12 +72,8 @@ export const Word = () => {
         </S.WordContainer>
 
         {!!word.type && (
-          <Styled.FlexWrapper>
-            <S.TypeContainer mTop={'8px'}>
-              <Typography.Body2R>
-                {t(`word_type.${word.type}`)}
-              </Typography.Body2R>
-            </S.TypeContainer>
+          <Styled.FlexWrapper mTop={'8px'}>
+            <WordEntity.TypeCard type={word.type} />
           </Styled.FlexWrapper>
         )}
 
