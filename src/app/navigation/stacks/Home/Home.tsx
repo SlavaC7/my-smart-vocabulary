@@ -4,6 +4,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import { HomeScreens } from '@/screens/Home'
 
+import { SearchScreens } from '@/screens/Search'
+
 import { EScreens } from '../../screens'
 import { NativeScreenNavigationOptions } from '../options'
 
@@ -19,6 +21,10 @@ export const HomeStack = () => {
         ...NativeScreenNavigationOptions,
       }}>
       <Stack.Screen component={HomeScreens.Main} name={EScreens.HomeMain} />
+      <Stack.Screen
+        component={SearchScreens.OwnTranslation}
+        name={EScreens.SearchOwnTranslation}
+      />
     </Stack.Navigator>
   )
 }

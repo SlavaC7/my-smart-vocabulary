@@ -1,8 +1,11 @@
+import React from 'react'
+
 import { TStyledTextProps, Typography } from '../../styled'
 
 type TColoredTextProps = {
   TextComponent?: typeof Typography.Body1R
   highlightWords?: Array<string>
+  children: string
 } & TStyledTextProps
 
 export const ColoredText = ({
@@ -14,19 +17,20 @@ export const ColoredText = ({
   const regex = new RegExp(`(${highlightWords.join('|')})`, 'gi')
   const parts = (children || '')?.split(regex)
 
-  return (
-    <TextComponent {...props}>
-      {parts.map((part, index) =>
-        highlightWords.some(
-          word => word.toLowerCase() === part.toLowerCase(),
-        ) ? (
-          <TextComponent key={index} color="primary_500">
-            {part}
-          </TextComponent>
-        ) : (
-          part
-        ),
-      )}
-    </TextComponent>
-  )
+  const renderItem = (part: string, index: number) => {
+    const isHightLight = highlightWords.some(
+      word => word.toLowerCase() === part.toLowerCase(),
+    )
+
+    if (isHightLight) {
+      return (
+        <TextComponent key={index} color="primary_500">
+          {part}
+        </TextComponent>
+      )
+    }
+    return part
+  }
+
+  return <TextComponent {...props}>{parts.map(renderItem)}</TextComponent>
 }

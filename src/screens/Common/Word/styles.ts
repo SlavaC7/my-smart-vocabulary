@@ -1,8 +1,10 @@
 import { View } from 'react-native'
 
+import { StyleSheet } from 'react-native'
+
 import styled from 'styled-components'
 
-import { MARGIN, TMargin } from '@/shared'
+import { MARGIN, Styled, TMargin } from '@/shared'
 
 export const WordContainer = styled(View)<TMargin>`
   width: 100%;
@@ -54,3 +56,17 @@ export const Footer = styled(View)`
   margin-bottom: ${({ theme: { insets } }) => insets.bottom + 16}px;
   flex-direction: row;
 `
+
+export const TypeContainer = styled(Styled.FlexWrapper).attrs({
+  width: 'auto',
+})`
+  border: 1px solid ${({ theme: { COLORS } }) => COLORS.black};
+  border-radius: 20px;
+  padding: 5px 7px;
+`
+
+export const styles = StyleSheet.create({
+  flex1: {
+    flex: 1,
+  },
+})

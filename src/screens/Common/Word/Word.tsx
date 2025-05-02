@@ -60,7 +60,9 @@ export const Word = () => {
 
       <Background.Scroll>
         <S.WordContainer mTop="12px">
-          <Typography.H1>{word.text}</Typography.H1>
+          <Typography.H1>
+            {word.text} {word.flag}
+          </Typography.H1>
           {!!folderName && (
             <Typography.Body2R color="neutral_500" mTop="8px">
               {folderName}
@@ -68,9 +70,19 @@ export const Word = () => {
           )}
         </S.WordContainer>
 
+        {!!word.type && (
+          <Styled.FlexWrapper>
+            <S.TypeContainer mTop={'8px'}>
+              <Typography.Body2R>
+                {t(`word_type.${word.type}`)}
+              </Typography.Body2R>
+            </S.TypeContainer>
+          </Styled.FlexWrapper>
+        )}
+
         <S.TranslationContainer mTop="8px" mBottom="24px">
           <Icon name="Translate" size={16} />
-          <Typography.Body1R mLeft="12px" style={{ flex: 1 }}>
+          <Typography.Body1R mLeft="12px" style={S.styles.flex1}>
             {word.translations?.map(item => _.capitalize(item))?.join(' • ')}
           </Typography.Body1R>
         </S.TranslationContainer>

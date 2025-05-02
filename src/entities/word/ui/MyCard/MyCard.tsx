@@ -4,15 +4,16 @@ import _ from 'lodash'
 
 import { useTranslation } from 'react-i18next'
 
+import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable'
+
 import { EScreens } from '@/app/navigation'
 
 import { Icon, Styled, Typography, useNavigation } from '@/shared'
 
-import { TWord } from '../../models'
-
 import * as S from './styles'
+import { TMyCardProps } from './types'
 
-export const MyCard = ({ word }: { word: TWord }) => {
+export const MyCard = ({ word, rightAction }: TMyCardProps) => {
   const { t } = useTranslation()
   const navigation = useNavigation()
 
@@ -21,24 +22,31 @@ export const MyCard = ({ word }: { word: TWord }) => {
   }, [word])
 
   return (
-    <S.Container onPress={onPress}>
-      <Styled.FlexWrapper justify="space-between">
-        <Typography.Body1R>{word.text}</Typography.Body1R>
+    <Swipeable
+      enableTrackpadTwoFingerGesture
+      renderRightActions={event => rightAction()}>
+      <S.Container onPress={onPress}>
+        <Styled.FlexWrapper justify="space-between">
+          <Typography.Body1R>{word.text}</Typography.Body1R>
 
-        <Icon name="ArrowUpRight" />
-      </Styled.FlexWrapper>
+          <Styled.FlexWrapper width={'auto'}>
+            <Typography.Body1R>{word.flag || '🇺🇸'}</Typography.Body1R>
+            <Icon name="ArrowUpRight" />
+          </Styled.FlexWrapper>
+        </Styled.FlexWrapper>
 
-      {!!word.type && (
-        <S.TypeContainer>
-          <Typography.Caption1R color={'white'}>
-            {t(`word_type.${word.type}`)}
-          </Typography.Caption1R>
-        </S.TypeContainer>
-      )}
+        {!!word.type && (
+          <S.TypeContainer>
+            <Typography.Caption1R color={'white'}>
+              {t(`word_type.${word.type}`)}
+            </Typography.Caption1R>
+          </S.TypeContainer>
+        )}
 
-      <Typography.Body2R mTop={'5px'} color="neutral_500">
-        {word.translations?.map(item => _.capitalize(item))?.join(', ')}
-      </Typography.Body2R>
-    </S.Container>
+        <Typography.Body2R mTop={'5px'} color="neutral_500">
+          {word.translations?.map(item => _.capitalize(item))?.join(', ')}
+        </Typography.Body2R>
+      </S.Container>
+    </Swipeable>
   )
 }

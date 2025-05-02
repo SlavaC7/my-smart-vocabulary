@@ -43,4 +43,5 @@ export enum EColors {
   last_time = '#3872E4',
   other_message = '#E9E9E9',
   ruby_chat_button = '#22E8D5',
+  red_15 = '#F45C4D26',
 }

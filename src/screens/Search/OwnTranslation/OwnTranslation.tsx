@@ -1,11 +1,15 @@
 import React, { useCallback } from 'react'
 
+import { useRoute } from '@react-navigation/native'
 import { Controller, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
 import uuid from 'react-native-uuid'
 import { useDispatch } from 'react-redux'
 import { useTheme } from 'styled-components'
+
+import { EScreens } from '@/app/navigation'
+import { TScreenQueryProps } from '@/app/navigation/types'
 
 import { Header } from '@/widgets/header'
 
@@ -32,6 +36,10 @@ export const OwnTranslation = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const navigation = useNavigation()
+  const { params } =
+    useRoute<TScreenQueryProps<EScreens.SearchOwnTranslation>>()
+
+  const isHome = !!params.isHome
 
   const {
     control,
@@ -45,6 +53,8 @@ export const OwnTranslation = () => {
       word: '',
       type: EWordType.word,
       translations: [''],
+      code: 'US',
+      flag: '🇺🇸',
     },
   })
 
@@ -62,16 +72,15 @@ export const OwnTranslation = () => {
   const onSave = (formData: TCreateOwnTranslationForm) => {
     dispatch(
       wordActions.addWord({
+        ...formData,
         _id: uuid.v4(),
         text: formData.word,
         // translations: [formData.translations[0], ...formData.translations],
-        translations: formData.translations,
-        type: formData.type,
       }),
     )
 
     navigation.goBack()
-    navigation.goBack()
+    !isHome && navigation.goBack()
   }
 
   return (
@@ -121,6 +130,29 @@ export const OwnTranslation = () => {
           name="type"
           render={({ field: { value, onChange } }) => (
             <WordFeature.TypePicker {...{ value, onChange }} />
+          )}
+        />
+
+        <Controller
+          control={control}
+          name="code"
+          render={({ field: { value, onChange } }) => (
+            <Controller
+              control={control}
+              name="flag"
+              render={({
+                field: { value: flagValue, onChange: onChangeFlag },
+              }) => (
+                <WordFeature.LangPicker
+                  value={value}
+                  flag={flagValue}
+                  onChange={item => {
+                    onChange(item.value)
+                    onChangeFlag(item.flag)
+                  }}
+                />
+              )}
+            />
           )}
         />
 

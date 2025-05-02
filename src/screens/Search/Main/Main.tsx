@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
-import { useTheme } from 'styled-components'
 
 import { EScreens } from '@/app/navigation'
 
@@ -25,7 +24,6 @@ import * as UI from './components'
 import * as S from './styles'
 
 export const Main = () => {
-  const { COLORS } = useTheme()
   const { t } = useTranslation()
   const navigation = useNavigation()
   const [searchText, setSearchText] = useState('')
@@ -43,10 +41,11 @@ export const Main = () => {
       : null
 
   const onPressCreateOwn = useCallback(() => {
-    navigation.navigate(EScreens.SearchOwnTranslation)
+    navigation.navigate(EScreens.SearchOwnTranslation, {})
   }, [])
 
   const onPressWord = useCallback(() => {
+    if (!word) return
     navigation.navigate(EScreens.WordMain, { word })
   }, [word])
 
@@ -57,9 +56,7 @@ export const Main = () => {
       </Styled.Padding>
 
       <S.TitleSection>
-        <Typography.Caption1R
-          textTransform="uppercase"
-          color={COLORS.neutral_500}>
+        <Typography.Caption1R textTransform="uppercase" color={'neutral_500'}>
           {t('search.title')}
         </Typography.Caption1R>
       </S.TitleSection>
@@ -72,9 +69,7 @@ export const Main = () => {
       )}
 
       <S.TitleSection mTop="12px">
-        <Typography.Caption1R
-          textTransform="uppercase"
-          color={COLORS.neutral_500}>
+        <Typography.Caption1R textTransform="uppercase" color={'neutral_500'}>
           {t('common.other')}
         </Typography.Caption1R>
       </S.TitleSection>

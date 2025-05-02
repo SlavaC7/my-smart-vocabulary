@@ -42,6 +42,7 @@ export default {
     translation: 'Translation',
     your_word: 'Your word',
     type: 'Type of word',
+    language: 'Language of word',
   },
   word: {
     synonyms: 'Synonyms',

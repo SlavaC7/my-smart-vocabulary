@@ -58,7 +58,12 @@ export const MyWordsList = ({ searchTerm }: TMyWordsListProps) => {
         )}
         data={filteredWords}
         keyExtractor={item => item._id}
-        renderItem={({ item }) => <WordEntity.MyCard word={item} />}
+        renderItem={({ item }) => (
+          <WordEntity.MyCard
+            word={item}
+            rightAction={() => <WordFeature.DeleteWord id={item._id} />}
+          />
+        )}
         ItemSeparatorComponent={() => <Styled.Divider height={8} />}
         ListFooterComponent={() => <Styled.Divider height={100} />}
       />

@@ -9,6 +9,8 @@ export type TWord = {
   examples?: Array<TTranslationExample>
   voice?: string
   type?: EWordType
+  code: string
+  flag: string
 }
 
 export enum EWordType {

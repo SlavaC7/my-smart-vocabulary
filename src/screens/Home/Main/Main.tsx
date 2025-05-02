@@ -4,9 +4,11 @@ import { useTranslation } from 'react-i18next'
 
 import { useTheme } from 'styled-components'
 
+import { EScreens } from '@/app/navigation'
+
 import { WordFeature } from '@/features'
 
-import { Typography } from '@/shared'
+import { Icon, Styled, Typography, useNavigation } from '@/shared'
 import { Background } from '@/shared/ui/background'
 
 import * as UI from './components'
@@ -15,12 +17,23 @@ import * as S from './styles'
 export const Main = () => {
   const { COLORS } = useTheme()
   const { t } = useTranslation()
+  const { navigate } = useNavigation()
   const [searchTerm, setSearchTerm] = useState('')
+
+  const onCreate = () => {
+    navigate(EScreens.SearchOwnTranslation, { isHome: true })
+  }
 
   return (
     <Background.Container top={0} bottom={0} color={COLORS.background}>
       <S.Header>
-        <Typography.H1 color="white">{t('app.name')}</Typography.H1>
+        <Styled.FlexWrapper justify={'space-between'}>
+          <Typography.H1 color="white">{t('app.name')}</Typography.H1>
+
+          <S.PlusContainer onPress={onCreate}>
+            <Icon name={'Plus'} size={30} />
+          </S.PlusContainer>
+        </Styled.FlexWrapper>
         <S.SearchContainer>
           <WordFeature.SearchInput
             value={searchTerm}

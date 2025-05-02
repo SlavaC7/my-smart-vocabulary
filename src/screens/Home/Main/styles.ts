@@ -2,7 +2,7 @@ import { View } from 'react-native'
 
 import styled from 'styled-components'
 
-import { appPadding } from '@/shared'
+import { appPadding, Styled } from '@/shared'
 
 export const Header = styled(View)`
   padding: 0px ${appPadding}px;
@@ -22,4 +22,12 @@ export const SearchContainer = styled(View)`
   align-self: center;
   bottom: -18px;
   z-index: 10;
+`
+
+export const PlusContainer = styled(Styled.Touchable).attrs({
+  width: '35px',
+  height: '35px',
+})`
+  border-radius: 100px;
+  background-color: ${({ theme: { COLORS } }) => COLORS.white};
 `
