@@ -12,15 +12,37 @@ const data = [EWordType.word, EWordType.phrase]
 
 export const TypePicker = ({ onChange, value }: TTypePickerProps) => {
   const { t } = useTranslation()
+
+  const validateActive = (item: EWordType) => {
+    if (Array.isArray(value)) {
+      return value.includes(item)
+    }
+
+    return item === value
+  }
+
+  const _onChange = (item: EWordType, isActive: boolean) => {
+    if (Array.isArray(value)) {
+      if (isActive) {
+        onChange(value.filter(fil => fil !== item))
+        return
+      }
+      onChange([...value, item])
+      return
+    }
+
+    onChange(item)
+  }
   const renderItem = (item: EWordType) => {
-    const active = item === value
+    const active = validateActive(item)
     return (
       <WordEntity.TypeCard
+        key={item}
         active={active}
         mRight={'16px'}
         type={item}
         size={'standard'}
-        onPress={onChange}
+        onPress={() => _onChange(item, active)}
         textComponent={'Body2R'}
       />
     )

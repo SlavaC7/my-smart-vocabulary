@@ -101,7 +101,7 @@ export const FoldresBS = forwardRef<TBottomSheetModalRef, TFoldersBSProps>(
                 <Icon name="FolderDublicate" />
                 <Typography.H4 mLeft="4px">{item.name}</Typography.H4>
                 <Typography.H4 color="neutral_300">{` / ${words.reduce(
-                  (st, val) => st + +(val.forderId === item._id),
+                  (st, val) => st + +(val.folderId === item._id),
                   0,
                 )}`}</Typography.H4>
               </Styled.FlexWrapper>

@@ -25,7 +25,7 @@ export const Main = () => {
   }, {} as TWord)
 
   const getFoldersWords = (id: string) => {
-    return words.filter(item => item.forderId === id)
+    return words.filter(item => item.folderId === id)
   }
 
   const renderFolders = (item: TFolder) => {

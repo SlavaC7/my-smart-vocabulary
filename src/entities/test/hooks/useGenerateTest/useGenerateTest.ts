@@ -1,5 +1,7 @@
 import { useDispatch } from 'react-redux'
 
+import { TConfiguringForm } from '@/features/test/ConfiguringForm/types'
+
 import { TWord } from '@/entities/word'
 
 import { uuid } from '@/shared'
@@ -18,8 +20,24 @@ export const useGenerateTest = () => {
     return [...array].sort(() => Math.random() - 0.5)
   }
 
-  const onGenerate = (words: TWord[]) => {
-    const test: TTestItem[] = words.map(word => {
+  const onGenerate = (words: TWord[], config: TConfiguringForm) => {
+    let configuring = words
+
+    if (config?.type.length) {
+      configuring = configuring.filter(item => config.type.includes(item.type))
+    }
+
+    if (config?.lang.length) {
+      configuring = configuring.filter(item => config.lang.includes(item.code))
+    }
+
+    if (config?.folders?.length) {
+      configuring = configuring.filter(item =>
+        config.folders.includes(item.folderId || ''),
+      )
+    }
+
+    const test: TTestItem[] = configuring.map(word => {
       const correctTranslation = getRandomElement(word.translations)
 
       const otherWords = words.filter(
@@ -56,7 +74,7 @@ export const useGenerateTest = () => {
 
     console.log('test =>', test)
 
-    dispatch(testsActions.setState({ test }))
+    dispatch(testsActions.setState({ test: shuffleArray(test) }))
     dispatch(testsActions.setState({ testAnswers: [] }))
   }
 

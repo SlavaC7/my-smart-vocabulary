@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next'
 
 import { CountryPicker } from 'react-native-country-codes-picker'
 
+import { availableLang } from '@/entities/word/utils'
+
 import { Typography } from '@/shared'
 
 import * as S from './styles'
@@ -33,8 +35,9 @@ export const LangPicker = ({ onChange, value, flag }: TLangPickerProps) => {
             height: 500,
           },
         }}
-        showOnly={['US', 'IT']}
+        showOnly={availableLang}
         pickerButtonOnPress={item => {
+          console.log('item=>', item)
           onChange({
             flag: item.flag,
             value: item.code,

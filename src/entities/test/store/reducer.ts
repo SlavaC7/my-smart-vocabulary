@@ -14,6 +14,8 @@ const initialState: TInitialState = {
   testAnswers: [],
   config: {
     count: 0,
+    lang: [],
+    type: [],
     folders: [],
   },
 

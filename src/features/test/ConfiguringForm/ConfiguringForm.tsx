@@ -10,6 +10,8 @@ import { useTypedSelector } from '@/app/store'
 
 import { Footer } from '@/widgets/footer'
 
+import { WordFeature } from '@/features'
+
 import { useGenerateTest } from '@/entities/test'
 import { getWordSelector } from '@/entities/word'
 
@@ -30,16 +32,21 @@ export const ConfiguringForm = () => {
   const {
     control,
     watch,
-    formState: { isValid },
+    handleSubmit,
+    formState: { errors },
   } = useForm<TConfiguringForm>({
     resolver: zodResolver(createConfigSchema(maxCount)),
     defaultValues: {
       count: 1,
       folders: [],
+      type: [],
+      lang: [],
     },
   })
 
-  const onHandleMaxCount = (folders: string[] | undefined) => {
+  console.log('errors =>', errors)
+
+  const onHandleMaxCount = (folders: (string | undefined)[]) => {
     let count = 0
 
     const array = folders || []
@@ -48,7 +55,7 @@ export const ConfiguringForm = () => {
       count = words.length
     }
     if (array.length) {
-      count = words.filter(item => array.includes(item?.forderId || '')).length
+      count = words.filter(item => array.includes(item?.folderId || '')).length
     }
 
     setMaxCount(count)
@@ -64,8 +71,8 @@ export const ConfiguringForm = () => {
     }
   }, [])
 
-  const onSubmit = () => {
-    onGenerate(words)
+  const onSubmit = (data: TConfiguringForm) => {
+    onGenerate(words, data)
 
     navigate(EScreens.TestsQuestion)
   }
@@ -89,10 +96,29 @@ export const ConfiguringForm = () => {
             <C.Count {...{ value, onChange }} />
           )}
         />
+
+        <Controller
+          control={control}
+          name="type"
+          render={({ field: { value, onChange } }) => (
+            <WordFeature.TypePicker {...{ value, onChange }} />
+          )}
+        />
+
+        <Controller
+          control={control}
+          name="lang"
+          render={({ field: { value, onChange } }) => (
+            <C.LangPicker {...{ value, onChange }} />
+          )}
+        />
       </Background.Scroll>
 
       <Footer.Standard>
-        <Button.Standard text={t('button.start')} onPress={onSubmit} />
+        <Button.Standard
+          text={t('button.start')}
+          onPress={handleSubmit(onSubmit)}
+        />
       </Footer.Standard>
     </>
   )

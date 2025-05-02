@@ -53,9 +53,9 @@ export const SelectFolders = ({
   }
   return (
     <>
-      <Typography.H3 mBottom={'16px'} mLeft={'10px'}>
+      <Typography.Body2R mBottom={'16px'} color={'neutral_500'}>
         {t('tests.select_folders')}
-      </Typography.H3>
+      </Typography.Body2R>
       <Styled.FlexWrapper wrap={'wrap'} justify={'flex-start'}>
         {array.map(renderItem)}
       </Styled.FlexWrapper>

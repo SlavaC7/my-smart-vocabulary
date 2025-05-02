@@ -33,11 +33,11 @@ export const Count = ({
 
   return (
     <>
-      <Typography.H3 mBottom={'16px'} mLeft={'10px'}>
+      <Typography.Body2R mBottom={'8px'} color={'neutral_500'}>
         {t('tests.count')}
-      </Typography.H3>
+      </Typography.Body2R>
 
-      <Styled.FlexWrapper justify={'flex-start'}>
+      <Styled.FlexWrapper mBottom={'16px'} justify={'flex-start'}>
         <Input.Standard
           width={'30%'}
           value={value + ''}

@@ -45,7 +45,7 @@ export const Word = () => {
 
   const synonims = synonimsData?.synonyms?.synonyms || []
 
-  const folderName = folders?.find(item => item._id === word.forderId)?.name
+  const folderName = folders?.find(item => item._id === word.folderId)?.name
   return (
     <Background.Container color={COLORS.background}>
       <Header.Standard
@@ -54,7 +54,7 @@ export const Word = () => {
         rightAction={
           <WordFeature.HeaderActions
             wordId={word._id}
-            folderId={word?.forderId || null}
+            folderId={word?.folderId || null}
           />
         }
       />

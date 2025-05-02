@@ -31,7 +31,7 @@ export const MyWordsList = ({ searchTerm }: TMyWordsListProps) => {
     () =>
       words.filter(
         word =>
-          (!selectedFolder || word.forderId === selectedFolder._id) &&
+          (!selectedFolder || word.folderId === selectedFolder._id) &&
           (!searchTerm ||
             word.text.toLowerCase().includes(searchTerm.toLowerCase())),
       ),

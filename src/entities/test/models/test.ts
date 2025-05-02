@@ -1,4 +1,5 @@
 import { EWordType } from '@/entities/word'
+import { TAvailableLang } from '@/entities/word/utils'
 
 export type TTestItem = {
   _id: string
@@ -18,4 +19,6 @@ export type TAnswer = {
 export type TConfig = {
   count: number
   folders: string[]
+  type: EWordType[]
+  lang: TAvailableLang[]
 }

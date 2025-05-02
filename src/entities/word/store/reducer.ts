@@ -35,7 +35,7 @@ export const slice = createSlice({
     ) => {
       state.words = state.words.map(item =>
         item._id === payload.wordId
-          ? { ...item, forderId: payload.folderId }
+          ? { ...item, folderId: payload.folderId }
           : item,
       )
     },
@@ -47,7 +47,7 @@ export const slice = createSlice({
     removeFolder: (state, { payload }: PayloadAction<string>) => {
       state.folders = state.folders.filter(item => item._id !== payload)
       state.words = state.words.map(item =>
-        item.forderId === payload ? { ...item, forderId: null } : item,
+        item.folderId === payload ? { ...item, folderId: null } : item,
       )
     },
   },
