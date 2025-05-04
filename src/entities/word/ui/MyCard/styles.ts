@@ -12,9 +12,11 @@ export const Container = styled(Styled.Touchable)`
   align-items: flex-start;
 `
 
-export const TypeContainer = styled(Styled.FlexWrapper)`
-  width: auto;
-  background-color: ${({ theme: { COLORS } }) => COLORS.black};
+export const DuplicateContainer = styled(Styled.FlexWrapper).attrs({
+  mRight: '10px',
+  width: 'auto',
+})`
+  background-color: ${({ theme: { COLORS } }) => COLORS.red_300};
   border-radius: 20px;
   padding: 5px 7px;
 `

@@ -11,13 +11,11 @@ export const styles = StyleSheet.create({
   errorToast: {
     borderLeftColor: EColors.red_300,
     padding: 10,
-    height: 'auto',
     backgroundColor: EColors.white,
   },
   successToast: {
     borderLeftColor: EColors.green_300,
     padding: 10,
-    height: 'auto',
     backgroundColor: EColors.white,
   },
   text1: {

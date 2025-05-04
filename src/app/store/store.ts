@@ -1,4 +1,4 @@
-import { REDUX_KEY } from '@env'
+import { REDUX_KEY, STORAGE_VERSION } from '@env'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { configureStore } from '@reduxjs/toolkit'
 import { persistStore, persistReducer } from 'redux-persist'
@@ -20,7 +20,7 @@ const persistedReducer = persistReducer(
     key: REDUX_KEY,
     storage: AsyncStorage,
     whitelist,
-    version: 1,
+    version: STORAGE_VERSION,
   },
   rootReducer,
 )

@@ -262,6 +262,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MySmartVocabulary/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "My Smart Vocabulary";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -273,7 +274,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mysmartvocabulary;
 				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.mySmartVocabulary;
 				PRODUCT_NAME = MySmartVocabulary;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -290,6 +291,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = MySmartVocabulary/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "My Smart Vocabulary";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -301,7 +303,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mysmartvocabulary;
 				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.mySmartVocabulary;
 				PRODUCT_NAME = MySmartVocabulary;
 				SWIFT_VERSION = 5.0;

@@ -22,6 +22,11 @@ export const StatisticsStack = () => {
         component={StatisticsScreens.Main}
         name={EScreens.StatisticsMain}
       />
+
+      <Stack.Screen
+        component={StatisticsScreens.ImportSetting}
+        name={EScreens.StatisticsImportSetting}
+      />
     </Stack.Navigator>
   )
 }

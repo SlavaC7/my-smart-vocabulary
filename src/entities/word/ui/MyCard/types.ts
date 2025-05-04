@@ -5,4 +5,5 @@ import { TWord } from '../../models'
 export type TMyCardProps = {
   rightAction: () => React.ReactNode
   word: TWord
+  duplicate?: boolean
 }

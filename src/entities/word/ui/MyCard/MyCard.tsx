@@ -2,6 +2,7 @@ import React, { useCallback } from 'react'
 
 import _ from 'lodash'
 
+import { useTranslation } from 'react-i18next'
 import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable'
 
 import { EScreens } from '@/app/navigation'
@@ -13,7 +14,12 @@ import { WordEntity } from '../..'
 import * as S from './styles'
 import { TMyCardProps } from './types'
 
-export const MyCard = ({ word, rightAction }: TMyCardProps) => {
+export const MyCard = ({
+  word,
+  duplicate = false,
+  rightAction,
+}: TMyCardProps) => {
+  const { t } = useTranslation()
   const navigation = useNavigation()
 
   const onPress = useCallback(() => {
@@ -29,6 +35,13 @@ export const MyCard = ({ word, rightAction }: TMyCardProps) => {
           <Typography.Body1R>{word.text}</Typography.Body1R>
 
           <Styled.FlexWrapper width={'auto'}>
+            {!!duplicate && (
+              <S.DuplicateContainer>
+                <Typography.Caption1R color={'white'}>
+                  {t('export_import.duplicate')}
+                </Typography.Caption1R>
+              </S.DuplicateContainer>
+            )}
             <Typography.Body1R>{word.flag || '🇺🇸'}</Typography.Body1R>
             <Icon name="ArrowUpRight" />
           </Styled.FlexWrapper>

@@ -5,18 +5,26 @@ import { useTranslation } from 'react-i18next'
 
 import { useTheme } from 'styled-components'
 
+import { EScreens } from '@/app/navigation'
 import { useTypedSelector } from '@/app/store'
 
 import { Header } from '@/widgets/header'
 
-import { getWordSelector, TFolder, TWord } from '@/entities/word'
+import {
+  getWordSelector,
+  TFolder,
+  TWord,
+  useExportImport,
+} from '@/entities/word'
 
-import { Background, Styled, Typography } from '@/shared'
+import { Background, Button, Styled, Typography, useNavigation } from '@/shared'
 
 export const Main = () => {
   const { t } = useTranslation()
   const { COLORS } = useTheme()
+  const { navigate } = useNavigation()
   const { words, folders } = useTypedSelector(getWordSelector)
+  const { exportToJsonFile } = useExportImport()
 
   const latestWord = words.reduce((latest, current) => {
     return new Date(current.createdAt || '') > new Date(latest.createdAt || '')
@@ -40,6 +48,10 @@ export const Main = () => {
         </Typography.H3Bold>
       </Styled.FlexWrapper>
     )
+  }
+
+  const onPressImport = () => {
+    navigate(EScreens.StatisticsImportSetting)
   }
 
   return (
@@ -74,6 +86,18 @@ export const Main = () => {
         )}
 
         {folders.map(renderFolders)}
+
+        <Button.Standard
+          mTop={'16px'}
+          text={t('export_import.export')}
+          onPress={exportToJsonFile}
+        />
+
+        <Button.Standard
+          text={t('export_import.import')}
+          mTop={'16px'}
+          onPress={onPressImport}
+        />
       </Background.Standard>
     </Background.Container>
   )

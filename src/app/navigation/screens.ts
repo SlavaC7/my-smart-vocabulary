@@ -13,6 +13,7 @@ export enum EScreens {
   TestsSuccess = 'TestsSuccessScreen',
 
   StatisticsMain = 'StatisticsMainScreen',
+  StatisticsImportSetting = 'StatisticsImportSettingScreen',
 
   WordMain = 'WordMainScreen',
 }

@@ -9,13 +9,19 @@ import { Icon } from '@/shared'
 import { Container } from './styles'
 import { TDeleteWordProps } from './types'
 
-export const DeleteWord = ({ id: wordId }: TDeleteWordProps) => {
+export const DeleteWord = ({ id: wordId, onDelete }: TDeleteWordProps) => {
   const dispatch = useDispatch()
-  const onDelete = () => {
+
+  const _onDelete = () => {
+    if (onDelete) {
+      onDelete()
+      return
+    }
+    if (!wordId) return
     dispatch(wordActions.removeWord(wordId))
   }
   return (
-    <Container onPress={onDelete}>
+    <Container onPress={_onDelete}>
       <Icon name={'Trash'} />
     </Container>
   )

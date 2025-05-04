@@ -1,3 +1,4 @@
 export type TDeleteWordProps = {
-  id: string
+  id?: string
+  onDelete?: () => void
 }

@@ -69,6 +69,13 @@ export default {
     new_folder: 'New folder',
     enter_folder_name: 'Enter folder name',
   },
+  export_import: {
+    import: 'Import',
+    export: 'Export',
+    import_data: 'Import data:',
+    duplicate: 'Duplicate',
+    start_import: 'Start import',
+  },
 
   word_type: {
     word: 'Word',
