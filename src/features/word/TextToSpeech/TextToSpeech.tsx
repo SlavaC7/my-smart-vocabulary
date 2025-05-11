@@ -10,6 +10,7 @@ import { TTextToSpeechProps } from './types'
 export const TextToSpeech = ({ text, ...props }: TTextToSpeechProps) => {
   const onPress = useCallback(() => {
     if (text) {
+      Tts.setDefaultLanguage('it')
       Tts.speak(text, {
         iosVoiceId: 'com.apple.ttsbundle.Moira-compact',
         rate: 0.5,

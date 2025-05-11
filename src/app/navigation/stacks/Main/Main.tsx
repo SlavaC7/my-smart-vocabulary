@@ -4,6 +4,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import { CommonScreens } from '@/screens/Common'
 
+import { SearchScreens } from '@/screens/Search'
+
 import { EScreens } from '../../screens'
 import { NativeScreenNavigationOptions } from '../options'
 
@@ -25,6 +27,10 @@ export const MainStack = () => {
       <Stack.Screen component={TabsStack} name={EStacks.Tabs} />
 
       <Stack.Screen component={CommonScreens.Word} name={EScreens.WordMain} />
+      <Stack.Screen
+        component={SearchScreens.OwnTranslation}
+        name={EScreens.SearchOwnTranslation}
+      />
     </Stack.Navigator>
   )
 }

@@ -7,3 +7,5 @@ export type TInitialState = {
 
   folders: Array<TFolder>
 }
+
+export type TChangeWord = { _id: string } & Partial<TWord>

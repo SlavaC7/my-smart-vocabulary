@@ -1,5 +1,7 @@
 import { TWordScreenParams } from '@/screens/Common/Word/types'
 
+import { TSearchOwnTranslationScreenProps } from '@/screens/Search/OwnTranslation'
+
 import { EScreens } from '../../screens'
 import { TNavigatorScreenParams } from '../../types'
 import { EStacks } from '../stacks'
@@ -10,4 +12,5 @@ export type TMainStack = {
   [EStacks.Tabs]: TNavigatorScreenParams<TTabsStack>
 
   [EScreens.WordMain]: TWordScreenParams
+  [EScreens.SearchOwnTranslation]: TSearchOwnTranslationScreenProps
 }

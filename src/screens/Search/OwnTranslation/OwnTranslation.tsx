@@ -40,6 +40,7 @@ export const OwnTranslation = () => {
     useRoute<TScreenQueryProps<EScreens.SearchOwnTranslation>>()
 
   const isHome = !!params.isHome
+  const isEdit = !!params._id
 
   const {
     control,
@@ -50,11 +51,11 @@ export const OwnTranslation = () => {
   } = useForm<TCreateOwnTranslationForm>({
     resolver: createOwnTranslationSchema(t),
     defaultValues: {
-      word: '',
-      type: EWordType.word,
-      translations: [''],
-      code: 'US',
-      flag: '🇺🇸',
+      word: params?.word || '',
+      type: params?.type ? params.type : EWordType.word,
+      translations: params?.translations?.length ? params.translations : [''],
+      code: params.code || 'US',
+      flag: params.flag || '🇺🇸',
     },
   })
 
@@ -70,14 +71,27 @@ export const OwnTranslation = () => {
   }, [])
 
   const onSave = (formData: TCreateOwnTranslationForm) => {
-    dispatch(
-      wordActions.addWord({
-        ...formData,
-        _id: uuid.v4(),
-        text: formData.word,
-        // translations: [formData.translations[0], ...formData.translations],
-      }),
-    )
+    if (isEdit) {
+      dispatch(
+        wordActions.changeWord({
+          ...formData,
+          _id: params._id,
+          text: formData.word,
+          // translations: [formData.translations[0], ...formData.translations],
+        }),
+      )
+    }
+
+    if (!isEdit) {
+      dispatch(
+        wordActions.addWord({
+          ...formData,
+          _id: uuid.v4(),
+          text: formData.word,
+          // translations: [formData.translations[0], ...formData.translations],
+        }),
+      )
+    }
 
     navigation.goBack()
     !isHome && navigation.goBack()

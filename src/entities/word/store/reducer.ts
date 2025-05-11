@@ -6,7 +6,7 @@ import { EStoreReducer } from '@/app/store/types'
 
 import { TFolder, TWord } from '../models'
 
-import { TInitialState } from './types'
+import { TChangeWord, TInitialState } from './types'
 
 const initialState: TInitialState = {
   loading: false,
@@ -23,6 +23,15 @@ export const slice = createSlice({
 
     addWord: (state, { payload }: PayloadAction<TWord>) => {
       state.words.unshift({ ...payload, createdAt: new Date().toISOString() })
+    },
+
+    changeWord: (state, { payload }: PayloadAction<TChangeWord>) => {
+      state.words = state.words.map(item =>
+        item._id === payload._id
+          ? { ...item, createdAt: new Date().toISOString(), ...payload }
+          : item,
+      )
+      state.words.unshift()
     },
 
     removeWord: (state, { payload }: PayloadAction<string>) => {

@@ -22,7 +22,14 @@ import {
   WordEntity,
 } from '@/entities/word'
 
-import { Background, Icon, Styled, Typography, useQuery } from '@/shared'
+import {
+  Background,
+  Icon,
+  Styled,
+  Typography,
+  useNavigation,
+  useQuery,
+} from '@/shared'
 
 import { Common } from '@/shared/ui/common'
 
@@ -33,6 +40,7 @@ export const Word = () => {
   const { t } = useTranslation()
   const { folders } = useTypedSelector(getWordSelector)
   const { existInAnyFolder } = useWordControl()
+  const { navigate } = useNavigation()
 
   const {
     params: { word },
@@ -46,6 +54,14 @@ export const Word = () => {
   const synonims = synonimsData?.synonyms?.synonyms || []
 
   const folderName = folders?.find(item => item._id === word.folderId)?.name
+
+  const onPressEdit = () => {
+    navigate(EScreens.SearchOwnTranslation, {
+      isHome: true,
+      ...word,
+    })
+  }
+
   return (
     <Background.Container color={COLORS.background}>
       <Header.Standard
@@ -53,6 +69,7 @@ export const Word = () => {
         color={COLORS.background}
         rightAction={
           <WordFeature.HeaderActions
+            onPressEdit={onPressEdit}
             wordId={word._id}
             folderId={word?.folderId || null}
           />

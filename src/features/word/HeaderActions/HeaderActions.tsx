@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { useTheme } from 'styled-components'
 
+import { EScreens } from '@/app/navigation'
+
 import { WordFeature } from '@/features'
 
 import { TFolder, wordActions } from '@/entities/word'
@@ -19,7 +21,11 @@ import { Styled, Typography } from '@/shared/ui/styled'
 import * as S from './styles'
 import { THeaderActionsProps } from './types'
 
-export const HeaderActions = ({ wordId, folderId }: THeaderActionsProps) => {
+export const HeaderActions = ({
+  wordId,
+  folderId,
+  onPressEdit,
+}: THeaderActionsProps) => {
   const { t } = useTranslation()
   const { COLORS } = useTheme()
   const popoverRef = useRef<TPopoverRef | null>(null)
@@ -59,7 +65,11 @@ export const HeaderActions = ({ wordId, folderId }: THeaderActionsProps) => {
   )
 
   return (
-    <>
+    <Styled.FlexWrapper width={'auto'}>
+      <Styled.Touchable onPress={onPressEdit} mRight="16px" width="auto">
+        <Icon name="Edit" />
+      </Styled.Touchable>
+
       <Common.Popover
         ref={popoverRef}
         from={
@@ -89,6 +99,6 @@ export const HeaderActions = ({ wordId, folderId }: THeaderActionsProps) => {
         onChange={onMoveToFolder}
         value={folderId}
       />
-    </>
+    </Styled.FlexWrapper>
   )
 }
