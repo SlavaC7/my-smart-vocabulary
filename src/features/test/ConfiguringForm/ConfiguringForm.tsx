@@ -72,9 +72,15 @@ export const ConfiguringForm = () => {
   }, [])
 
   const onSubmit = (data: TConfiguringForm) => {
-    onGenerate(words, data)
+    const quiz = onGenerate(words, data)
 
-    navigate(EScreens.TestsQuestion)
+    if (quiz.length) {
+      navigate(EScreens.TestsQuestion)
+    }
+
+    if (!quiz.length) {
+      //TODO: MAke a tast
+    }
   }
 
   return (

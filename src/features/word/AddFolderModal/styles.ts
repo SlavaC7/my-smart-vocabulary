@@ -1,12 +1,17 @@
+import { StyleSheet } from 'react-native'
+
+import { BottomSheetView } from '@gorhom/bottom-sheet'
 import styled from 'styled-components'
 
-import { Styled } from '@/shared'
+import { EColors } from '@/shared'
 
-export const Conatiner = styled(Styled.Touchable)`
-  height: 40px;
-  width: 68px;
-  border-radius: 50px;
-  align-items: center;
-  justify-content: center;
-  background-color: ${({ theme: { COLORS } }) => COLORS.black};
+export const Container = styled(BottomSheetView)`
+  padding: 0px 16px;
 `
+
+export const styles = StyleSheet.create({
+  input: {
+    borderWidth: 1,
+    borderColor: EColors.placeholder,
+  },
+})

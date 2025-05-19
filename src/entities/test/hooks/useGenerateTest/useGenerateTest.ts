@@ -23,15 +23,37 @@ export const useGenerateTest = () => {
   const onGenerate = (words: TWord[], config: TConfiguringForm) => {
     let configuring = words
 
+    console.log('config =>', config)
+    console.log('configuring =>', configuring)
+
     if (config?.type.length) {
+      console.log(
+        'type =>',
+        config?.type,
+        configuring.filter(item => config.type.includes(item.type)),
+      )
+
       configuring = configuring.filter(item => config.type.includes(item.type))
     }
 
     if (config?.lang.length) {
+      console.log(
+        'lang =>',
+        config?.lang,
+        configuring.filter(item => config.lang.includes(item.code)),
+      )
+
       configuring = configuring.filter(item => config.lang.includes(item.code))
     }
 
     if (config?.folders?.length) {
+      console.log(
+        'folders =>',
+        config?.folders,
+        (configuring = configuring.filter(item =>
+          config.folders.includes(item.folderId || ''),
+        )),
+      )
       configuring = configuring.filter(item =>
         config.folders.includes(item.folderId || ''),
       )
@@ -74,8 +96,12 @@ export const useGenerateTest = () => {
 
     console.log('test =>', test)
 
-    dispatch(testsActions.setState({ test: shuffleArray(test) }))
+    const finallyFest = shuffleArray(test)
+
+    dispatch(testsActions.setState({ test: finallyFest }))
     dispatch(testsActions.setState({ testAnswers: [] }))
+
+    return finallyFest
   }
 
   return {

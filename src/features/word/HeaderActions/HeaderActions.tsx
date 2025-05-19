@@ -5,8 +5,6 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { useTheme } from 'styled-components'
 
-import { EScreens } from '@/app/navigation'
-
 import { WordFeature } from '@/features'
 
 import { TFolder, wordActions } from '@/entities/word'

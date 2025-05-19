@@ -29,8 +29,6 @@ import {
 import { BottomSheet } from '@/shared/ui/bottomSheet'
 import { TBottomSheetModalRef } from '@/shared/ui/bottomSheet/Modal'
 
-import { TBaseModalRef } from '@/shared/ui/modal/Base'
-
 import { AddFolderModal } from '../AddFolderModal'
 
 import * as S from './styles'
@@ -39,7 +37,7 @@ import { TFoldersBSProps } from './types'
 export const FoldresBS = forwardRef<TBottomSheetModalRef, TFoldersBSProps>(
   ({ onChange, value = null }, ref) => {
     const bsRef = useBottomSheetRef(ref)
-    const modalRef = useRef<TBaseModalRef>(null)
+    const modalRef = useRef<TBottomSheetModalRef>(null)
     const { t } = useTranslation()
     const { bottom } = useSafeAreaInsets()
     const dispatch = useDispatch()
@@ -51,6 +49,7 @@ export const FoldresBS = forwardRef<TBottomSheetModalRef, TFoldersBSProps>(
     }, [value])
 
     const onPressAddFolder = () => {
+      // Alert.prompt('sdfsd', 'sdfsd')
       modalRef.current?.open()
     }
 
@@ -64,6 +63,10 @@ export const FoldresBS = forwardRef<TBottomSheetModalRef, TFoldersBSProps>(
     const onPressDeleteFolder = useCallback((folderId: string) => {
       dispatch(wordActions.removeFolder(folderId))
     }, [])
+
+    const onAddFolderClose = () => {
+      modalRef.current?.close()
+    }
 
     return (
       <>
@@ -132,7 +135,7 @@ export const FoldresBS = forwardRef<TBottomSheetModalRef, TFoldersBSProps>(
           />
         </BottomSheet.Modal>
 
-        <AddFolderModal ref={modalRef} />
+        <AddFolderModal ref={modalRef} onClose={onAddFolderClose} />
       </>
     )
   },
