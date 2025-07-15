@@ -72,6 +72,7 @@ export const ConfiguringForm = () => {
   }, [])
 
   const onSubmit = (data: TConfiguringForm) => {
+    console.log('onSubmit =>', data)
     const quiz = onGenerate(words, data)
 
     if (quiz.length) {

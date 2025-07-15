@@ -18,12 +18,16 @@ export const SelectFolders = ({
   const { t } = useTranslation()
   const { folders } = useTypedSelector(getWordSelector)
 
+  console.log('value =>', value)
+
   const array = useMemo(
     () => [{ _id: '1', name: 'All Worlds' }, ...folders],
     [folders],
   )
 
   const onSelect = (id: string, active: boolean) => {
+    console.log('onSelect =>', id, active)
+
     if (id === '1') {
       onChange([])
       return
@@ -32,6 +36,8 @@ export const SelectFolders = ({
       onChange(value.filter(item => item !== id))
       return
     }
+
+    console.log('onSelect =>', [id, ...value])
 
     onChange([id, ...value])
   }
