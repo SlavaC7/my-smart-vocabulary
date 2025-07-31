@@ -1,5 +1,7 @@
 import { HOST } from '@env'
+import auth from '@react-native-firebase/auth'
 import axios from 'axios'
+
 console.log('HOST: ', HOST)
 const privateInstance = axios.create({
   baseURL: HOST,
@@ -17,7 +19,7 @@ const publicInstance = axios.create({
 
 privateInstance.interceptors.request.use(
   async config => {
-    const token = null
+    const token = await auth().currentUser?.getIdToken(true)
 
     if (token && config.headers) {
       config.headers.Authorization = 'Bearer ' + token

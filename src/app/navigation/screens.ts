@@ -16,4 +16,6 @@ export enum EScreens {
   StatisticsImportSetting = 'StatisticsImportSettingScreen',
 
   WordMain = 'WordMainScreen',
+
+  AuthMain = 'AuthMainScreen',
 }
