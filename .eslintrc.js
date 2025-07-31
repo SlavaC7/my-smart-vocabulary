@@ -29,7 +29,6 @@ module.exports = {
     ],
     'no-unused-vars': 'error',
     'no-empty': 'off',
-    'no-unused-vars': 'off',
     'no-empty-function': 'off',
     'import/no-unresolved': 'off',
     'import/no-duplicates': 'off',

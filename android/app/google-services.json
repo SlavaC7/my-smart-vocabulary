@@ -12,7 +12,20 @@
           "package_name": "com.mysmartvocabulary"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1081291759389-61qhpkd6firk6tem3o26div9kifnsut7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mysmartvocabulary",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "1081291759389-41i3rjrpdibpo9cruicuecvrusu4b4rn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC1jPhihIyTZGhSv5JSwoqPVeKR_xfuoDw"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1081291759389-41i3rjrpdibpo9cruicuecvrusu4b4rn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1081291759389-2q8bkqk4gtffgi6eusjoruq31jrslkbr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mysmartvocabulary"
+              }
+            }
+          ]
         }
       }
     }
