@@ -14,6 +14,16 @@ export default {
     number_in_use: 'The given phone number is already in use!',
     integer: 'This field must contain an integer numeric value',
   },
+  inputs: {
+    search: 'Search',
+  },
+  auth: {
+    google: 'Continue with Google',
+    apple: 'Continue with Apple',
+    or: 'or',
+    welcome: 'Welcome',
+    phone_placeholder: 'Phone number',
+  },
   home: {
     title: 'Home',
   },

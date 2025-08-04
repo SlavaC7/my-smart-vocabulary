@@ -28,3 +28,7 @@ export { default as AngleArrowLeft } from './sources/angle-arrow-left.svg'
 export { default as Edit } from './sources/edit.svg'
 export { default as Close } from './sources/close-black.svg'
 export { default as Auth } from './sources/auth.svg'
+
+export { default as Google } from './sources/google.svg'
+export { default as Apple } from './sources/apple.svg'
+export { default as BottomAuth } from './sources/bottom-auth.svg'

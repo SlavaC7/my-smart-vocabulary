@@ -21,8 +21,8 @@ export const Icon = ({
   return (
     <IconSvg
       style={style}
-      width={size ?? width}
-      height={size ?? height}
+      width={width || size}
+      height={height || size}
       fill={currentFill}
       {...{ props }}
     />

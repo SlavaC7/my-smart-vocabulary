@@ -19,7 +19,7 @@ import {
   StyledTextInput,
   StyledTextInputContainer,
   styles,
-} from './styled'
+} from './styles'
 import { TStandardInputProps } from './types'
 
 export const Standard = ({
@@ -162,7 +162,7 @@ export const Standard = ({
         {!!withClear && (
           <TouchableOpacity
             style={styles.padding}
-            onPress={() => onChange?.('', '', '')}
+            onPress={() => onChange?.('')}
             activeOpacity={0.8}>
             <Icon name="CloseFilled" fill={COLORS.neutral_700} size={18} />
           </TouchableOpacity>
