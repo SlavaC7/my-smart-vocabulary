@@ -2,12 +2,29 @@ import React from 'react'
 
 import { useTranslation } from 'react-i18next'
 
+import { UserService } from '@/entities/user/services'
+
 import { Icon, Styled, Typography } from '@/shared'
+
+import { FirebaseService } from '@/shared/services/firebase'
 
 import * as S from './styles'
 
 export const SocialAuth = () => {
   const { t } = useTranslation()
+
+  const onGoogle = async () => {
+    try {
+      await FirebaseService.signInWithGoogle()
+      console.log('SUCCESS')
+
+      const data = await UserService.getUser()
+
+      console.log('user', data)
+    } catch (error) {
+      console.log('onGoogle error', { ...error })
+    }
+  }
   return (
     <Styled.FlexWrapper flexDirection="column">
       <Styled.FlexWrapper mBottom={'16px'}>
@@ -17,7 +34,7 @@ export const SocialAuth = () => {
         </Typography.Body2R>
         <S.Line />
       </Styled.FlexWrapper>
-      <S.ButtonContainer>
+      <S.ButtonContainer onPress={onGoogle}>
         <Icon name={'Google'} />
 
         <Typography.H3 mLeft={'10px'}>{t('auth.google')}</Typography.H3>

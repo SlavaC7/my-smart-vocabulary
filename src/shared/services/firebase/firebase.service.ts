@@ -7,7 +7,7 @@ import * as Sentry from '@sentry/react-native'
 
 import Toast from 'react-native-toast-message'
 
-import { isIOS } from '@/shared'
+import { isIos } from '@/shared/lib'
 
 import { firebaseErrors } from './config'
 
@@ -15,12 +15,12 @@ type TPhoneAuthState = 'sent' | 'timeout' | 'verified' | 'error'
 
 console.log(
   'FIREBASE_WEB_CLIENT_ID =>',
-  isIOS ? FIREBASE_IOS_CLIENT_ID : FIREBASE_WEB_CLIENT_ID,
+  isIos ? FIREBASE_IOS_CLIENT_ID : FIREBASE_WEB_CLIENT_ID,
 )
 
 GoogleSignin.configure({
   iosClientId: FIREBASE_IOS_CLIENT_ID,
-  webClientId: isIOS ? FIREBASE_IOS_CLIENT_ID : FIREBASE_WEB_CLIENT_ID,
+  webClientId: isIos ? FIREBASE_IOS_CLIENT_ID : FIREBASE_WEB_CLIENT_ID,
   scopes: ['https://www.googleapis.com/auth/userinfo.profile', 'openid'],
 })
 
