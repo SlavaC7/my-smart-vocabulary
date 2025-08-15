@@ -14,17 +14,30 @@ export type TWordsStoreProps = {
 export type TWordStoreMethods = {
   clear: () => void
   setWordState: (data: Partial<TWordsStoreProps>) => void
+  setWord: (data: TWord) => void
 }
 
 export type TWordStore = TWordsStoreProps & TWordStoreMethods
 
 export const useWordStore = create<TWordStore>()(
   persist(
-    set => ({
+    (set, _, state) => ({
       words: [],
       folders: [],
-      clear: () => set({}),
+      clear: () =>
+        set({
+          words: [],
+          folders: [],
+        }),
       setWordState: (store: Partial<TWordsStoreProps>) => set(store),
+      setWord: (word: TWord) => {
+        const words = state.getState().words
+
+        const newWords = words.filter(w => w._id !== word._id)
+        set({
+          words: [...newWords, word],
+        })
+      },
     }),
     {
       name: EStores.user,

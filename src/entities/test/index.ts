@@ -1,5 +1,5 @@
 export * from './models'
-export * from './store2'
+export * from './store'
 export * from './hooks'
 
 // export * as TestEntity from './ui'

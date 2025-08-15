@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
+import { useUserStore } from '@/entities/user'
 import { UserService } from '@/entities/user/services'
 
 import { Button, Input, Typography } from '@/shared'
@@ -13,6 +14,7 @@ import { createProfileFormValidation } from './validation'
 
 export const CreateProfileForm = () => {
   const { t } = useTranslation()
+  const { setUser } = useUserStore()
 
   const { control, handleSubmit } = useForm<TCreateProfileProps>({
     resolver: zodResolver(createProfileFormValidation(t)),
@@ -29,8 +31,10 @@ export const CreateProfileForm = () => {
       const { data: user } = await UserService.postUser(data)
 
       console.log('PostProfile Back-end:', user)
+
+      setUser(user)
     } catch (error) {
-      console.log('Create user error:', { ...error })
+      console.log('Create user error:', error)
     }
   })
 

@@ -5,7 +5,7 @@ export type TCreateOwnTranslationForm = {
   word: string
   type: EWordType
   translations: Array<string>
-  code: TAvailableLang
+  lang: TAvailableLang
   flag: string
 }
 

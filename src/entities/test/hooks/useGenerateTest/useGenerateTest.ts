@@ -82,7 +82,7 @@ export const useGenerateTest = () => {
 
       return {
         _id: word._id,
-        word: word.text,
+        word: word.word,
         answers,
         flag: word.flag,
         type: word.type,

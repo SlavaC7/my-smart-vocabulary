@@ -13,6 +13,6 @@ export const createOwnTranslationSchema = validationSchema(schema => ({
     .min(minTranslationLenght)
     .max(maxTranslationLenght),
   type: z.enum([EWordType.word, EWordType.phrase]),
-  code: schema.requiredString,
+  lang: schema.requiredString,
   flag: schema.requiredString,
 }))

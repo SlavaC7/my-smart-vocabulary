@@ -13,7 +13,12 @@ import { Header } from '@/widgets/header'
 
 import { WordFeature } from '@/features'
 
-import { EWordType } from '@/entities/word'
+import {
+  EWordType,
+  TPostWordsApi,
+  useWordStore,
+  WordsService,
+} from '@/entities/word'
 
 import {
   Background,
@@ -21,6 +26,7 @@ import {
   Icon,
   Input,
   Styled,
+  useLoader,
   useNavigation,
 } from '@/shared'
 
@@ -33,6 +39,8 @@ export const OwnTranslation = () => {
   const { COLORS } = useTheme()
   const { t } = useTranslation()
   const navigation = useNavigation()
+  const { setLoading } = useLoader()
+  const { setWord } = useWordStore()
   const { params } =
     useRoute<TScreenQueryProps<EScreens.SearchOwnTranslation>>()
 
@@ -51,7 +59,7 @@ export const OwnTranslation = () => {
       word: params?.word || '',
       type: params?.type ? params.type : EWordType.word,
       translations: params?.translations?.length ? params.translations : [''],
-      code: params.code || 'US',
+      lang: params.lang || 'US',
       flag: params.flag || '🇺🇸',
     },
   })
@@ -67,31 +75,42 @@ export const OwnTranslation = () => {
       })
   }, [])
 
-  const onSave = (formData: TCreateOwnTranslationForm) => {
-    if (isEdit) {
-      // dispatch(
-      //   wordActions.changeWord({
-      //     ...formData,
-      //     _id: params._id,
-      //     text: formData.word,
-      //     // translations: [formData.translations[0], ...formData.translations],
-      //   }),
-      // )
-    }
+  const onSave = async (formData: TCreateOwnTranslationForm) => {
+    try {
+      setLoading(true)
+      const data: TPostWordsApi['payload'] = {
+        ...formData,
+        translations: [formData.translations[0], ...formData.translations],
+        folderId: '',
+      }
 
-    if (!isEdit) {
-      // dispatch(
-      //   wordActions.addWord({
-      //     ...formData,
-      //     _id: uuid.v4(),
-      //     text: formData.word,
-      //     // translations: [formData.translations[0], ...formData.translations],
-      //   }),
-      // )
-    }
+      console.log('Create word data:', data)
 
-    navigation.goBack()
-    !isHome && navigation.goBack()
+      if (isEdit) {
+        const { data: newWord } = await WordsService.patchWord({
+          id: params._id,
+          ...data,
+        })
+
+        setWord(newWord)
+        console.log('Patch word result:', newWord)
+      }
+
+      if (!isEdit) {
+        const { data: newWord } = await WordsService.postWord(data)
+
+        console.log('Post word result:', newWord)
+
+        setWord(newWord)
+      }
+
+      navigation.goBack()
+      !isHome && navigation.goBack()
+    } catch (error) {
+      console.error('Error create word:', error)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -146,7 +165,7 @@ export const OwnTranslation = () => {
 
         <Controller
           control={control}
-          name="code"
+          name="lang"
           render={({ field: { value, onChange } }) => (
             <Controller
               control={control}

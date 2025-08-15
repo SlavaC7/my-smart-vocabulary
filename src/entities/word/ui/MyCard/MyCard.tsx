@@ -29,10 +29,10 @@ export const MyCard = ({
   return (
     <Swipeable
       enableTrackpadTwoFingerGesture
-      renderRightActions={event => rightAction()}>
+      renderRightActions={() => rightAction()}>
       <S.Container onPress={onPress}>
         <Styled.FlexWrapper justify="space-between">
-          <Typography.Body1R>{word.text}</Typography.Body1R>
+          <Typography.Body1R>{word.word}</Typography.Body1R>
 
           <Styled.FlexWrapper width={'auto'}>
             {!!duplicate && (

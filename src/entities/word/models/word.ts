@@ -4,7 +4,7 @@ import { TTranslationExample } from './translate'
 
 export type TWord = {
   _id: string
-  text: string
+  word: string
   translations: Array<string>
   folderId?: string | null
   createdAt?: string

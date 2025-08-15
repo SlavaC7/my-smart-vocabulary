@@ -46,7 +46,7 @@ export const Word = () => {
 
   const { data: synonimsData } = useQuery(TranslateService.postSynonyms, {
     lang: 'english',
-    word: word.text,
+    word: word.word,
   })
 
   const synonims = synonimsData?.synonyms?.synonyms || []
@@ -77,7 +77,7 @@ export const Word = () => {
       <Background.Scroll>
         <S.WordContainer mTop="12px">
           <Typography.H1>
-            {word.text} {word.flag}
+            {word.word} {word.flag}
           </Typography.H1>
           {!!folderName && (
             <Typography.Body2R color="neutral_500" mTop="8px">
@@ -139,9 +139,9 @@ export const Word = () => {
       </Background.Scroll>
 
       <S.Footer>
-        <WordFeature.TextToSpeech text={word.text} />
+        <WordFeature.TextToSpeech text={word.word} />
 
-        {!existInAnyFolder(word.text) && (
+        {!existInAnyFolder(word.word) && (
           <WordFeature.SaveButton word={word} mLeft="12px" />
         )}
       </S.Footer>
