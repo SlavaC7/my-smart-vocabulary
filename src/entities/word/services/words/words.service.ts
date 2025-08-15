@@ -4,7 +4,7 @@ import * as T from './types'
 
 export class WordsService {
   //get Words
-  static async getWord(
+  static async getWords(
     params: T.TGetWordsApi['payload'],
   ): TResponse<T.TGetWordsApi['response']> {
     return apiPrivate.get(`/words`, { params })

@@ -1,12 +1,12 @@
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 
-import { FlatList } from 'react-native'
+import { FlatList, ListRenderItem } from 'react-native'
 
 import { useTranslation } from 'react-i18next'
 
 import { WordFeature } from '@/features'
 
-import { TFolder, useWordStore, WordEntity } from '@/entities/word'
+import { TFolder, TWord, WordEntity, WordsService } from '@/entities/word'
 
 import {
   appPadding,
@@ -16,24 +16,44 @@ import {
   useBottomSheetRef,
 } from '@/shared'
 
+import { useInfiniteApiQuery } from '@/shared/hooks/useApi'
+
 import { TMyWordsListProps } from './types'
 
-export const MyWordsList = ({ searchTerm }: TMyWordsListProps) => {
+export const MyWordsList = ({ search }: TMyWordsListProps) => {
   const { t } = useTranslation()
-  const { words } = useWordStore()
   const foldersBSRef = useBottomSheetRef()
+
+  const { docs: wordsData, flatListProps } = useInfiniteApiQuery(
+    WordsService.getWords,
+    {
+      limit: 10,
+      payload: { search },
+      persist: true,
+    },
+  )
 
   const [selectedFolder, setSelectedFolder] = useState<TFolder | null>(null)
 
-  const filteredWords = useMemo(
-    () =>
-      words.filter(
-        word =>
-          (!selectedFolder || word.folderId === selectedFolder._id) &&
-          (!searchTerm ||
-            word.word.toLowerCase().includes(searchTerm.toLowerCase())),
-      ),
-    [words, searchTerm, selectedFolder?._id],
+  const renderItem: ListRenderItem<TWord> = ({ item }) => (
+    <WordEntity.MyCard
+      word={item}
+      rightAction={() => <WordFeature.DeleteWord id={item._id} />}
+    />
+  )
+
+  const renderHeader = () => (
+    <Styled.Touchable
+      mTop="22px"
+      mBottom="12px"
+      justify="flex-start"
+      onPress={() => foldersBSRef.current?.open()}
+      width="auto">
+      <Typography.H2 mRight="4px">
+        {selectedFolder?.name || t('folder.my_words')}
+      </Typography.H2>
+      <Icon name="ExpandDown" />
+    </Styled.Touchable>
   )
 
   return (
@@ -41,29 +61,13 @@ export const MyWordsList = ({ searchTerm }: TMyWordsListProps) => {
       <FlatList
         key={selectedFolder?._id}
         style={{ paddingHorizontal: appPadding }}
-        ListHeaderComponent={() => (
-          <Styled.Touchable
-            mTop="22px"
-            mBottom="12px"
-            justify="flex-start"
-            onPress={() => foldersBSRef.current?.open()}
-            width="auto">
-            <Typography.H2 mRight="4px">
-              {selectedFolder?.name || t('folder.my_words')}
-            </Typography.H2>
-            <Icon name="ExpandDown" />
-          </Styled.Touchable>
-        )}
-        data={filteredWords}
+        ListHeaderComponent={renderHeader}
+        data={wordsData}
         keyExtractor={item => item._id}
-        renderItem={({ item }) => (
-          <WordEntity.MyCard
-            word={item}
-            rightAction={() => <WordFeature.DeleteWord id={item._id} />}
-          />
-        )}
+        renderItem={renderItem}
         ItemSeparatorComponent={() => <Styled.Divider height={8} />}
-        ListFooterComponent={() => <Styled.Divider height={100} />}
+        // ListFooterComponent={() => <Styled.Divider height={100} />}
+        {...flatListProps}
       />
       <WordFeature.FoldresBS ref={foldersBSRef} onChange={setSelectedFolder} />
     </>

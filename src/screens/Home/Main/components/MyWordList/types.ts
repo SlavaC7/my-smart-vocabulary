@@ -1,1 +1,1 @@
-export type TMyWordsListProps = { searchTerm?: string }
+export type TMyWordsListProps = { search: string }

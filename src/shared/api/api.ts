@@ -21,8 +21,6 @@ privateInstance.interceptors.request.use(
   async config => {
     const token = await auth().currentUser?.getIdToken(true)
 
-    console.log('Token => ', token)
-
     if (token && config.headers) {
       config.headers.Authorization = 'Bearer ' + token
     }

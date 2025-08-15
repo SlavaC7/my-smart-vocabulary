@@ -80,11 +80,8 @@ export const OwnTranslation = () => {
       setLoading(true)
       const data: TPostWordsApi['payload'] = {
         ...formData,
-        translations: [formData.translations[0], ...formData.translations],
         folderId: '',
       }
-
-      console.log('Create word data:', data)
 
       if (isEdit) {
         const { data: newWord } = await WordsService.patchWord({
@@ -93,13 +90,10 @@ export const OwnTranslation = () => {
         })
 
         setWord(newWord)
-        console.log('Patch word result:', newWord)
       }
 
       if (!isEdit) {
         const { data: newWord } = await WordsService.postWord(data)
-
-        console.log('Post word result:', newWord)
 
         setWord(newWord)
       }

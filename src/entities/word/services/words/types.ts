@@ -1,4 +1,4 @@
-import { TQuery } from '@/shared/api/types'
+import { TQuery, TQueryListData } from '@/shared/api/types'
 
 import { EWordType, TWord } from '../../models'
 
@@ -9,7 +9,7 @@ type TGetWordsPayload = Partial<{
   limit: number
 }>
 
-type TGetWordsResponse = TWord[]
+type TGetWordsResponse = TQueryListData<TWord>
 
 export type TPostWordsApi = TQuery<TPostWordsPayload, TPostWordsResponse>
 type TPostWordsPayload = {

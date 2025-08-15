@@ -7,6 +7,10 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
+import { SWRConfig } from 'swr'
+
+import { useSwrCache } from '@/shared/hooks/useApi/persist'
+
 import { LanguageProvider } from './Language'
 import { LoaderWrapper } from './Loader'
 import { ThemeWrapper } from './Theme'
@@ -17,28 +21,34 @@ type TContext = {
 }
 
 export const Contexts = ({ children }: TContext) => {
+  const cache = useSwrCache()
+
+  if (!cache) return null
   return (
     <>
-      {/*  SaveAreaView */}
-      <SafeAreaProvider>
-        {/* GestureHandler */}
-        <GestureHandlerRootView style={styles.gestureHandlerContainer}>
-          <ThemeWrapper>
-            {/* Loader */}
-            <LoaderWrapper>
-              {/* Language */}
-              <LanguageProvider>
-                {/* Toast */}
-                <ToastWrapper>
-                  <BottomSheetModalProvider>
-                    {children}
-                  </BottomSheetModalProvider>
-                </ToastWrapper>
-              </LanguageProvider>
-            </LoaderWrapper>
-          </ThemeWrapper>
-        </GestureHandlerRootView>
-      </SafeAreaProvider>
+      <SWRConfig value={{ provider: cache ? () => cache : undefined }}>
+        {/*  SaveAreaView */}
+        <SafeAreaProvider>
+          {/* GestureHandler */}
+          <GestureHandlerRootView style={styles.gestureHandlerContainer}>
+            {/* Theme */}
+            <ThemeWrapper>
+              {/* Loader */}
+              <LoaderWrapper>
+                {/* Language */}
+                <LanguageProvider>
+                  {/* Toast */}
+                  <ToastWrapper>
+                    <BottomSheetModalProvider>
+                      {children}
+                    </BottomSheetModalProvider>
+                  </ToastWrapper>
+                </LanguageProvider>
+              </LoaderWrapper>
+            </ThemeWrapper>
+          </GestureHandlerRootView>
+        </SafeAreaProvider>
+      </SWRConfig>
     </>
   )
 }
