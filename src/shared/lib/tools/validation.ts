@@ -75,6 +75,7 @@ export const getSchemas = (t: TFunction<ELanguages, undefined>) => ({
       required_error: t('errors.required'),
     })
     .email({ message: t('errors.email') }),
+  optionalEmail: z.string().email().optional().or(z.literal('')),
   bool: z.boolean(),
 })
 

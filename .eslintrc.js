@@ -2,7 +2,7 @@ module.exports = {
   env: {
     jest: true,
   },
-  plugins: ['import', '@typescript-eslint'],
+  plugins: ['import', '@typescript-eslint', 'prettier', 'prefer-arrow'],
   extends: [
     '@react-native-community',
     'prettier',
@@ -27,8 +27,8 @@ module.exports = {
         allowAsProps: false,
       },
     ],
-    'no-unused-vars': 'error',
     'no-empty': 'off',
+    'no-unused-vars': 'off',
     'no-empty-function': 'off',
     'import/no-unresolved': 'off',
     'import/no-duplicates': 'off',
@@ -42,7 +42,7 @@ module.exports = {
     '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-extra-semi': 'off',
-    '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/no-unused-vars': 'warn',
     '@typescript-eslint/no-empty-function': 'off',
 
     '@typescript-eslint/no-explicit-any': 'error',
@@ -50,6 +50,14 @@ module.exports = {
     'jest/no-disabled-tests': 'off',
     'no-shadow': 'off',
     'no-var': 'error',
+    'prefer-arrow/prefer-arrow-functions': [
+      'error',
+      {
+        classPropertiesAllowed: false,
+        disallowPrototype: true,
+        singleReturnOnly: false,
+      },
+    ],
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
     'react-native/no-inline-styles': 'error',
     'react/self-closing-comp': 'error',

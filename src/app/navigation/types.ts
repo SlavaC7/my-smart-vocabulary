@@ -4,6 +4,8 @@ import {
   RouteProp,
 } from '@react-navigation/native'
 
+import { TAuthStack } from './stacks/Auth'
+
 import type {
   THomeStack,
   TMainStack,
@@ -22,7 +24,8 @@ export type TScreens = TMainStack &
   THomeStack &
   TSearchStack &
   TTestsStack &
-  TStatisticsStack
+  TStatisticsStack &
+  TAuthStack
 
 /**
  * Description: use for Screens props

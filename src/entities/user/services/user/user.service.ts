@@ -10,16 +10,16 @@ export class UserService {
   //Post User
   static async postUser(
     data: T.TPostUserMeApi['payload'],
-  ): Promise<T.TPostUserMeApi['response']> {
-    return apiPrivate.post(`/users`, data)
+  ): TResponse<T.TPostUserMeApi['response']> {
+    return apiPrivate.post(`/user/me`, data)
   }
 
   static async pathUser(
     data: T.TPostUserMeApi['payload'],
-  ): Promise<T.TPostUserMeApi['response']> {
-    return apiPrivate.patch(`/users`, data)
+  ): TResponse<T.TPostUserMeApi['response']> {
+    return apiPrivate.patch(`/user/me`, data)
   }
-  static async deleteUser(): Promise<T.TDeleteUserMeApi['response']> {
-    return apiPrivate.delete(`/users`)
+  static async deleteUser(): TResponse<T.TDeleteUserMeApi['response']> {
+    return apiPrivate.delete(`/user/me`)
   }
 }

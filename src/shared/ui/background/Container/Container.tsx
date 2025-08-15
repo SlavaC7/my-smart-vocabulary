@@ -5,6 +5,8 @@ import { StatusBar, StyleProp, ViewStyle } from 'react-native'
 import _ from 'lodash'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
+import { useTheme } from 'styled-components'
+
 import { EColors } from '../../styled'
 
 import * as S from './styled'
@@ -23,11 +25,12 @@ type TContainerProps = {
 
 export const Container = ({
   children,
-  color = EColors.white,
+  color,
   pHorizontal = 0,
   ...props
 }: TContainerProps) => {
   const { top, bottom, left, right } = useSafeAreaInsets()
+  const { COLORS } = useTheme()
 
   return (
     <S.Background
@@ -38,7 +41,7 @@ export const Container = ({
         paddingLeft: _.isNumber(props?.left) ? props.left : left,
         paddingRight: _.isNumber(props?.right) ? props.right : right,
       }}
-      color={color}
+      color={color || COLORS.background}
       {...props}>
       <StatusBar
         translucent

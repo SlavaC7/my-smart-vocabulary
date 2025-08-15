@@ -2,9 +2,11 @@ import React from 'react'
 
 import { useTranslation } from 'react-i18next'
 
-import { UserService } from '@/entities/user/services'
+import { EScreens } from '@/app/navigation'
 
-import { Icon, Styled, Typography } from '@/shared'
+import { useAuth } from '@/entities/auth'
+
+import { Icon, Styled, Typography, useNavigation } from '@/shared'
 
 import { FirebaseService } from '@/shared/services/firebase'
 
@@ -12,15 +14,16 @@ import * as S from './styles'
 
 export const SocialAuth = () => {
   const { t } = useTranslation()
+  const { auth } = useAuth()
+  const { navigate } = useNavigation()
 
   const onGoogle = async () => {
     try {
-      await FirebaseService.signInWithGoogle()
-      console.log('SUCCESS')
+      navigate(EScreens.AuthCreateProfile)
+      // await FirebaseService.signInWithGoogle()
+      // console.log('SUCCESS')
 
-      const data = await UserService.getUser()
-
-      console.log('user', data)
+      // auth()
     } catch (error) {
       console.log('onGoogle error', { ...error })
     }

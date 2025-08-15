@@ -58,7 +58,8 @@ export const Standard = ({
   onBlur,
   onFocus,
   isBottomSheet = false,
-  withClear = true,
+  withClear = false,
+  labelColor,
   ...props
 }: TStandardInputProps) => {
   const inputRef = useRef<TextInput | null>(null)
@@ -90,7 +91,10 @@ export const Standard = ({
 
       {!!label && (
         <Styled.FlexWrapper justify="space-between">
-          <Typography.Body2R mBottom="8px" color="neutral_500">
+          <Typography.Body2R
+            mLeft="8px"
+            mBottom="8px"
+            color={labelColor || 'neutral_500'}>
             {label}
           </Typography.Body2R>
 

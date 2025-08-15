@@ -7,20 +7,15 @@ import * as Sentry from '@sentry/react-native'
 
 import Toast from 'react-native-toast-message'
 
-import { isIos } from '@/shared/lib'
-
 import { firebaseErrors } from './config'
 
 type TPhoneAuthState = 'sent' | 'timeout' | 'verified' | 'error'
 
-console.log(
-  'FIREBASE_WEB_CLIENT_ID =>',
-  isIos ? FIREBASE_IOS_CLIENT_ID : FIREBASE_WEB_CLIENT_ID,
-)
+console.log('ENV =>', FIREBASE_IOS_CLIENT_ID, FIREBASE_WEB_CLIENT_ID)
 
 GoogleSignin.configure({
   iosClientId: FIREBASE_IOS_CLIENT_ID,
-  webClientId: isIos ? FIREBASE_IOS_CLIENT_ID : FIREBASE_WEB_CLIENT_ID,
+  webClientId: FIREBASE_WEB_CLIENT_ID,
   scopes: ['https://www.googleapis.com/auth/userinfo.profile', 'openid'],
 })
 
@@ -44,17 +39,24 @@ class FirebaseService {
 
   // Google login
   public async signInWithGoogle() {
-    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true })
+    console.log('1')
+    // await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true })
+    console.log('2')
 
     const localUser = GoogleSignin.getCurrentUser()
+    console.log('3')
 
     if (localUser) {
       try {
+        console.log('4')
+
         await GoogleSignin.revokeAccess()
       } catch {}
     }
+    console.log('5')
 
     const signInResult = await GoogleSignin.signIn()
+    console.log('6')
 
     let idToken = signInResult.data?.idToken
 

@@ -1,5 +1,3 @@
-//All screen add here
-
 export enum EScreens {
   // Home screens
   HomeMain = 'HomeMainScreen',
@@ -18,4 +16,5 @@ export enum EScreens {
   WordMain = 'WordMainScreen',
 
   AuthMain = 'AuthMainScreen',
+  AuthCreateProfile = 'AuthCreateProfileScreen',
 }

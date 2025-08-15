@@ -19,6 +19,11 @@ export const AuthStack = () => {
         ...NativeScreenNavigationOptions,
       }}>
       <Stack.Screen component={AuthScreens.Main} name={EScreens.AuthMain} />
+
+      <Stack.Screen
+        component={AuthScreens.CreateProfile}
+        name={EScreens.AuthCreateProfile}
+      />
     </Stack.Navigator>
   )
 }

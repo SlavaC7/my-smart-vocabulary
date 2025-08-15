@@ -10,6 +10,7 @@ import { TIconsKeys } from '@assets/svg'
 
 import { TIconProps } from '../../Icon/types'
 import { TMargin } from '../../utils'
+import { TEColors } from '../../styled'
 
 export type TStandardInputProps = {
   style?: StyleProp<ViewStyle>
@@ -48,6 +49,7 @@ export type TStandardInputProps = {
   withClear?: boolean
   onBlur?: () => void
   onFocus?: () => void
+  labelColor?: TEColors
 } & Partial<TContainer> &
   Pick<Partial<TStyledInputContainer>, 'height'>
 

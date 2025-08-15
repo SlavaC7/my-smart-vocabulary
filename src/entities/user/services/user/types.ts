@@ -9,7 +9,10 @@ type TGetUserMePayload = {}
 type TGetUserMeResponse = TUser
 
 export type TPostUserMeApi = TQuery<TPostUserMePayload, TPostUserMeResponse>
-type TPostUserMePayload = {}
+type TPostUserMePayload = {
+  name: string
+  email: string
+}
 type TPostUserMeResponse = TUser
 
 export type TPatchUserMeApi = TQuery<TPatchUserMPayload, TPatchUserMResponse>

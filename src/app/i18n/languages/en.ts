@@ -16,6 +16,8 @@ export default {
   },
   inputs: {
     search: 'Search',
+    name: 'Name',
+    email: 'Email',
   },
   auth: {
     google: 'Continue with Google',
@@ -23,6 +25,7 @@ export default {
     or: 'or',
     welcome: 'Welcome',
     phone_placeholder: 'Phone number',
+    simple_auth: 'Complete a simple registration process',
   },
   home: {
     title: 'Home',
