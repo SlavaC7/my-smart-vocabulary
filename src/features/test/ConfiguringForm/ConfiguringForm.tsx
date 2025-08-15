@@ -6,14 +6,13 @@ import { Controller, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
 import { EScreens } from '@/app/navigation'
-import { useTypedSelector } from '@/app/store'
 
 import { Footer } from '@/widgets/footer'
 
 import { WordFeature } from '@/features'
 
 import { useGenerateTest } from '@/entities/test'
-import { getWordSelector } from '@/entities/word'
+import { useWordStore } from '@/entities/word'
 
 import { Background, Button, Styled, useNavigation } from '@/shared'
 
@@ -23,7 +22,7 @@ import { createConfigSchema } from './validation'
 
 export const ConfiguringForm = () => {
   const { t } = useTranslation()
-  const { words } = useTypedSelector(getWordSelector)
+  const { words } = useWordStore()
   const { onGenerate } = useGenerateTest()
   const { navigate } = useNavigation()
 

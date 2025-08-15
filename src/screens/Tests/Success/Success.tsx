@@ -6,9 +6,7 @@ import { useTranslation } from 'react-i18next'
 
 import { EScreens } from '@/app/navigation'
 
-import { useTypedSelector } from '@/app/store'
-
-import { getTestSelector } from '@/entities/test'
+import { useQuizStore } from '@/entities/test/store'
 
 import { Background, Button, Styled, Typography, useNavigation } from '@/shared'
 
@@ -20,7 +18,7 @@ export const Success = () => {
   const { navigate } = useNavigation()
   const animationRef = useRef<LottieView>(null)
 
-  const { test, testAnswers } = useTypedSelector(getTestSelector)
+  const { test, testAnswers } = useQuizStore()
 
   const totalCount = test.length
 

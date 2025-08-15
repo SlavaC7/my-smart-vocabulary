@@ -11,11 +11,7 @@ import { useTranslation } from 'react-i18next'
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import { useDispatch } from 'react-redux'
-
-import { useTypedSelector } from '@/app/store'
-
-import { getWordSelector, TFolder, wordActions } from '@/entities/word'
+import { TFolder, useWordStore } from '@/entities/word'
 
 import {
   appPadding,
@@ -40,8 +36,7 @@ export const FoldresBS = forwardRef<TBottomSheetModalRef, TFoldersBSProps>(
     const modalRef = useRef<TBottomSheetModalRef>(null)
     const { t } = useTranslation()
     const { bottom } = useSafeAreaInsets()
-    const dispatch = useDispatch()
-    const { folders, words } = useTypedSelector(getWordSelector)
+    const { folders, words } = useWordStore()
     const [selectedFolder, setSelectedFolder] = useState<string | null>(value)
 
     useEffect(() => {
@@ -61,7 +56,7 @@ export const FoldresBS = forwardRef<TBottomSheetModalRef, TFoldersBSProps>(
     }
 
     const onPressDeleteFolder = useCallback((folderId: string) => {
-      dispatch(wordActions.removeFolder(folderId))
+      // dispatch(wordActions.removeFolder(folderId))
     }, [])
 
     const onAddFolderClose = () => {

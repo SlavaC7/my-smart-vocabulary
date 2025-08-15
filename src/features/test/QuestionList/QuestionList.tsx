@@ -5,9 +5,10 @@ import { Dimensions, ListRenderItem } from 'react-native'
 import Carousel, { CarouselProperties } from 'react-native-snap-carousel'
 
 import { EScreens } from '@/app/navigation'
-import { useTypedSelector } from '@/app/store'
 
-import { getTestSelector, TTestItem } from '@/entities/test'
+import { TTestItem } from '@/entities/test'
+
+import { useQuizStore } from '@/entities/test/store'
 
 import { Background, Icon, Styled, useNavigation } from '@/shared'
 
@@ -19,7 +20,7 @@ import { TQuestionListProps } from './types'
 const { width: viewportWidth, height } = Dimensions.get('window')
 
 export const QuestionList = ({}: TQuestionListProps) => {
-  const { test } = useTypedSelector(getTestSelector)
+  const { test } = useQuizStore()
   const ref = useRef<Carousel<TTestItem>>(null)
   const [disable, setDisable] = useState<boolean>(false)
   const activeIndex = useRef(0)

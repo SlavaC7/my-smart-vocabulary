@@ -1,5 +1,3 @@
-import { useDispatch } from 'react-redux'
-
 import { TConfiguringForm } from '@/features/test/ConfiguringForm/types'
 
 import { TWord } from '@/entities/word'
@@ -7,11 +5,8 @@ import { TWord } from '@/entities/word'
 import { uuid } from '@/shared'
 
 import { TAnswer, TTestItem } from '../../models'
-import { testsActions } from '../../store'
 
 export const useGenerateTest = () => {
-  const dispatch = useDispatch()
-
   const getRandomElement = <T>(array: T[]): T => {
     return array[Math.floor(Math.random() * array.length)]
   }
@@ -98,8 +93,8 @@ export const useGenerateTest = () => {
 
     const finallyFest = shuffleArray(test)
 
-    dispatch(testsActions.setState({ test: finallyFest }))
-    dispatch(testsActions.setState({ testAnswers: [] }))
+    // dispatch(testsActions.setState({ test: finallyFest }))
+    // dispatch(testsActions.setState({ testAnswers: [] }))
 
     return finallyFest
   }

@@ -1,10 +1,8 @@
 import React from 'react'
 
-import { useDispatch } from 'react-redux'
+import { TAnswer } from '@/entities/test'
 
-import { useTypedSelector } from '@/app/store'
-
-import { getTestSelector, TAnswer, testsActions } from '@/entities/test'
+import { useQuizStore } from '@/entities/test/store'
 
 import { Styled, TEColors, Typography } from '@/shared'
 
@@ -16,19 +14,18 @@ export const Answers = ({
   answers = [],
   onPressItem = () => {},
 }: TAnswersProps) => {
-  const dispatch = useDispatch()
-  const { testAnswers } = useTypedSelector(getTestSelector)
+  const { testAnswers } = useQuizStore()
 
   const haveAnswers = testAnswers.find(item => item.questionId === _id)
 
   const _onPress = (item: TAnswer) => {
-    dispatch(
-      testsActions.correctAnswer({
-        type: item.isCorrect ? 'correct' : 'incorrect',
-      }),
-    )
+    // dispatch(
+    //   testsActions.correctAnswer({
+    //     type: item.isCorrect ? 'correct' : 'incorrect',
+    //   }),
+    // )
 
-    dispatch(testsActions.setAnswer(item))
+    // dispatch(testsActions.setAnswer(item))
 
     onPressItem()
   }

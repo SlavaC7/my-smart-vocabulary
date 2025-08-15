@@ -2,10 +2,6 @@ import React, { useCallback } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
-import { useDispatch } from 'react-redux'
-
-import { wordActions } from '@/entities/word'
-
 import { Icon, Styled, Typography } from '@/shared'
 
 import * as S from './styles'
@@ -17,10 +13,9 @@ export const SaveButton = ({
   ...props
 }: TSaveButtonProps) => {
   const { t } = useTranslation()
-  const dispatch = useDispatch()
 
   const onPressSave = useCallback(() => {
-    dispatch(wordActions.addWord(word))
+    // dispatch(wordActions.addWord(word))
   }, [word])
 
   if (variant === 'plus') {

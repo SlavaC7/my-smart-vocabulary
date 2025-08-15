@@ -2,11 +2,7 @@ import React, { forwardRef, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
-import { useDispatch } from 'react-redux'
-
-import { wordActions } from '@/entities/word'
-
-import { Button, Input, Styled, Typography, uuid } from '@/shared'
+import { Button, Input, Styled, Typography } from '@/shared'
 import { BottomSheet } from '@/shared/ui/bottomSheet'
 import { TBottomSheetModalRef } from '@/shared/ui/bottomSheet/Modal'
 
@@ -20,7 +16,6 @@ export const AddFolderModal = forwardRef<
   // const currentRef = useRef<TBaseModalRef>(null)
   const { t } = useTranslation()
   const [value, setValue] = useState('')
-  const dispatch = useDispatch()
 
   // useImperativeHandle(
   //   ref,
@@ -43,12 +38,12 @@ export const AddFolderModal = forwardRef<
   const onAdd = () => {
     if (!value) return
 
-    dispatch(
-      wordActions.createFolder({
-        _id: uuid.v4(),
-        name: value,
-      }),
-    )
+    // dispatch(
+    //   wordActions.createFolder({
+    //     _id: uuid.v4(),
+    //     name: value,
+    //   }),
+    // )
 
     onClearText()
     onClose()

@@ -2,9 +2,7 @@ import React, { useMemo } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
-import { useTypedSelector } from '@/app/store'
-
-import { getWordSelector, TFolder } from '@/entities/word'
+import { TFolder, useWordStore } from '@/entities/word'
 
 import { Styled, TEColors, Typography } from '@/shared'
 
@@ -16,7 +14,7 @@ export const SelectFolders = ({
   onChange = () => {},
 }: TSelectFoldersProps) => {
   const { t } = useTranslation()
-  const { folders } = useTypedSelector(getWordSelector)
+  const { folders } = useWordStore()
 
   console.log('value =>', value)
 

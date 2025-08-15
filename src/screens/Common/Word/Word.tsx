@@ -9,16 +9,14 @@ import { useTheme } from 'styled-components'
 import { EScreens } from '@/app/navigation'
 import { TScreenQueryProps } from '@/app/navigation/types'
 
-import { useTypedSelector } from '@/app/store'
-
 import { Header } from '@/widgets/header'
 
 import { WordFeature } from '@/features'
 
 import {
-  getWordSelector,
   TranslateService,
   useWordControl,
+  useWordStore,
   WordEntity,
 } from '@/entities/word'
 
@@ -38,7 +36,7 @@ import * as S from './styles'
 export const Word = () => {
   const { COLORS } = useTheme()
   const { t } = useTranslation()
-  const { folders } = useTypedSelector(getWordSelector)
+  const { folders } = useWordStore()
   const { existInAnyFolder } = useWordControl()
   const { navigate } = useNavigation()
 

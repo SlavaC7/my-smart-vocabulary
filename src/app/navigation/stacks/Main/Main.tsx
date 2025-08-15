@@ -2,13 +2,11 @@ import React from 'react'
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import { useTypedSelector } from '@/app/store'
-
 import { CommonScreens } from '@/screens/Common'
 
 import { SearchScreens } from '@/screens/Search'
 
-import { getUserSelector } from '@/entities/user/store'
+import { useUserStore } from '@/entities/user/store'
 
 import { EScreens } from '../../screens'
 import { AuthStack } from '../Auth'
@@ -22,7 +20,7 @@ import { TMainStack } from './types'
 const Stack = createNativeStackNavigator<TMainStack>()
 
 export const MainStack = () => {
-  const { user } = useTypedSelector(getUserSelector)
+  const { user } = useUserStore()
 
   const isUser = !!user
   return (

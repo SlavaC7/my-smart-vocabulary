@@ -3,14 +3,12 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 // import { Confetti } from 'react-native-fast-confetti'
-import { useDispatch } from 'react-redux'
 
 import { EScreens } from '@/app/navigation'
-import { useTypedSelector } from '@/app/store'
 
 import { Header } from '@/widgets/header'
 
-import { getTestSelector, testsActions } from '@/entities/test'
+import { useQuizStore } from '@/entities/test/store'
 
 import {
   Background,
@@ -27,9 +25,7 @@ import { styles } from './styles'
 export const Main = () => {
   const { t } = useTranslation()
   const { navigate } = useNavigation()
-  const { correctAnswers, incorrectAnswers, totalAnswers } =
-    useTypedSelector(getTestSelector)
-  const dispatch = useDispatch()
+  const { correctAnswers, incorrectAnswers, totalAnswers } = useQuizStore()
 
   const correctPercent =
     !!correctAnswers && totalAnswers ? (correctAnswers / totalAnswers) * 100 : 0
@@ -43,13 +39,13 @@ export const Main = () => {
   }
 
   const onClear = () => {
-    dispatch(
-      testsActions.setState({
-        correctAnswers: 0,
-        incorrectAnswers: 0,
-        totalAnswers: 0,
-      }),
-    )
+    // dispatch(
+    //   testsActions.setState({
+    //     correctAnswers: 0,
+    //     incorrectAnswers: 0,
+    //     totalAnswers: 0,
+    //   }),
+    // )
   }
   return (
     <Background.Container>

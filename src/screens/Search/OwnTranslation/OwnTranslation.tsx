@@ -4,8 +4,6 @@ import { useRoute } from '@react-navigation/native'
 import { Controller, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
-import uuid from 'react-native-uuid'
-import { useDispatch } from 'react-redux'
 import { useTheme } from 'styled-components'
 
 import { EScreens } from '@/app/navigation'
@@ -15,7 +13,7 @@ import { Header } from '@/widgets/header'
 
 import { WordFeature } from '@/features'
 
-import { EWordType, wordActions } from '@/entities/word'
+import { EWordType } from '@/entities/word'
 
 import {
   Background,
@@ -34,7 +32,6 @@ import { createOwnTranslationSchema } from './validation'
 export const OwnTranslation = () => {
   const { COLORS } = useTheme()
   const { t } = useTranslation()
-  const dispatch = useDispatch()
   const navigation = useNavigation()
   const { params } =
     useRoute<TScreenQueryProps<EScreens.SearchOwnTranslation>>()
@@ -72,25 +69,25 @@ export const OwnTranslation = () => {
 
   const onSave = (formData: TCreateOwnTranslationForm) => {
     if (isEdit) {
-      dispatch(
-        wordActions.changeWord({
-          ...formData,
-          _id: params._id,
-          text: formData.word,
-          // translations: [formData.translations[0], ...formData.translations],
-        }),
-      )
+      // dispatch(
+      //   wordActions.changeWord({
+      //     ...formData,
+      //     _id: params._id,
+      //     text: formData.word,
+      //     // translations: [formData.translations[0], ...formData.translations],
+      //   }),
+      // )
     }
 
     if (!isEdit) {
-      dispatch(
-        wordActions.addWord({
-          ...formData,
-          _id: uuid.v4(),
-          text: formData.word,
-          // translations: [formData.translations[0], ...formData.translations],
-        }),
-      )
+      // dispatch(
+      //   wordActions.addWord({
+      //     ...formData,
+      //     _id: uuid.v4(),
+      //     text: formData.word,
+      //     // translations: [formData.translations[0], ...formData.translations],
+      //   }),
+      // )
     }
 
     navigation.goBack()

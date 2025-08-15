@@ -4,11 +4,9 @@ import { FlatList } from 'react-native'
 
 import { useTranslation } from 'react-i18next'
 
-import { useTypedSelector } from '@/app/store'
-
 import { WordFeature } from '@/features'
 
-import { getWordSelector, TFolder, WordEntity } from '@/entities/word'
+import { TFolder, useWordStore, WordEntity } from '@/entities/word'
 
 import {
   appPadding,
@@ -22,7 +20,7 @@ import { TMyWordsListProps } from './types'
 
 export const MyWordsList = ({ searchTerm }: TMyWordsListProps) => {
   const { t } = useTranslation()
-  const { words } = useTypedSelector(getWordSelector)
+  const { words } = useWordStore()
   const foldersBSRef = useBottomSheetRef()
 
   const [selectedFolder, setSelectedFolder] = useState<TFolder | null>(null)

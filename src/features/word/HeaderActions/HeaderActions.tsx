@@ -2,12 +2,11 @@ import React, { useCallback, useRef } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
-import { useDispatch } from 'react-redux'
 import { useTheme } from 'styled-components'
 
 import { WordFeature } from '@/features'
 
-import { TFolder, wordActions } from '@/entities/word'
+import { TFolder } from '@/entities/word'
 
 import { delay } from '@/shared'
 import { useBottomSheetRef, useNavigation } from '@/shared/hooks'
@@ -27,7 +26,6 @@ export const HeaderActions = ({
   const { t } = useTranslation()
   const { COLORS } = useTheme()
   const popoverRef = useRef<TPopoverRef | null>(null)
-  const dispatch = useDispatch()
   const navigation = useNavigation()
 
   const folderBSRef = useBottomSheetRef()
@@ -45,19 +43,19 @@ export const HeaderActions = ({
 
     await delay(500)
 
-    dispatch(wordActions.removeWord(wordId))
+    // dispatch(wordActions.removeWord(wordId))
 
     navigation.goBack()
   }, [wordId])
 
   const onMoveToFolder = useCallback(
     (folder: TFolder | null) => {
-      dispatch(
-        wordActions.addToFolder({
-          folderId: folder?._id || null,
-          wordId: wordId,
-        }),
-      )
+      // dispatch(
+      //   wordActions.addToFolder({
+      //     folderId: folder?._id || null,
+      //     wordId: wordId,
+      //   }),
+      // )
     },
     [wordId],
   )

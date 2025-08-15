@@ -2,16 +2,14 @@ import React from 'react'
 
 import { FlatList, ListRenderItem } from 'react-native'
 
-import { useTypedSelector } from '@/app/store'
-
 import { WordFeature } from '@/features'
 
-import { getWordSelector, TWord, WordEntity } from '@/entities/word'
+import { TWord, useWordStore, WordEntity } from '@/entities/word'
 
 import { TImportListProps } from './types'
 
 export const ImportList = ({ data, setData }: TImportListProps) => {
-  const { words } = useTypedSelector(getWordSelector)
+  const { words } = useWordStore()
 
   const _onDelete = (id: string) => {
     setData(data.filter(item => item._id !== id))

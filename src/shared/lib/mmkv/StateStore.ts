@@ -5,7 +5,7 @@ import { StateStorage } from 'zustand/middleware'
 // Create an MMKV instance
 export const storage = new MMKV({
   id: STORAGE_ID,
-  encryptionKey: STORAGE_KEY, // Encryption ensures secure storage
+  encryptionKey: STORAGE_KEY,
 })
 
 // Configure Zustand to use MMKV for state persistence

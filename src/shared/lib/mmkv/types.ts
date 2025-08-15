@@ -9,10 +9,7 @@ export type TSetStatePayload<TInitialState = {}> = Partial<TInitialState>
 
 export enum EStores {
   user = 'user',
-  product = 'product',
-  order = 'order',
-  favorite = 'favorite',
-  rest = 'rest',
+  word = 'word',
 }
 
 export type TSagaResponse<Res = unknown> = AxiosResponse<Res>
