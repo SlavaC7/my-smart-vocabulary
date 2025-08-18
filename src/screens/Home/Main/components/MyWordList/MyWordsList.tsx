@@ -24,21 +24,24 @@ export const MyWordsList = ({ search }: TMyWordsListProps) => {
   const { t } = useTranslation()
   const foldersBSRef = useBottomSheetRef()
 
-  const { docs: wordsData, flatListProps } = useInfiniteApiQuery(
-    WordsService.getWords,
-    {
-      limit: 10,
-      payload: { search },
-      persist: true,
-    },
-  )
-
   const [selectedFolder, setSelectedFolder] = useState<TFolder | null>(null)
+
+  const {
+    docs: wordsData,
+    flatListProps,
+    refresh,
+  } = useInfiniteApiQuery(WordsService.getWords, {
+    limit: 10,
+    payload: { search, folderId: selectedFolder?._id },
+    persist: true,
+  })
 
   const renderItem: ListRenderItem<TWord> = ({ item }) => (
     <WordEntity.MyCard
       word={item}
-      rightAction={() => <WordFeature.DeleteWord id={item._id} />}
+      rightAction={() => (
+        <WordFeature.DeleteWord id={item._id} onDelete={refresh} />
+      )}
     />
   )
 
@@ -66,10 +69,9 @@ export const MyWordsList = ({ search }: TMyWordsListProps) => {
         keyExtractor={item => item._id}
         renderItem={renderItem}
         ItemSeparatorComponent={() => <Styled.Divider height={8} />}
-        // ListFooterComponent={() => <Styled.Divider height={100} />}
         {...flatListProps}
       />
-      <WordFeature.FoldresBS ref={foldersBSRef} onChange={setSelectedFolder} />
+      <WordFeature.FoldersBS ref={foldersBSRef} onChange={setSelectedFolder} />
     </>
   )
 }

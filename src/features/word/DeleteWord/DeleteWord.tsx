@@ -1,18 +1,27 @@
 import React from 'react'
 
+import { WordsService } from '@/entities/word'
+
 import { Icon } from '@/shared'
 
 import { Container } from './styles'
 import { TDeleteWordProps } from './types'
 
 export const DeleteWord = ({ id: wordId, onDelete }: TDeleteWordProps) => {
-  const _onDelete = () => {
-    if (onDelete) {
-      onDelete()
-      return
+  const _onDelete = async () => {
+    try {
+      if (!wordId) return
+
+      await WordsService.deleteWord({ id: wordId })
+
+      if (onDelete) {
+        onDelete()
+        console.log('Word deleted')
+        return
+      }
+    } catch (error) {
+      console.error('Error deleting word:', error)
     }
-    if (!wordId) return
-    // dispatch(wordActions.removeWord(wordId))
   }
   return (
     <Container onPress={_onDelete}>

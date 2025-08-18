@@ -31,4 +31,11 @@ export class WordsService {
   }: T.TPatchWordApi['payload']): TResponse<T.TPatchWordApi['response']> {
     return apiPrivate.patch(`/words/${id}`, data)
   }
+
+  //delete Word by id
+  static async deleteWord({
+    id,
+  }: T.TGetWordByIdApi['payload']): TResponse<T.TGetWordByIdApi['response']> {
+    return apiPrivate.delete(`/words/${id}`)
+  }
 }

@@ -48,8 +48,6 @@ export const Tab = ({ title, icon, active, activeIcon, count }: TTab) => {
             stroke={activeIcon === 'Waterfall' ? color : undefined}
           />
         </Styled.FlexWrapper>
-
-        <Title color={color}>{title}</Title>
       </Container>
     </>
   )

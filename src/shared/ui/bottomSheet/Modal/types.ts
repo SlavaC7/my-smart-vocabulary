@@ -1,6 +1,8 @@
 import { BottomSheetModalProps } from '@gorhom/bottom-sheet'
 
-export type TBottomSheetModalProps = Partial<BottomSheetModalProps>
+export type TBottomSheetModalProps = {
+  onOpen?: () => void
+} & Partial<BottomSheetModalProps>
 
 export type TBottomSheetModalRef = {
   open: () => void

@@ -6,7 +6,7 @@ export type TWord = {
   _id: string
   word: string
   translations: Array<string>
-  folderId?: string | null
+  folderId?: string
   createdAt?: string
   examples?: Array<TTranslationExample>
   voice?: string

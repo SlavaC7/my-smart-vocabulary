@@ -2,6 +2,8 @@ import React, { forwardRef, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
+import { FoldersService, useWordStore } from '@/entities/word'
+
 import { Button, Input, Styled, Typography } from '@/shared'
 import { BottomSheet } from '@/shared/ui/bottomSheet'
 import { TBottomSheetModalRef } from '@/shared/ui/bottomSheet/Modal'
@@ -13,41 +15,31 @@ export const AddFolderModal = forwardRef<
   TBottomSheetModalRef,
   TAddFolderModalProps
 >(({ onClose = () => {} }, ref) => {
-  // const currentRef = useRef<TBaseModalRef>(null)
   const { t } = useTranslation()
   const [value, setValue] = useState('')
-
-  // useImperativeHandle(
-  //   ref,
-  //   () => ({
-  //     open: () => {
-  //       currentRef.current?.open()
-  //     },
-  //     close: () => {
-  //       setValue('')
-  //       currentRef.current?.close()
-  //     },
-  //   }),
-  //   [],
-  // )
+  const { setFolder } = useWordStore()
 
   const onClearText = () => {
     setValue('')
   }
 
-  const onAdd = () => {
-    if (!value) return
+  const onAdd = async () => {
+    try {
+      if (!value) return
 
-    // dispatch(
-    //   wordActions.createFolder({
-    //     _id: uuid.v4(),
-    //     name: value,
-    //   }),
-    // )
+      const { data } = await FoldersService.postFolder({
+        name: value,
+      })
 
-    onClearText()
-    onClose()
+      setFolder(data)
+
+      onClearText()
+      onClose()
+    } catch (error) {
+      console.log('onAddFolder error =>', error)
+    }
   }
+
   return (
     <BottomSheet.Modal
       android_keyboardInputMode={'adjustResize'}
@@ -57,11 +49,12 @@ export const AddFolderModal = forwardRef<
       <Container>
         <Styled.FlexWrapper flexDirection={'column'} align={'flex-start'}>
           <Typography.H3 mBottom={'16px'}>
-            {t('folder.enter_folder_name')}
+            {t('folder.new_folder')}
           </Typography.H3>
           <Input.Standard
             onChange={setValue}
             value={value}
+            label={t('folder.enter_folder_name')}
             isBottomSheet
             inputContainerStyle={styles.input}
             onPressRightIcon={onClearText}

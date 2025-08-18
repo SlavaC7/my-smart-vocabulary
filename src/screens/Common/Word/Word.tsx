@@ -3,7 +3,6 @@ import React from 'react'
 import { useRoute } from '@react-navigation/native'
 
 import _ from 'lodash'
-import { useTranslation } from 'react-i18next'
 import { useTheme } from 'styled-components'
 
 import { EScreens } from '@/app/navigation'
@@ -13,21 +12,9 @@ import { Header } from '@/widgets/header'
 
 import { WordFeature } from '@/features'
 
-import {
-  TranslateService,
-  useWordControl,
-  useWordStore,
-  WordEntity,
-} from '@/entities/word'
+import { useGetWord, useWordControl, WordEntity } from '@/entities/word'
 
-import {
-  Background,
-  Icon,
-  Styled,
-  Typography,
-  useNavigation,
-  useQuery,
-} from '@/shared'
+import { Background, Icon, Styled, Typography, useNavigation } from '@/shared'
 
 import { Common } from '@/shared/ui/common'
 
@@ -35,23 +22,21 @@ import * as S from './styles'
 
 export const Word = () => {
   const { COLORS } = useTheme()
-  const { t } = useTranslation()
-  const { folders } = useWordStore()
   const { existInAnyFolder } = useWordControl()
   const { navigate } = useNavigation()
 
   const {
-    params: { word },
+    params: { word: paramWord },
   } = useRoute<TScreenQueryProps<EScreens.WordMain>>()
 
-  const { data: synonimsData } = useQuery(TranslateService.postSynonyms, {
-    lang: 'english',
-    word: word.word,
-  })
+  const { word, getAction, folder } = useGetWord(paramWord._id, paramWord)
 
-  const synonims = synonimsData?.synonyms?.synonyms || []
+  // const { data: synonimsData } = useQuery(TranslateService.postSynonyms, {
+  //   lang: 'english',
+  //   word: word.word,
+  // })
 
-  const folderName = folders?.find(item => item._id === word.folderId)?.name
+  // const synonims = synonimsData?.synonyms?.synonyms || []
 
   const onPressEdit = () => {
     navigate(EScreens.SearchOwnTranslation, {
@@ -68,6 +53,7 @@ export const Word = () => {
         rightAction={
           <WordFeature.HeaderActions
             onPressEdit={onPressEdit}
+            refresh={getAction}
             wordId={word._id}
             folderId={word?.folderId || null}
           />
@@ -79,11 +65,6 @@ export const Word = () => {
           <Typography.H1>
             {word.word} {word.flag}
           </Typography.H1>
-          {!!folderName && (
-            <Typography.Body2R color="neutral_500" mTop="8px">
-              {folderName}
-            </Typography.Body2R>
-          )}
         </S.WordContainer>
 
         {!!word.type && (
@@ -114,8 +95,13 @@ export const Word = () => {
             </Common.ColoredText>
           </S.ExampleContainer>
         ))}
+        <WordFeature.WordScreenFolder
+          folder={folder}
+          wordId={word._id}
+          refresh={getAction}
+        />
 
-        {!!synonims?.length && (
+        {/* {!!synonims?.length && (
           <>
             <Typography.Body1R color="neutral_500" mTop="4px" mBottom="12px">
               {t('word.synonyms')}
@@ -133,7 +119,7 @@ export const Word = () => {
               ))}
             </Styled.FlexWrapper>
           </>
-        )}
+        )} */}
 
         <Styled.Divider height={100} />
       </Background.Scroll>

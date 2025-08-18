@@ -5,6 +5,7 @@ import { zustandStorage } from '@/shared'
 import { EStores } from '@/shared/lib/mmkv/types'
 
 import { TFolder, TWord } from './models'
+import { FoldersService } from './services'
 
 export type TWordsStoreProps = {
   words: TWord[]
@@ -15,6 +16,9 @@ export type TWordStoreMethods = {
   clear: () => void
   setWordState: (data: Partial<TWordsStoreProps>) => void
   setWord: (data: TWord) => void
+  setFolder: (data: TFolder) => void
+  updateFolders: () => Promise<void>
+  deleteFolder: (folderId: string) => Promise<void>
 }
 
 export type TWordStore = TWordsStoreProps & TWordStoreMethods
@@ -30,6 +34,18 @@ export const useWordStore = create<TWordStore>()(
           folders: [],
         }),
       setWordState: (store: Partial<TWordsStoreProps>) => set(store),
+      updateFolders: async () => {
+        try {
+          const { data } = await FoldersService.getFolders()
+
+          console.log('updateFolders', data)
+          set({
+            folders: data.docs,
+          })
+        } catch (error) {
+          console.log('updateFolders error =>', error)
+        }
+      },
       setWord: (word: TWord) => {
         const words = state.getState().words
 
@@ -38,10 +54,31 @@ export const useWordStore = create<TWordStore>()(
           words: [...newWords, word],
         })
       },
+      setFolder: (folder: TFolder) => {
+        const folders = state.getState().folders
+
+        const newFolders = folders.filter(w => w._id !== folder._id)
+        set({
+          folders: [...newFolders, folder],
+        })
+      },
+
+      deleteFolder: async (folderId: string) => {
+        try {
+          await FoldersService.deleteFolder({ id: folderId })
+
+          state.getState().updateFolders()
+        } catch (error) {
+          console.log('deleteFolder error =>', error)
+        }
+      },
     }),
     {
-      name: EStores.user,
-      partialize: () => ({}),
+      name: EStores.word,
+      partialize: state => ({
+        words: state.words,
+        folder: state.folders,
+      }),
       storage: createJSONStorage(() => zustandStorage),
     },
   ),

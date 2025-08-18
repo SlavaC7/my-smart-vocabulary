@@ -8,8 +8,6 @@ import { EScreens } from '@/app/navigation'
 
 import { WordFeature } from '@/features'
 
-import { WordsService } from '@/entities/word'
-
 import { Icon, Styled, Typography, useNavigation } from '@/shared'
 import { Background } from '@/shared/ui/background'
 
@@ -25,10 +23,6 @@ export const Main = () => {
   const onCreate = () => {
     navigate(EScreens.SearchOwnTranslation, { isHome: true })
   }
-
-  WordsService.getWords({}).then(response => {
-    console.log('Words fetched:', response.data)
-  })
 
   return (
     <Background.Container top={0} bottom={0} color={COLORS.background}>

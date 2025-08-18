@@ -7,6 +7,7 @@ type TGetWordsPayload = Partial<{
   search: string
   skip: number
   limit: number
+  folderId: string
 }>
 
 type TGetWordsResponse = TQueryListData<TWord>

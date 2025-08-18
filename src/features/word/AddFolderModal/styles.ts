@@ -7,11 +7,11 @@ import { EColors } from '@/shared'
 
 export const Container = styled(BottomSheetView)`
   padding: 0px 16px;
+  background-color: transparent;
 `
 
 export const styles = StyleSheet.create({
   input: {
-    borderWidth: 1,
-    borderColor: EColors.placeholder,
+    backgroundColor: EColors.white,
   },
 })

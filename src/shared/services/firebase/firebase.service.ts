@@ -56,7 +56,7 @@ class FirebaseService {
     console.log('5')
 
     const signInResult = await GoogleSignin.signIn()
-    console.log('6')
+    console.log('6', signInResult)
 
     let idToken = signInResult.data?.idToken
 

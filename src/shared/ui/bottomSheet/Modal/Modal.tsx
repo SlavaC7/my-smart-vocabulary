@@ -16,7 +16,13 @@ import { TBottomSheetModalRef, TBottomSheetModalProps } from './types'
 
 export const Modal = forwardRef<TBottomSheetModalRef, TBottomSheetModalProps>(
   (
-    { children, snapPoints = [], enableDynamicSizing = false, ...props },
+    {
+      children,
+      snapPoints = [],
+      enableDynamicSizing = false,
+      onOpen = () => {},
+      ...props
+    },
     ref,
   ) => {
     const bottomSheetRef = useRef<BottomSheetModal>(null)
@@ -30,6 +36,7 @@ export const Modal = forwardRef<TBottomSheetModalRef, TBottomSheetModalProps>(
       ref,
       () => ({
         open: () => {
+          onOpen()
           Keyboard.dismiss()
           bottomSheetRef.current?.present()
         },
@@ -40,6 +47,7 @@ export const Modal = forwardRef<TBottomSheetModalRef, TBottomSheetModalProps>(
           bottomSheetRef.current?.collapse()
         },
         expand: async () => {
+          onOpen()
           bottomSheetRef.current?.expand()
         },
       }),
