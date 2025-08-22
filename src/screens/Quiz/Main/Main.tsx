@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
@@ -8,6 +8,7 @@ import { EScreens } from '@/app/navigation'
 
 import { Header } from '@/widgets/header'
 
+import { QuizService } from '@/entities/quiz/services'
 import { useQuizStore } from '@/entities/quiz/store'
 
 import {
@@ -26,6 +27,14 @@ export const Main = () => {
   const { t } = useTranslation()
   const { navigate } = useNavigation()
   const { correctAnswers, incorrectAnswers, totalAnswers } = useQuizStore()
+
+  const [haveActiveQuiz, setHaveActiveQuiz] = useState(false)
+
+  useEffect(() => {
+    QuizService.getActiveQuiz().then(data => {
+      setHaveActiveQuiz(!!data.data)
+    })
+  }, [])
 
   const correctPercent =
     !!correctAnswers && totalAnswers ? (correctAnswers / totalAnswers) * 100 : 0

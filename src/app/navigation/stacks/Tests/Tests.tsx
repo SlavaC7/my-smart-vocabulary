@@ -2,7 +2,7 @@ import React from 'react'
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import { TestsScreens } from '@/screens/Tests'
+import { TestsScreens } from '@/screens/Quiz'
 
 import { EScreens } from '../../screens'
 import { NativeScreenNavigationOptions } from '../options'

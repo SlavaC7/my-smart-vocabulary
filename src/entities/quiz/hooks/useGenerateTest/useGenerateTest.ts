@@ -1,4 +1,4 @@
-import { TConfiguringForm } from '@/features/test/ConfiguringForm/types'
+import { TConfiguringForm } from '@/features/quiz/ConfiguringForm/types'
 
 import { TWord } from '@/entities/word'
 
