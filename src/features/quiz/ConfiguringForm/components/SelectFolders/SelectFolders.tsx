@@ -2,9 +2,11 @@ import React, { useMemo } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
-import { TFolder, useWordStore } from '@/entities/word'
+import { WordFeature } from '@/features'
 
-import { Styled, TEColors, Typography } from '@/shared'
+import { TFolder } from '@/entities/word'
+
+import { Styled, TEColors, Typography, useBottomSheetRef } from '@/shared'
 
 import * as S from './styles'
 import { TSelectFoldersProps } from './types'
@@ -14,43 +16,57 @@ export const SelectFolders = ({
   onChange = () => {},
 }: TSelectFoldersProps) => {
   const { t } = useTranslation()
-  const { folders } = useWordStore()
+  const folderBSRef = useBottomSheetRef()
+
+  const folderIds = value.map(item => item._id)
 
   console.log('value =>', value)
 
   const array = useMemo(
-    () => [{ _id: '1', name: 'All Worlds' }, ...folders],
-    [folders],
+    () => [{ _id: '1', name: 'All Worlds' } as TFolder, ...value],
+    [value],
   )
 
-  const onSelect = (id: string, active: boolean) => {
-    console.log('onSelect =>', id, active)
+  const onOpenBS = () => {
+    folderBSRef.current?.open()
+  }
 
+  const onDeleteOne = (id: string) => {
     if (id === '1') {
       onChange([])
       return
     }
-    if (active) {
-      onChange(value.filter(item => item !== id))
+
+    onChange(value.filter(fol => fol._id !== id))
+  }
+
+  const onSelect = (item: TFolder | null) => {
+    if (!item) {
+      onChange([])
+      return
+    }
+    const isActive = folderIds.includes(item._id)
+
+    if (isActive) {
+      onChange(value.filter(fol => fol._id !== item._id))
       return
     }
 
-    console.log('onSelect =>', [id, ...value])
-
-    onChange([id, ...value])
+    onChange([item, ...value])
   }
 
   const renderItem = (item: TFolder) => {
     const isAll = item._id === '1'
-    const isActive = isAll ? !value.length : value.includes(item._id)
+    const isActive = isAll ? !value.length : folderIds.includes(item._id)
     const colors: TEColors = isActive ? 'white' : 'black'
 
     return (
       <S.Item
         key={item._id}
         mRight={'16px'}
+        mBottom={'6px'}
         active={isActive}
-        onPress={() => onSelect(item._id, isActive)}>
+        onPress={() => onDeleteOne(item._id)}>
         <Typography.Body1R color={colors}>{item.name}</Typography.Body1R>
       </S.Item>
     )
@@ -61,8 +77,19 @@ export const SelectFolders = ({
         {t('tests.select_folders')}
       </Typography.Body2R>
       <Styled.FlexWrapper wrap={'wrap'} justify={'flex-start'}>
+        <S.Button mRight={'16px'} onPress={onOpenBS}>
+          <Typography.Body1R>Select</Typography.Body1R>
+        </S.Button>
         {array.map(renderItem)}
       </Styled.FlexWrapper>
+
+      <WordFeature.FoldersBS
+        ref={folderBSRef}
+        onChange={onSelect}
+        values={folderIds}
+        isSelect
+        isMultiple
+      />
     </>
   )
 }

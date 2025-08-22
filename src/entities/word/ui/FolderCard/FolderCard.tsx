@@ -9,9 +9,31 @@ export const FolderCard = ({
   folder,
   isSelected,
   width = '100%',
+  hideIcons = false,
   onPress = () => {},
   onPressDeleteFolder = () => {},
 }: TFolderCardProps) => {
+  const renderIcons = () => {
+    if (isSelected) {
+      return <Icon name="Done" />
+    }
+
+    if (hideIcons) {
+      return <></>
+    }
+
+    if (!isSelected) {
+      return (
+        <Styled.Touchable
+          width="auto"
+          onPress={() => onPressDeleteFolder(folder._id)}>
+          <Icon name="Trash" />
+        </Styled.Touchable>
+      )
+    }
+
+    return <></>
+  }
   return (
     <S.FolderWrapper
       width={width}
@@ -23,15 +45,7 @@ export const FolderCard = ({
         <Typography.H4 color="neutral_300">{` (${folder.count})`}</Typography.H4>
       </Styled.FlexWrapper>
 
-      {isSelected && <Icon name="Done" />}
-
-      {!isSelected && (
-        <Styled.Touchable
-          width="auto"
-          onPress={() => onPressDeleteFolder(folder._id)}>
-          <Icon name="Trash" />
-        </Styled.Touchable>
-      )}
+      {renderIcons()}
     </S.FolderWrapper>
   )
 }

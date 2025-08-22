@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, useForm } from 'react-hook-form'
 
 import { useTranslation } from 'react-i18next'
 
-import { EScreens } from '@/app/navigation'
-
 import { Footer } from '@/widgets/footer'
 
 import { WordFeature } from '@/features'
 
-import { useGenerateTest } from '@/entities/quiz'
-import { useWordStore } from '@/entities/word'
+import { useQuizStore } from '@/entities/quiz'
+import { QuizService } from '@/entities/quiz/services'
+import { TFolder } from '@/entities/word'
 
 import { Background, Button, Styled, useNavigation } from '@/shared'
 
@@ -22,21 +21,20 @@ import { createConfigSchema } from './validation'
 
 export const ConfiguringForm = () => {
   const { t } = useTranslation()
-  const { words } = useWordStore()
-  const { onGenerate } = useGenerateTest()
+  const {} = useQuizStore()
   const { navigate } = useNavigation()
 
-  const [maxCount, setMaxCount] = useState(words.length)
+  const [maxCount, setMaxCount] = useState(50)
 
   const {
     control,
-    watch,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<TConfiguringForm>({
     resolver: zodResolver(createConfigSchema(maxCount)),
     defaultValues: {
-      count: 1,
+      count: 50,
       folders: [],
       type: [],
       lang: [],
@@ -45,41 +43,36 @@ export const ConfiguringForm = () => {
 
   console.log('errors =>', errors)
 
-  const onHandleMaxCount = (folders: (string | undefined)[]) => {
+  const onHandleMaxCount = (folders: TFolder[]) => {
     let count = 0
 
     const array = folders || []
 
     if (!array.length) {
-      count = words.length
+      count = 50
     }
+
     if (array.length) {
-      count = words.filter(item => array.includes(item?.folderId || '')).length
+      count = array.reduce((acc, folder) => (acc += folder?.count || 0), 0)
     }
+    setValue('count', count)
+
+    console.log('count', count)
 
     setMaxCount(count)
   }
 
-  useEffect(() => {
-    const formWatch = watch(
-      data => data.folders && onHandleMaxCount(data.folders || []),
-    )
-
-    return () => {
-      formWatch.unsubscribe()
-    }
-  }, [])
-
-  const onSubmit = (data: TConfiguringForm) => {
+  const onSubmit = async (data: TConfiguringForm) => {
     console.log('onSubmit =>', data)
-    const quiz = onGenerate(words, data)
+    try {
+      const { data: quiz } = await QuizService.postCreateQuiz({
+        ...data,
+        folders: data.folders.map(item => item._id),
+      })
 
-    if (quiz.length) {
-      navigate(EScreens.TestsQuestion)
-    }
-
-    if (!quiz.length) {
-      //TODO: MAke a tast
+      console.log('quiz =>', quiz)
+    } catch (error) {
+      console.log('ConfiguringForm error =>', error)
     }
   }
 
@@ -90,7 +83,13 @@ export const ConfiguringForm = () => {
           control={control}
           name="folders"
           render={({ field: { value, onChange } }) => (
-            <C.SelectFolders {...{ value, onChange }} />
+            <C.SelectFolders
+              {...{ value }}
+              onChange={newValue => {
+                onChange(newValue)
+                onHandleMaxCount(newValue)
+              }}
+            />
           )}
         />
         <Styled.Divider height={16} />
@@ -98,8 +97,8 @@ export const ConfiguringForm = () => {
         <Controller
           control={control}
           name="count"
-          render={({ field: { value, onChange } }) => (
-            <C.Count {...{ value, onChange }} />
+          render={({ field: { value, onChange }, fieldState: { error } }) => (
+            <C.Count {...{ value, onChange }} error={error?.message} />
           )}
         />
 

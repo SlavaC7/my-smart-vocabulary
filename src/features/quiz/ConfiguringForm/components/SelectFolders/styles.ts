@@ -13,3 +13,14 @@ export const Item = styled(Styled.Touchable).attrs({
   border: 1px solid ${({ theme: { COLORS } }) => COLORS.black};
   border-radius: 8px;
 `
+
+export const Button = styled(Styled.Touchable).attrs({
+  width: 'auto',
+})`
+  padding: 5px 10px;
+
+  background-color: ${({ theme: { COLORS } }) => COLORS.white};
+
+  border: 1px solid ${({ theme: { COLORS } }) => COLORS.black};
+  border-radius: 8px;
+`

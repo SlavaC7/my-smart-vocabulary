@@ -33,7 +33,16 @@ import * as S from './styles'
 import { TFoldersBSProps } from './types'
 
 export const FoldersBS = forwardRef<TBottomSheetModalRef, TFoldersBSProps>(
-  ({ onChange, value = null }, ref) => {
+  (
+    {
+      onChange,
+      value = null,
+      isSelect = false,
+      isMultiple = false,
+      values = [],
+    },
+    ref,
+  ) => {
     const bsRef = useBottomSheetRef(ref)
     const modalRef = useRef<TBottomSheetModalRef>(null)
     const { t } = useTranslation()
@@ -64,14 +73,40 @@ export const FoldersBS = forwardRef<TBottomSheetModalRef, TFoldersBSProps>(
       modalRef.current?.close()
     }
 
-    const renderItem: ListRenderItem<TFolder> = ({ item }) => (
-      <WordEntity.FolderCard
-        folder={item}
-        onPress={onPressSelect}
-        onPressDeleteFolder={onPressDeleteFolder}
-        isSelected={item._id === selectedFolder}
-      />
-    )
+    const renderItem: ListRenderItem<TFolder> = ({ item }) => {
+      const isSelected = isMultiple
+        ? values.includes(item._id)
+        : item._id === selectedFolder
+      return (
+        <WordEntity.FolderCard
+          folder={item}
+          hideIcons={isSelect}
+          onPress={onPressSelect}
+          onPressDeleteFolder={onPressDeleteFolder}
+          isSelected={isSelected}
+        />
+      )
+    }
+
+    const renderFooterComponent = () => {
+      if (isSelect) {
+        return <Styled.FlexWrapper mBottom={`${bottom + 16}px`} />
+      }
+      return (
+        <Styled.FlexWrapper mBottom={`${bottom + 16}px`} mTop="20px">
+          <Button.Text
+            leftIcon="Plus"
+            text={t('folder.new_folder')}
+            onPress={onPressAddFolder}
+          />
+        </Styled.FlexWrapper>
+      )
+    }
+    const isSelectedAllWords = isSelect
+      ? isMultiple
+        ? values.length === 0
+        : !selectedFolder
+      : !selectedFolder
 
     return (
       <>
@@ -100,20 +135,12 @@ export const FoldersBS = forwardRef<TBottomSheetModalRef, TFoldersBSProps>(
                     </Typography.H4>
                   </Styled.FlexWrapper>
 
-                  {!selectedFolder && <Icon name="Done" />}
+                  {isSelectedAllWords && <Icon name="Done" />}
                 </S.FolderWrapper>
               </>
             )}
             renderItem={renderItem}
-            ListFooterComponent={() => (
-              <Styled.FlexWrapper mBottom={`${bottom + 16}px`} mTop="20px">
-                <Button.Text
-                  leftIcon="Plus"
-                  text={t('folder.new_folder')}
-                  onPress={onPressAddFolder}
-                />
-              </Styled.FlexWrapper>
-            )}
+            ListFooterComponent={renderFooterComponent}
           />
         </BottomSheet.Modal>
 

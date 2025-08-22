@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
+import { StatusBar } from 'react-native'
+
+import { useIsFocused } from '@react-navigation/native'
 import { useTranslation } from 'react-i18next'
 
 // import { Confetti } from 'react-native-fast-confetti'
@@ -21,30 +24,36 @@ import {
   useNavigation,
 } from '@/shared'
 
-import { styles } from './styles'
-
 export const Main = () => {
   const { t } = useTranslation()
   const { navigate } = useNavigation()
-  const { correctAnswers, incorrectAnswers, totalAnswers } = useQuizStore()
+  const { setQuizState, activeQuiz } = useQuizStore()
+  const isFocused = useIsFocused()
 
   const [haveActiveQuiz, setHaveActiveQuiz] = useState(false)
 
   useEffect(() => {
+    if (!isFocused) return
     QuizService.getActiveQuiz().then(data => {
       setHaveActiveQuiz(!!data.data)
+      if (data.data) {
+        setQuizState({
+          activeQuiz: data.data,
+        })
+      }
     })
-  }, [])
-
-  const correctPercent =
-    !!correctAnswers && totalAnswers ? (correctAnswers / totalAnswers) * 100 : 0
-  const incorrectPercent =
-    !!incorrectAnswers && totalAnswers
-      ? (incorrectAnswers / totalAnswers) * 100
-      : 0
+  }, [isFocused])
 
   const onGoConfiguring = () => {
-    navigate(EScreens.TestsConfig)
+    if (!haveActiveQuiz) {
+      navigate(EScreens.TestsConfig)
+
+      return
+    }
+
+    if (activeQuiz) {
+      navigate(EScreens.TestsQuestion)
+    }
   }
 
   const onClear = () => {
@@ -58,6 +67,8 @@ export const Main = () => {
   }
   return (
     <Background.Container>
+      <StatusBar barStyle={'dark-content'} />
+
       <Header.Standard goBack />
       <Background.Standard>
         <Styled.FlexWrapper flexDirection={'column'}>
@@ -75,43 +86,6 @@ export const Main = () => {
         </Styled.FlexWrapper>
 
         <Styled.Hr mTop={'16px'} height={6} color={EColors.neutral_200} />
-
-        <Styled.FlexWrapper style={styles.container} flexDirection={'column'}>
-          <Typography.H2 mTop={'16px'} mBottom={'20px'}>
-            {t('statistics.title')}
-          </Typography.H2>
-
-          <Styled.FlexWrapper flexDirection={'column'} align={'flex-start'}>
-            <Typography.H3 mBottom={'12px'}>
-              {t('tests.total_answers')}:{' '}
-              <Typography.H3>{totalAnswers}</Typography.H3>
-            </Typography.H3>
-            <Typography.H3 mBottom={'12px'}>
-              {t('tests.correct_answers')}:{' '}
-              <Typography.H3 color={'green_300'}>
-                {correctAnswers}
-              </Typography.H3>{' '}
-              (
-              <Typography.H3 color={'green_300'}>
-                {correctPercent.toFixed(1)} %
-              </Typography.H3>
-              )
-            </Typography.H3>
-            <Typography.H3 mBottom={'12px'}>
-              {t('tests.incorrect_answers')}:{' '}
-              <Typography.H3 color={'red_400'}>
-                {incorrectAnswers}
-              </Typography.H3>{' '}
-              (
-              <Typography.H3 color={'red_400'}>
-                {incorrectPercent.toFixed(1)} %
-              </Typography.H3>
-              )
-            </Typography.H3>
-          </Styled.FlexWrapper>
-
-          <Button.Standard text={'Clear Stats (text)'} onPress={onClear} />
-        </Styled.FlexWrapper>
       </Background.Standard>
     </Background.Container>
   )

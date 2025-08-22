@@ -12,6 +12,7 @@ const addCount = [1, 5, 10, 20]
 export const Count = ({
   value = 1,
   onChange = () => {},
+  error = '',
 }: TConfigFormCountProps) => {
   const { t } = useTranslation()
 
@@ -50,6 +51,12 @@ export const Count = ({
           {addCount.map(renderItem)}
         </Styled.FlexWrapper>
       </Styled.FlexWrapper>
+
+      {!!error && (
+        <Typography.Body2R mBottom={'16px'} color="red_300">
+          {error}
+        </Typography.Body2R>
+      )}
     </>
   )
 }

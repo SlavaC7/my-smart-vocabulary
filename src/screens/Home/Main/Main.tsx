@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import { StatusBar } from 'react-native'
+
 import { useTranslation } from 'react-i18next'
 
 import { useTheme } from 'styled-components'
@@ -26,6 +28,7 @@ export const Main = () => {
 
   return (
     <Background.Container top={0} bottom={0} color={COLORS.background}>
+      <StatusBar barStyle={'light-content'} />
       <S.Header>
         <Styled.FlexWrapper justify={'space-between'}>
           <Typography.H1 color="white">{t('app.name')}</Typography.H1>

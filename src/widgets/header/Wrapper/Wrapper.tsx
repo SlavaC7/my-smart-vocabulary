@@ -21,7 +21,10 @@ export const Wrapper = ({
   const { top } = useSafeAreaInsets()
 
   const bg =
-    color || (transparent ? EColors.white || EColors.white : EColors.white)
+    color ||
+    (transparent
+      ? EColors.background || EColors.background
+      : EColors.background)
 
   const getStyle = (): StyleProp<ViewStyle> => {
     return {

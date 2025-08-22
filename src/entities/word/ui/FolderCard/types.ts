@@ -4,6 +4,7 @@ export type TFolderCardProps = {
   folder: TFolder
   isSelected: boolean
   width?: string
+  hideIcons?: boolean
   onPress?: (item: TFolder) => void
   onPressDeleteFolder?: (value: string) => void
 }

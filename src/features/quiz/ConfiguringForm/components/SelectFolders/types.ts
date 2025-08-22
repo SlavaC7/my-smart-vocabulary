@@ -1,4 +1,6 @@
+import { TFolder } from '@/entities/word'
+
 export type TSelectFoldersProps = {
-  value: string[]
-  onChange: (value: string[]) => void
+  value: TFolder[]
+  onChange: (value: TFolder[]) => void
 }

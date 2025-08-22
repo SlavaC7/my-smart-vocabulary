@@ -1,6 +1,6 @@
 export type TFolder = {
   _id: string
-  count: 0
+  count: number
   createdAt: string
   name: string
   ownerUid: string
