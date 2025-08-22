@@ -6,9 +6,9 @@ import Carousel, { CarouselProperties } from 'react-native-snap-carousel'
 
 import { EScreens } from '@/app/navigation'
 
-import { TTestItem } from '@/entities/test'
+import { TTestItem } from '@/entities/quiz'
 
-import { useQuizStore } from '@/entities/test/store'
+import { useQuizStore } from '@/entities/quiz/store'
 
 import { Background, Icon, Styled, useNavigation } from '@/shared'
 

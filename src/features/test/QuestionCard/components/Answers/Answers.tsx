@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { TAnswer } from '@/entities/test'
+import { TAnswer } from '@/entities/quiz'
 
-import { useQuizStore } from '@/entities/test/store'
+import { useQuizStore } from '@/entities/quiz/store'
 
 import { Styled, TEColors, Typography } from '@/shared'
 

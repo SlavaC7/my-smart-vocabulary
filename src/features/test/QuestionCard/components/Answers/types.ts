@@ -1,4 +1,4 @@
-import { TTestItem } from '@/entities/test'
+import { TTestItem } from '@/entities/quiz'
 
 export type TAnswersProps = {
   onPressItem?: () => void

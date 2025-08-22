@@ -8,7 +8,7 @@ import { EScreens } from '@/app/navigation'
 
 import { Header } from '@/widgets/header'
 
-import { useQuizStore } from '@/entities/test/store'
+import { useQuizStore } from '@/entities/quiz/store'
 
 import {
   Background,

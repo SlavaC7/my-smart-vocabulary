@@ -11,7 +11,7 @@ import { Footer } from '@/widgets/footer'
 
 import { WordFeature } from '@/features'
 
-import { useGenerateTest } from '@/entities/test'
+import { useGenerateTest } from '@/entities/quiz'
 import { useWordStore } from '@/entities/word'
 
 import { Background, Button, Styled, useNavigation } from '@/shared'

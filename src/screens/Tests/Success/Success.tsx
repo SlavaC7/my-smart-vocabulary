@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 
 import { EScreens } from '@/app/navigation'
 
-import { useQuizStore } from '@/entities/test/store'
+import { useQuizStore } from '@/entities/quiz/store'
 
 import { Background, Button, Styled, Typography, useNavigation } from '@/shared'
 

@@ -1,8 +1,19 @@
-import { FIREBASE_WEB_CLIENT_ID, FIREBASE_IOS_CLIENT_ID } from '@env'
+import { FIREBASE_WEB_CLIENT_ID } from '@env'
 import appleAuth from '@invertase/react-native-apple-authentication'
-import auth, { FirebaseAuthTypes, getAuth } from '@react-native-firebase/auth'
+import auth, {
+  FirebaseAuthTypes,
+  getAuth,
+  signOut,
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  getIdToken,
+  updatePhoneNumber,
+  updateProfile,
+  signInWithCredential,
+  signInWithPhoneNumber,
+} from '@react-native-firebase/auth'
 import { GoogleSignin } from '@react-native-google-signin/google-signin'
-// import LogRocket from '@logrocket/react-native'
+
 import * as Sentry from '@sentry/react-native'
 
 import Toast from 'react-native-toast-message'
@@ -11,10 +22,7 @@ import { firebaseErrors } from './config'
 
 type TPhoneAuthState = 'sent' | 'timeout' | 'verified' | 'error'
 
-console.log('ENV =>', FIREBASE_IOS_CLIENT_ID, FIREBASE_WEB_CLIENT_ID)
-
 GoogleSignin.configure({
-  iosClientId: FIREBASE_IOS_CLIENT_ID,
   webClientId: FIREBASE_WEB_CLIENT_ID,
   scopes: ['https://www.googleapis.com/auth/userinfo.profile', 'openid'],
 })
@@ -24,53 +32,51 @@ class FirebaseService {
   private snapshot: FirebaseAuthTypes.PhoneAuthSnapshot | undefined
   private unsubscribeInstance?: () => void
 
+  // Auth state changed
   public subscribe(cb: (user: FirebaseAuthTypes.User | null) => void) {
-    this.unsubscribeInstance = getAuth().onAuthStateChanged(cb)
+    this.unsubscribeInstance = onAuthStateChanged(getAuth(), cb)
+
     return this.unsubscribeInstance
   }
 
   public unsubscribe() {
-    this.unsubscribeInstance && this.unsubscribeInstance()
-  }
-
-  public async signInWithEmailAndPassword(email: string, password: string) {
-    return getAuth().signInWithEmailAndPassword(email, password)
+    this?.unsubscribeInstance?.()
   }
 
   // Google login
   public async signInWithGoogle() {
-    console.log('1')
-    // await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true })
-    console.log('2')
+    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true })
 
     const localUser = GoogleSignin.getCurrentUser()
-    console.log('3')
 
     if (localUser) {
       try {
-        console.log('4')
-
         await GoogleSignin.revokeAccess()
       } catch {}
     }
-    console.log('5')
 
-    const signInResult = await GoogleSignin.signIn()
-    console.log('6', signInResult)
+    const result = await GoogleSignin.signIn()
 
-    let idToken = signInResult.data?.idToken
-
+    let idToken = result.data?.idToken
     if (!idToken) {
-      idToken = (signInResult as never as { idToken: string })?.idToken
+      idToken = (result as unknown as { idToken: string })?.idToken
     }
-
     if (!idToken) {
       throw new Error('No ID token found')
     }
 
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken)
+    const googleCredential = GoogleAuthProvider.credential(idToken)
 
-    return getAuth().signInWithCredential(googleCredential)
+    const signInResult = await signInWithCredential(getAuth(), googleCredential)
+
+    const profile = signInResult?.additionalUserInfo?.profile
+
+    const user = getAuth()?.currentUser
+    if (!user) return
+    await updateProfile(user, {
+      displayName: profile?.name,
+      photoURL: profile?.picture,
+    })
   }
 
   // Sign in with apple
@@ -83,24 +89,27 @@ class FirebaseService {
     if (!appleAuthRequestResponse.identityToken) {
       throw new Error('Apple Sign-In failed - no identify token returned')
     }
-
     const { identityToken, nonce } = appleAuthRequestResponse
     const appleCredential = auth.AppleAuthProvider.credential(
       identityToken,
       nonce,
     )
 
-    await getAuth().signInWithCredential(appleCredential)
+    await signInWithCredential(getAuth(), appleCredential)
 
-    const firstName = appleAuthRequestResponse?.fullName?.givenName || ''
-    const secondName =
-      appleAuthRequestResponse?.fullName?.middleName ||
-      appleAuthRequestResponse?.fullName?.familyName
+    const givenName = appleAuthRequestResponse?.fullName?.givenName
+    const middleName = appleAuthRequestResponse?.fullName?.middleName
+    const familyName = appleAuthRequestResponse?.fullName?.familyName
 
-    const newDisplayName = firstName + (secondName ? ` ${secondName}` : '')
+    const displayName = `${givenName ? givenName : ''}${
+      middleName ? ` ${middleName}` : ''
+    }${familyName ? ` ${familyName}` : ''}`
 
-    await getAuth().currentUser?.updateProfile({
-      displayName: getAuth()?.currentUser?.displayName || newDisplayName,
+    const user = getAuth()?.currentUser
+    if (!user) return
+
+    await updateProfile(user, {
+      displayName: getAuth()?.currentUser?.displayName || displayName || '',
     })
   }
 
@@ -109,12 +118,12 @@ class FirebaseService {
     phoneNumber: string,
     resend: boolean | undefined = false,
   ) {
-    let codeConfirm: FirebaseAuthTypes.ConfirmationResult | null = null
-
-    const code = await getAuth().signInWithPhoneNumber(phoneNumber, resend)
-
-    codeConfirm = code
-
+    const codeConfirm = await signInWithPhoneNumber(
+      getAuth(),
+      phoneNumber,
+      undefined,
+      resend,
+    )
     this.confirmation = codeConfirm
   }
 
@@ -129,7 +138,7 @@ class FirebaseService {
     phone: string,
     resend: boolean | undefined = false,
     callbackSuccess?: (state: TPhoneAuthState) => void,
-    callbackFailure?: () => void,
+    callbackFailure?: (state: TPhoneAuthState) => void,
   ) {
     return getAuth()
       .verifyPhoneNumber(phone, resend)
@@ -142,20 +151,26 @@ class FirebaseService {
         }
       })
       .catch(err => {
-        callbackFailure?.()
         this.validateError(err)
       })
   }
 
   // Link phone number
   public async linkPhoneNumber(code: string) {
+    const user = getAuth()?.currentUser
     if (!this.snapshot) throw Error('Nothing to confirm')
+    if (!user) throw Error('User not found')
 
     const credential = auth.PhoneAuthProvider.credential(
       this.snapshot.verificationId,
       code,
     )
-    return getAuth().currentUser?.updatePhoneNumber(credential)
+    return updatePhoneNumber(user, credential)
+  }
+
+  // Unlink phone number
+  public async unlinkUserPhone() {
+    return getAuth().currentUser?.unlink(auth.PhoneAuthProvider.PROVIDER_ID)
   }
 
   // Get current user
@@ -166,30 +181,25 @@ class FirebaseService {
 
   // Sign out user
   public async signOut() {
-    await getAuth()?.signOut?.()
+    await signOut(getAuth())
   }
 
   // Get token
   public async getToken() {
-    return getAuth()?.currentUser?.getIdToken(true)
+    const user = getAuth().currentUser
+    if (!user) return ''
+    return getIdToken(user, true)
   }
 
   public async validateError(error: unknown) {
-    console.log('validateError =>', error)
+    console.log(error)
     const err = error as { code?: string; message?: string }
 
     if (err.code) {
-      Sentry.withScope(scope => {
-        scope.setExtra('Error:', error)
-
-        Sentry.captureException(error)
-      })
-      // LogRocket.captureException(error)
-
+      Sentry.captureException(error)
       const existError = firebaseErrors.includes(err.code)
 
       if (existError) {
-        console.log('err.code =>', err.code)
         Toast.show({ type: 'error', text1: `firebase_error.${err.code}` })
       }
     }
@@ -197,7 +207,9 @@ class FirebaseService {
 
   public async getIdToken(newToken?: boolean) {
     try {
-      const token = await getAuth().currentUser?.getIdToken(!!newToken)
+      const user = getAuth().currentUser
+      if (!user) return null
+      const token = await getIdToken(user, !!newToken)
       return token
     } catch (e) {
       return null
