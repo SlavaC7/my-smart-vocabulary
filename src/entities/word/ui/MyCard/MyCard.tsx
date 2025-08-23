@@ -14,11 +14,7 @@ import { WordEntity } from '../..'
 import * as S from './styles'
 import { TMyCardProps } from './types'
 
-export const MyCard = ({
-  word,
-  duplicate = false,
-  rightAction,
-}: TMyCardProps) => {
+export const MyCard = ({ word, rightAction }: TMyCardProps) => {
   const { t } = useTranslation()
   const navigation = useNavigation()
 
@@ -35,19 +31,22 @@ export const MyCard = ({
           <Typography.Body1R>{word.word}</Typography.Body1R>
 
           <Styled.FlexWrapper width={'auto'}>
-            {!!duplicate && (
-              <S.DuplicateContainer>
-                <Typography.Caption1R color={'white'}>
-                  {t('export_import.duplicate')}
-                </Typography.Caption1R>
-              </S.DuplicateContainer>
-            )}
+            <Typography.Body2R mRight={'5px'}>
+              <Typography.Body2R color={'green_300'}>
+                {word?.correct || 0}
+              </Typography.Body2R>{' '}
+              |{' '}
+              <Typography.Body2R color={'red_300'}>
+                {word?.incorrect || 0}
+              </Typography.Body2R>
+            </Typography.Body2R>
             <Typography.Body1R>{word.flag || '🇺🇸'}</Typography.Body1R>
-            <Icon name="ArrowUpRight" />
           </Styled.FlexWrapper>
         </Styled.FlexWrapper>
 
-        {!!word.type && <WordEntity.TypeCard active type={word.type} />}
+        {!!word.type && (
+          <WordEntity.TypeCard mTop={'5px'} active type={word.type} />
+        )}
 
         <Typography.Body2R mTop={'5px'} color="neutral_500">
           {word.translations?.map(item => _.capitalize(item))?.join(', ')}

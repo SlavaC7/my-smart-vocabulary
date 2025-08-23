@@ -132,6 +132,8 @@ export const Word = () => {
           onChange={onMoveToFolder}
         />
 
+        <WordEntity.WordAnswerStats {...word} />
+
         {/* {!!synonims?.length && (
           <>
             <Typography.Body1R color="neutral_500" mTop="4px" mBottom="12px">

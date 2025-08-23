@@ -13,6 +13,8 @@ export type TWord = {
   type: EWordType
   code: TAvailableLang
   flag: string
+  correct: number
+  incorrect: number
 }
 
 export enum EWordType {
