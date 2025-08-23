@@ -1,5 +1,6 @@
-import { TTestItem } from '../../../entities/quiz/models'
+import { TQuizItem } from '../../../entities/quiz/models'
 
 export type TQuestionCardProps = {
   onPressItem?: () => void
-} & TTestItem
+  quizId: string
+} & TQuizItem

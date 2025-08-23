@@ -2,6 +2,7 @@ import React from 'react'
 
 import { TAnswer } from '@/entities/quiz'
 
+import { QuizService } from '@/entities/quiz/services'
 import { useQuizStore } from '@/entities/quiz/store'
 
 import { Styled, TEColors, Typography } from '@/shared'
@@ -10,28 +11,41 @@ import * as S from './styles'
 import { TAnswersProps } from './types'
 
 export const Answers = ({
-  _id = '',
+  quizId,
+  id = '',
   answers = [],
   onPressItem = () => {},
 }: TAnswersProps) => {
-  const { testAnswers } = useQuizStore()
+  const { answer, setQuizState, activeQuiz } = useQuizStore()
+  const haveAnswers = activeQuiz?.userAnswers.find(
+    item => item.questionId === id,
+  )
 
-  const haveAnswers = testAnswers.find(item => item.questionId === _id)
+  const _onPress = async (item: TAnswer) => {
+    try {
+      const { data } = await QuizService.postQuizAnswer({
+        id: quizId,
+        answerId: item.id,
+        isCorrect: item.isCorrect,
+        questionId: id,
+      })
+      console.log('data =>', data)
 
-  const _onPress = (item: TAnswer) => {
-    // dispatch(
-    //   testsActions.correctAnswer({
-    //     type: item.isCorrect ? 'correct' : 'incorrect',
-    //   }),
-    // )
+      setQuizState({ activeQuiz: data })
 
-    // dispatch(testsActions.setAnswer(item))
+      console.log('setQuizState')
 
-    onPressItem()
+      onPressItem()
+
+      console.log('onPressItem')
+    } catch (error) {
+      console.log('Answer error =>', { ...error })
+    }
   }
 
+  console.log('haveAnswers =>', haveAnswers, activeQuiz?.userAnswers)
   const renderItem = (item: TAnswer) => {
-    const thisAnswer = item._id === haveAnswers?._id
+    const thisAnswer = item.id === haveAnswers?.answerId
 
     const color: TEColors = thisAnswer
       ? 'white'
@@ -44,7 +58,7 @@ export const Answers = ({
         {...{ thisAnswer, isCorrect: item.isCorrect }}
         disabled={!!haveAnswers}
         onPress={() => _onPress(item)}
-        key={item._id}>
+        key={item.id}>
         <Typography.Body1R color={color}>{item.text}</Typography.Body1R>
       </S.ItemContainer>
     )

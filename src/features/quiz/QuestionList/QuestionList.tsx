@@ -6,8 +6,9 @@ import Carousel, { CarouselProperties } from 'react-native-snap-carousel'
 
 import { EScreens } from '@/app/navigation'
 
-import { TTestItem } from '@/entities/quiz'
+import { TQuizItem } from '@/entities/quiz'
 
+import { QuizService } from '@/entities/quiz/services'
 import { useQuizStore } from '@/entities/quiz/store'
 
 import { Background, Icon, Styled, useNavigation } from '@/shared'
@@ -20,8 +21,8 @@ import { TQuestionListProps } from './types'
 const { width: viewportWidth, height } = Dimensions.get('window')
 
 export const QuestionList = ({}: TQuestionListProps) => {
-  const { test } = useQuizStore()
-  const ref = useRef<Carousel<TTestItem>>(null)
+  const { activeQuiz } = useQuizStore()
+  const ref = useRef<Carousel<TQuizItem>>(null)
   const [disable, setDisable] = useState<boolean>(false)
   const activeIndex = useRef(0)
 
@@ -59,13 +60,23 @@ export const QuestionList = ({}: TQuestionListProps) => {
   //   },
   // ).current
 
+  const onCompleteTest = async () => {
+    if (!activeQuiz?._id) return
+    try {
+      await QuizService.postQuizComplete({ id: activeQuiz._id })
+
+      navigate(EScreens.TestsSuccess)
+    } catch (error) {
+      console.log('error', error)
+    }
+  }
+
   const onPress = () => {
-    console.log('NEXT', activeIndex.current + 1, test.length)
+    console.log('NEXT', activeIndex.current + 1, activeQuiz?.quiz.length)
 
     setTimeout(() => {
-      if (activeIndex.current + 1 === test.length) {
-        console.log('NEXT')
-        navigate(EScreens.TestsSuccess)
+      if (activeIndex.current + 1 === activeQuiz?.quiz.length) {
+        onCompleteTest()
         return
       }
       console.log('snapToNext')
@@ -74,9 +85,19 @@ export const QuestionList = ({}: TQuestionListProps) => {
     }, 500)
   }
 
-  const renderItem: ListRenderItem<TTestItem> = useCallback(({ item }) => {
-    return <QuestionCard {...item} onPressItem={onPress} />
-  }, [])
+  onPress()
+
+  const renderItem: ListRenderItem<TQuizItem> = useCallback(
+    ({ item }) => {
+      if (!activeQuiz) {
+        return <></>
+      }
+      return (
+        <QuestionCard {...item} quizId={activeQuiz._id} onPressItem={onPress} />
+      )
+    },
+    [activeQuiz],
+  )
 
   const onSetActiveIndex = (index: number) => {
     activeIndex.current = index
@@ -96,16 +117,18 @@ export const QuestionList = ({}: TQuestionListProps) => {
           </Styled.Touchable> */}
         </Styled.FlexWrapper>
 
-        <Carousel
-          ref={ref}
-          data={test}
-          renderItem={renderItem}
-          scrollEnabled={false}
-          onSnapToItem={onSetActiveIndex}
-          pagingEnabled
-          // ListEmptyComponent={renderEmpty}
-          {...sliderParams}
-        />
+        {activeQuiz?.quiz.length && (
+          <Carousel
+            ref={ref}
+            data={activeQuiz.quiz}
+            renderItem={renderItem}
+            scrollEnabled={false}
+            onSnapToItem={onSetActiveIndex}
+            pagingEnabled
+            // ListEmptyComponent={renderEmpty}
+            {...sliderParams}
+          />
+        )}
       </Background.Standard>
 
       {/* <BottomBar disableButton>

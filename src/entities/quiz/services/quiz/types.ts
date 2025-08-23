@@ -1,8 +1,8 @@
 // import { TQuery } from '@/shared/api/types'
 
-import { TQuery } from '@/shared/api/types'
+import { TQuery, TQueryListData } from '@/shared/api/types'
 
-import { TQuiz, TQuizConfig } from '../../models'
+import { EQuizStatus, TQuiz, TQuizConfig } from '../../models'
 
 export type TPostCreateQuizApi = TQuery<TGetUserMePayload, TGetUserMeResponse>
 type TGetUserMePayload = TQuizConfig
@@ -23,7 +23,7 @@ type TPostQuizAnswerPayload = {
   id: string
   answerId: string
   questionId: string
-  isCorrect: string
+  isCorrect: boolean
 }
 type TPostQuizAnswerResponse = TQuiz
 
@@ -45,5 +45,6 @@ type TGetQuizHistoryPayload = Partial<{
   limit: number
   sortBy: string
   order: number
+  status: EQuizStatus
 }>
-type TGetQuizHistoryResponse = TQuiz
+type TGetQuizHistoryResponse = TQueryListData<TQuiz>

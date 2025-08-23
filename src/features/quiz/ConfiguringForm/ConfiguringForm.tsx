@@ -41,8 +41,6 @@ export const ConfiguringForm = () => {
     },
   })
 
-  console.log('errors =>', errors)
-
   const onHandleMaxCount = (folders: TFolder[]) => {
     let count = 0
 

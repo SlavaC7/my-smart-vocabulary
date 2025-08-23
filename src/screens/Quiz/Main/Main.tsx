@@ -11,6 +11,7 @@ import { EScreens } from '@/app/navigation'
 
 import { Header } from '@/widgets/header'
 
+import { EQuizStatus } from '@/entities/quiz'
 import { QuizService } from '@/entities/quiz/services'
 import { useQuizStore } from '@/entities/quiz/store'
 
@@ -34,11 +35,13 @@ export const Main = () => {
 
   useEffect(() => {
     if (!isFocused) return
-    QuizService.getActiveQuiz().then(data => {
-      setHaveActiveQuiz(!!data.data)
-      if (data.data) {
+
+    QuizService.getQuizzes({ status: EQuizStatus.in_progress }).then(data => {
+      console.log('getQuizzes', data.data.docs)
+      setHaveActiveQuiz(!!data.data.docs[0])
+      if (data.data.docs[0]) {
         setQuizState({
-          activeQuiz: data.data,
+          activeQuiz: data.data.docs[0],
         })
       }
     })

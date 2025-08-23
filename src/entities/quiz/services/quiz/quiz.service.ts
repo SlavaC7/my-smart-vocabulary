@@ -7,12 +7,7 @@ export class QuizService {
   static async postCreateQuiz(
     data: T.TPostCreateQuizApi['payload'],
   ): TResponse<T.TPostCreateQuizApi['response']> {
-    return apiPrivate.post(`/quiz/create`, data)
-  }
-
-  //Get active Quiz
-  static async getActiveQuiz(): TResponse<T.TGetActiveQuizApi['response']> {
-    return apiPrivate.get(`/quiz/quiz/active`)
+    return apiPrivate.post(`/quiz`, data)
   }
 
   //Answer to Quiz
@@ -22,7 +17,7 @@ export class QuizService {
   }: T.TPostQuizAnswerApi['payload']): TResponse<
     T.TPostQuizAnswerApi['response']
   > {
-    return apiPrivate.post(`/quiz/quiz/${id}/answer`, { data })
+    return apiPrivate.post(`/quiz/${id}/answer`, data)
   }
 
   //Complete Quiz
@@ -31,7 +26,7 @@ export class QuizService {
   }: T.TPostQuizCompleteApi['payload']): TResponse<
     T.TPostQuizCompleteApi['response']
   > {
-    return apiPrivate.post(`/quiz/quiz/${id}/complete`)
+    return apiPrivate.post(`/quiz/${id}/complete`)
   }
 
   //Cancel Quiz
@@ -40,20 +35,20 @@ export class QuizService {
   }: T.TPostQuizCompleteApi['payload']): TResponse<
     T.TPostQuizCompleteApi['response']
   > {
-    return apiPrivate.post(`/quiz/quiz/${id}/cancel`)
+    return apiPrivate.post(`/quiz/${id}/cancel`)
   }
 
   //Clear Quiz History
-  static async getQuizHistory(
+  static async getQuizzes(
     params: T.TGetQuizHistoryApi['payload'],
   ): TResponse<T.TGetQuizHistoryApi['response']> {
-    return apiPrivate.get(`/quiz/history`, { params })
+    return apiPrivate.get(`/quiz`, { params })
   }
 
   //Clear Quiz History
   static async deleteClearQuizHistory(): TResponse<
     T.TGetActiveQuizApi['response']
   > {
-    return apiPrivate.delete(`/quiz/history/clear`)
+    return apiPrivate.delete(`/quiz`)
   }
 }

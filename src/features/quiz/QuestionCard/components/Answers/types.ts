@@ -1,5 +1,7 @@
-import { TTestItem } from '@/entities/quiz'
+import { TQuiz, TQuizItem } from '@/entities/quiz'
 
 export type TAnswersProps = {
   onPressItem?: () => void
-} & Partial<Pick<TTestItem, 'answers' | '_id'>>
+  quizId: string
+} & Partial<Pick<TQuizItem, 'answers' | 'id'>> &
+  Partial<Pick<TQuiz, 'userAnswers'>>

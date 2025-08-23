@@ -18,11 +18,13 @@ export const Success = () => {
   const { navigate } = useNavigation()
   const animationRef = useRef<LottieView>(null)
 
-  const { test, testAnswers } = useQuizStore()
+  const { activeQuiz } = useQuizStore()
 
   const totalCount = test.length
 
-  const currentAnswer = testAnswers.filter(item => item.isCorrect).length
+  const currentAnswer = activeQuiz?.userAnswers.filter(
+    item => item.isCorrect,
+  ).length
 
   const correctPercent = +(
     !!currentAnswer && totalCount ? (currentAnswer / totalCount) * 100 : 0

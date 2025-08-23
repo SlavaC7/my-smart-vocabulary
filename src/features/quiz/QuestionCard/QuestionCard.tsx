@@ -13,10 +13,11 @@ import { TQuestionCardProps } from './types'
 export const QuestionCard = ({
   answers,
   word,
-  _id,
+  id,
   onPressItem,
   flag,
   type,
+  quizId,
 }: TQuestionCardProps) => {
   // const dispatch = useDispatch()
   return (
@@ -34,7 +35,7 @@ export const QuestionCard = ({
 
           <WordEntity.TypeCard type={type} mTop={'8px'} active />
 
-          <C.Answers {...{ _id, answers, onPressItem }} />
+          <C.Answers {...{ id, answers, onPressItem, quizId }} />
         </S.ContentContainer>
       </S.SVGContainer>
 

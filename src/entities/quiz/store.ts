@@ -4,7 +4,7 @@ import { createJSONStorage, persist } from 'zustand/middleware'
 import { zustandStorage } from '@/shared'
 import { EStores } from '@/shared/lib/mmkv/types'
 
-import { TQuiz } from './models'
+import { TQuiz, TUserAnswer } from './models'
 
 export type TQuizStoreProps = {
   quizzes: TQuiz[]
@@ -14,17 +14,30 @@ export type TQuizStoreProps = {
 export type TQuizStoreMethods = {
   clear: () => void
   setQuizState: (data: Partial<TQuizStoreProps>) => void
+  answer: (data: TUserAnswer) => void
 }
 
 export type TQuizStore = TQuizStoreProps & TQuizStoreMethods
 
 export const useQuizStore = create<TQuizStore>()(
   persist(
-    set => ({
+    (set, _, state) => ({
       quizzes: [],
       activeQuiz: null,
-      clear: () => set({}),
+      answer: (data: TUserAnswer) => {
+        const quiz = state.getState().activeQuiz
+
+        if (quiz) {
+          set({
+            activeQuiz: {
+              ...quiz,
+              userAnswers: [...(quiz?.userAnswers || []), data],
+            },
+          })
+        }
+      },
       setQuizState: (store: Partial<TQuizStoreProps>) => set(store),
+      clear: () => set({}),
     }),
     {
       name: EStores.user,
