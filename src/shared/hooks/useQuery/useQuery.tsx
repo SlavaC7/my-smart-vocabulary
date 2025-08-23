@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react'
 
-import { Sentry } from '@/shared/lib'
+import { errorHandler } from '@/shared/lib'
 
 type TActionResult<T> = {
   data: T
@@ -25,11 +25,11 @@ export const useQuery = <T, P>(
       const result = await action(props as P)
 
       setData(result.data)
-    } catch (e) {
-      console.log('e: ', e)
-
-      console.error(`useQuery [${debug || 'none'}] error:`, e)
-      Sentry.captureException(e)
+    } catch (error) {
+      errorHandler({
+        name: `useQuery [${debug || 'none'}]`,
+        error,
+      })
     }
 
     setLoading(false)

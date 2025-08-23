@@ -21,6 +21,7 @@ export type TPostQuizAnswerApi = TQuery<
 >
 type TPostQuizAnswerPayload = {
   id: string
+  wordId: string
   answerId: string
   questionId: string
   isCorrect: boolean

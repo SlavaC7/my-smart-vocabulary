@@ -5,7 +5,7 @@ import { TAnswer } from '@/entities/quiz'
 import { QuizService } from '@/entities/quiz/services'
 import { useQuizStore } from '@/entities/quiz/store'
 
-import { Styled, TEColors, Typography } from '@/shared'
+import { errorHandler, Styled, TEColors, Typography } from '@/shared'
 
 import * as S from './styles'
 import { TAnswersProps } from './types'
@@ -14,9 +14,10 @@ export const Answers = ({
   quizId,
   id = '',
   answers = [],
+  wordId,
   onPressItem = () => {},
 }: TAnswersProps) => {
-  const { answer, setQuizState, activeQuiz } = useQuizStore()
+  const { setQuizState, activeQuiz } = useQuizStore()
   const haveAnswers = activeQuiz?.userAnswers.find(
     item => item.questionId === id,
   )
@@ -28,6 +29,7 @@ export const Answers = ({
         answerId: item.id,
         isCorrect: item.isCorrect,
         questionId: id,
+        wordId: wordId,
       })
       console.log('data =>', data)
 
@@ -39,7 +41,10 @@ export const Answers = ({
 
       console.log('onPressItem')
     } catch (error) {
-      console.log('Answer error =>', { ...error })
+      errorHandler({
+        error: error,
+        name: 'Answer',
+      })
     }
   }
 

@@ -3,7 +3,7 @@ import { useState, useCallback, useEffect } from 'react'
 import { useIsFocused } from '@react-navigation/native'
 
 import { TQueryListData } from '@/shared/api/types'
-import { Sentry } from '@/shared/lib'
+import { errorHandler } from '@/shared/lib'
 
 import { usePagination } from '../usePagination'
 
@@ -42,9 +42,11 @@ export const useQueryList = <T, P>(
         const docs = result.data?.docs || []
         setData(prev => (skip ? [...prev, ...docs] : docs))
         setTotalCount(result.data?.totalCount || 0)
-      } catch (e) {
-        console.error(`useQueryList [${debug || 'none'}] error: `, e)
-        Sentry.captureException(e)
+      } catch (error) {
+        errorHandler({
+          name: `useQueryList [${debug || 'none'}] `,
+          error,
+        })
       }
 
       setLoading(false)

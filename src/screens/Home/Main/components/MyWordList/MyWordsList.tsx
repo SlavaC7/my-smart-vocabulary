@@ -4,6 +4,8 @@ import { FlatList, ListRenderItem } from 'react-native'
 
 import { useTranslation } from 'react-i18next'
 
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+
 import { WordFeature } from '@/features'
 
 import { TFolder, TWord, WordEntity, WordsService } from '@/entities/word'
@@ -23,6 +25,8 @@ import { TMyWordsListProps } from './types'
 export const MyWordsList = ({ search }: TMyWordsListProps) => {
   const { t } = useTranslation()
   const foldersBSRef = useBottomSheetRef()
+
+  const { bottom } = useSafeAreaInsets()
 
   const [selectedFolder, setSelectedFolder] = useState<TFolder | null>(null)
 
@@ -66,6 +70,7 @@ export const MyWordsList = ({ search }: TMyWordsListProps) => {
         style={{ paddingHorizontal: appPadding }}
         ListHeaderComponent={renderHeader}
         data={wordsData}
+        contentContainerStyle={{ paddingBottom: bottom + 100 }}
         keyExtractor={item => item._id}
         renderItem={renderItem}
         ItemSeparatorComponent={() => <Styled.Divider height={8} />}

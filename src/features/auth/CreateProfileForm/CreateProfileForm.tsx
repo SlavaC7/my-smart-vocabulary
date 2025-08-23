@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { useUserStore } from '@/entities/user'
 import { UserService } from '@/entities/user/services'
 
-import { Button, Input, Typography } from '@/shared'
+import { Button, errorHandler, Input, Typography } from '@/shared'
 
 import { TCreateProfileProps } from './types'
 import { createProfileFormValidation } from './validation'
@@ -34,7 +34,12 @@ export const CreateProfileForm = () => {
 
       setUser(user)
     } catch (error) {
-      console.log('Create user error:', error)
+      errorHandler({
+        error: error,
+        name: 'CreateUser',
+        withSentry: true,
+        withToast: true,
+      })
     }
   })
 

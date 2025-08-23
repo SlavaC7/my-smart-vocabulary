@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 
+import { errorHandler } from '@/shared'
+
 import { TFolder, TWord } from '../models'
 import { FoldersService, WordsService } from '../services'
 
@@ -19,7 +21,12 @@ export const useGetWord = (id: string, initialState: TWord) => {
 
       setFolder(newFolder)
     } catch (error) {
-      console.log('useGetWord getFolder error =>', error)
+      errorHandler({
+        error: error,
+        name: 'getFolder',
+        withSentry: true,
+        withToast: true,
+      })
     }
   }
 
@@ -42,7 +49,12 @@ export const useGetWord = (id: string, initialState: TWord) => {
       setWord(newWord)
       getFolder(newWord.folderId)
     } catch (error) {
-      console.log('useGetWord =>', error)
+      errorHandler({
+        error: error,
+        name: 'useGetWord',
+        withSentry: true,
+        withToast: true,
+      })
     }
   }
   useEffect(() => {

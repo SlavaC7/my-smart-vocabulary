@@ -7,6 +7,7 @@ export type TCreateOwnTranslationForm = {
   translations: Array<string>
   lang: TAvailableLang
   flag: string
+  folderId: string | undefined
 }
 
 export type TSearchOwnTranslationScreenProps = {

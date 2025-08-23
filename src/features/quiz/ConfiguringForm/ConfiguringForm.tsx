@@ -5,6 +5,8 @@ import { Controller, useForm } from 'react-hook-form'
 
 import { useTranslation } from 'react-i18next'
 
+import { EScreens } from '@/app/navigation'
+
 import { Footer } from '@/widgets/footer'
 
 import { WordFeature } from '@/features'
@@ -13,7 +15,13 @@ import { useQuizStore } from '@/entities/quiz'
 import { QuizService } from '@/entities/quiz/services'
 import { TFolder } from '@/entities/word'
 
-import { Background, Button, Styled, useNavigation } from '@/shared'
+import {
+  Background,
+  Button,
+  errorHandler,
+  Styled,
+  useNavigation,
+} from '@/shared'
 
 import * as C from './components'
 import { TConfiguringForm } from './types'
@@ -21,25 +29,21 @@ import { createConfigSchema } from './validation'
 
 export const ConfiguringForm = () => {
   const { t } = useTranslation()
-  const {} = useQuizStore()
+  const { setQuizState } = useQuizStore()
   const { navigate } = useNavigation()
 
   const [maxCount, setMaxCount] = useState(50)
 
-  const {
-    control,
-    setValue,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<TConfiguringForm>({
-    resolver: zodResolver(createConfigSchema(maxCount)),
-    defaultValues: {
-      count: 50,
-      folders: [],
-      type: [],
-      lang: [],
-    },
-  })
+  const { control, setValue, handleSubmit, formState } =
+    useForm<TConfiguringForm>({
+      resolver: zodResolver(createConfigSchema(maxCount)),
+      defaultValues: {
+        count: 50,
+        folders: [],
+        type: [],
+        lang: [],
+      },
+    })
 
   const onHandleMaxCount = (folders: TFolder[]) => {
     let count = 0
@@ -68,9 +72,16 @@ export const ConfiguringForm = () => {
         folders: data.folders.map(item => item._id),
       })
 
+      setQuizState({
+        activeQuiz: quiz,
+      })
+      navigate(EScreens.TestsQuestion)
       console.log('quiz =>', quiz)
     } catch (error) {
-      console.log('ConfiguringForm error =>', error)
+      errorHandler({
+        error: error,
+        name: 'ConfiguringForm',
+      })
     }
   }
 

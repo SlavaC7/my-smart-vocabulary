@@ -23,6 +23,7 @@ import {
 import {
   Background,
   Button,
+  errorHandler,
   Icon,
   Input,
   Styled,
@@ -61,6 +62,7 @@ export const OwnTranslation = () => {
       translations: params?.translations?.length ? params.translations : [''],
       lang: params.lang || 'US',
       flag: params.flag || '🇺🇸',
+      folderId: '',
     },
   })
 
@@ -101,7 +103,10 @@ export const OwnTranslation = () => {
       navigation.goBack()
       !isHome && navigation.goBack()
     } catch (error) {
-      console.error('Error create word:', error)
+      errorHandler({
+        error: error,
+        name: 'ErrorCreate',
+      })
     } finally {
       setLoading(false)
     }
@@ -148,7 +153,24 @@ export const OwnTranslation = () => {
             </Styled.FlexWrapper>
           )}
         />
+        <Controller
+          control={control}
+          name="folderId"
+          render={({ field: { value, onChange } }) => (
+            <WordFeature.SelectFolder
+              mBottom={'16px'}
+              folderId={value}
+              onChange={item => {
+                if (!item) {
+                  onChange('')
+                  return
+                }
 
+                onChange(item._id)
+              }}
+            />
+          )}
+        />
         <Controller
           control={control}
           name="type"

@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 
 // import { Confetti } from 'react-native-fast-confetti'
 
-import { EScreens } from '@/app/navigation'
+import { EScreens, EStacks } from '@/app/navigation'
 
 import { Header } from '@/widgets/header'
 
@@ -39,13 +39,15 @@ export const Main = () => {
     QuizService.getQuizzes({ status: EQuizStatus.in_progress }).then(data => {
       console.log('getQuizzes', data.data.docs)
       setHaveActiveQuiz(!!data.data.docs[0])
-      if (data.data.docs[0]) {
-        setQuizState({
-          activeQuiz: data.data.docs[0],
-        })
-      }
+      setQuizState({
+        activeQuiz: data.data.docs[0] || null,
+      })
     })
   }, [isFocused])
+
+  const onGoHome = () => {
+    navigate(EStacks.Home)
+  }
 
   const onGoConfiguring = () => {
     if (!haveActiveQuiz) {
@@ -72,7 +74,7 @@ export const Main = () => {
     <Background.Container>
       <StatusBar barStyle={'dark-content'} />
 
-      <Header.Standard goBack />
+      <Header.Standard goBack onGoBack={onGoHome} />
       <Background.Standard>
         <Styled.FlexWrapper flexDirection={'column'}>
           <Icon name={'Test'} size={100} />

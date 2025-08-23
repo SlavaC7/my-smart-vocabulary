@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import { useAuth } from '@/entities/auth'
 
-import { Icon, Styled, Typography } from '@/shared'
+import { errorHandler, Icon, Styled, Typography } from '@/shared'
 
 import { FirebaseService } from '@/shared/services/firebase'
 
@@ -21,7 +21,12 @@ export const SocialAuth = () => {
 
       auth()
     } catch (error) {
-      console.log('onGoogle error', error)
+      errorHandler({
+        error: error,
+        name: 'onGoogle',
+        withSentry: true,
+        withToast: true,
+      })
     }
   }
   return (

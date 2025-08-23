@@ -15,4 +15,5 @@ export const createOwnTranslationSchema = validationSchema(schema => ({
   type: z.enum([EWordType.word, EWordType.phrase]),
   lang: schema.requiredString,
   flag: schema.requiredString,
+  folderId: schema.optionalText,
 }))

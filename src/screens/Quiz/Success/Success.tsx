@@ -20,7 +20,7 @@ export const Success = () => {
 
   const { activeQuiz } = useQuizStore()
 
-  const totalCount = test.length
+  const totalCount = activeQuiz?.quiz.length
 
   const currentAnswer = activeQuiz?.userAnswers.filter(
     item => item.isCorrect,

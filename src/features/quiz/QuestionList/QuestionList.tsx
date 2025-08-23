@@ -11,7 +11,7 @@ import { TQuizItem } from '@/entities/quiz'
 import { QuizService } from '@/entities/quiz/services'
 import { useQuizStore } from '@/entities/quiz/store'
 
-import { Background, Icon, Styled, useNavigation } from '@/shared'
+import { Background, errorHandler, Icon, Styled, useNavigation } from '@/shared'
 
 import { QuestionCard } from '../QuestionCard'
 
@@ -21,7 +21,7 @@ import { TQuestionListProps } from './types'
 const { width: viewportWidth, height } = Dimensions.get('window')
 
 export const QuestionList = ({}: TQuestionListProps) => {
-  const { activeQuiz } = useQuizStore()
+  const { activeQuiz, setQuizState } = useQuizStore()
   const ref = useRef<Carousel<TQuizItem>>(null)
   const [disable, setDisable] = useState<boolean>(false)
   const activeIndex = useRef(0)
@@ -63,11 +63,18 @@ export const QuestionList = ({}: TQuestionListProps) => {
   const onCompleteTest = async () => {
     if (!activeQuiz?._id) return
     try {
-      await QuizService.postQuizComplete({ id: activeQuiz._id })
+      const { data } = await QuizService.postQuizComplete({
+        id: activeQuiz._id,
+      })
+
+      setQuizState({ activeQuiz: data })
 
       navigate(EScreens.TestsSuccess)
     } catch (error) {
-      console.log('error', error)
+      errorHandler({
+        error: error,
+        name: 'onCompleteTest',
+      })
     }
   }
 
@@ -84,8 +91,6 @@ export const QuestionList = ({}: TQuestionListProps) => {
       ref.current?.snapToNext()
     }, 500)
   }
-
-  onPress()
 
   const renderItem: ListRenderItem<TQuizItem> = useCallback(
     ({ item }) => {

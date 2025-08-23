@@ -81,6 +81,7 @@ export default {
     my_words: 'My words',
     new_folder: 'New folder',
     enter_folder_name: 'Enter folder name',
+    move_to_folder: 'Move to Folder',
   },
   export_import: {
     import: 'Import',

@@ -6,38 +6,44 @@ import { Sentry } from '../sentry'
 type Props = {
   error: unknown
   withToast?: boolean
-  toastText?: string
   withSentry?: boolean
   name?: string
 }
 
 export const errorHandler = ({
   error,
-  toastText,
-  withSentry,
   name,
-  withToast = false,
+  withSentry = true,
+  withToast = true,
 }: Props) => {
+  const isAxios = axios.isAxiosError(error)
   let axiosError: AxiosError | null = null
 
-  if (axios.isAxiosError(error)) {
+  if (isAxios) {
     axiosError = error
   }
 
   if (withToast) {
     Toast.show({
       type: 'error',
-      text2:
-        toastText ||
-        (axiosError?.response?.data as { message: string })?.message ||
-        '',
+      text2: isAxios
+        ? (axiosError?.response?.data as { message: string })?.message || ''
+        : error + '' || '',
     })
   }
 
   if (withSentry)
-    Sentry.captureException(
-      `[REQUEST ERROR]: [${name}] => , ${axiosError?.response?.data}`,
-    )
+    Sentry.withScope(scope => {
+      scope.setTag('ERROR:', JSON.stringify(error))
 
-  console.log(`[REQUEST ERROR]: [${name}] => `, axiosError?.response?.data)
+      Sentry.captureException(
+        `[REQUEST ERROR]: [${name}] => , ${axiosError?.response?.data}`,
+      )
+    })
+
+  console.log(
+    `[REQUEST ERROR]: [${name}] => `,
+    { ...(error as {}) },
+    axiosError?.response?.data,
+  )
 }

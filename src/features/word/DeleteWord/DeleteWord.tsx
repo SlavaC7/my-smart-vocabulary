@@ -2,7 +2,7 @@ import React from 'react'
 
 import { WordsService } from '@/entities/word'
 
-import { Icon } from '@/shared'
+import { errorHandler, Icon } from '@/shared'
 
 import { Container } from './styles'
 import { TDeleteWordProps } from './types'
@@ -20,7 +20,10 @@ export const DeleteWord = ({ id: wordId, onDelete }: TDeleteWordProps) => {
         return
       }
     } catch (error) {
-      console.error('Error deleting word:', error)
+      errorHandler({
+        error: error,
+        name: 'deleteWord',
+      })
     }
   }
   return (

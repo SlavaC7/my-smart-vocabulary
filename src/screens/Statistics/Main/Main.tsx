@@ -43,10 +43,6 @@ export const Main = () => {
     )
   }
 
-  const onPressImport = () => {
-    navigate(EScreens.StatisticsImportSetting)
-  }
-
   return (
     <Background.Container color={COLORS.background}>
       <Header.Standard

@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 
-import { zustandStorage } from '@/shared'
+import { errorHandler, zustandStorage } from '@/shared'
 import { EStores } from '@/shared/lib/mmkv/types'
 
 import { TFolder, TWord } from './models'
@@ -43,7 +43,12 @@ export const useWordStore = create<TWordStore>()(
             folders: data.docs,
           })
         } catch (error) {
-          console.log('updateFolders error =>', error)
+          errorHandler({
+            error: error,
+            name: 'updateFolders',
+            withSentry: true,
+            withToast: true,
+          })
         }
       },
       setWord: (word: TWord) => {
@@ -69,7 +74,12 @@ export const useWordStore = create<TWordStore>()(
 
           state.getState().updateFolders()
         } catch (error) {
-          console.log('deleteFolder error =>', error)
+          errorHandler({
+            error: error,
+            name: 'deleteFolder',
+            withSentry: true,
+            withToast: true,
+          })
         }
       },
     }),

@@ -7,7 +7,7 @@ import { UserService } from '@/entities/user/services'
 
 import { useWordStore } from '@/entities/word'
 
-import { useNavigation } from '@/shared'
+import { errorHandler, useNavigation } from '@/shared'
 
 export const useAuth = () => {
   const { navigate } = useNavigation()
@@ -29,7 +29,12 @@ export const useAuth = () => {
           navigate(EScreens.AuthCreateProfile)
         }
       }
-      console.log('useAuth error =>', error)
+      errorHandler({
+        error: error,
+        name: 'useAuth',
+        withSentry: true,
+        withToast: true,
+      })
     }
   }
   return {

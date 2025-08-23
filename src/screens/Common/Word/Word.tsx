@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 
 import { useRoute } from '@react-navigation/native'
 
@@ -12,9 +12,22 @@ import { Header } from '@/widgets/header'
 
 import { WordFeature } from '@/features'
 
-import { useGetWord, useWordControl, WordEntity } from '@/entities/word'
+import {
+  TFolder,
+  useGetWord,
+  useWordControl,
+  WordEntity,
+  WordsService,
+} from '@/entities/word'
 
-import { Background, Icon, Styled, Typography, useNavigation } from '@/shared'
+import {
+  Background,
+  errorHandler,
+  Icon,
+  Styled,
+  Typography,
+  useNavigation,
+} from '@/shared'
 
 import { Common } from '@/shared/ui/common'
 
@@ -44,6 +57,24 @@ export const Word = () => {
       ...word,
     })
   }
+
+  const onMoveToFolder = useCallback(
+    async (newFolder: TFolder | null) => {
+      try {
+        await WordsService.patchWord({
+          id: word._id,
+          folderId: newFolder?._id || '',
+        })
+        getAction()
+      } catch (error) {
+        errorHandler({
+          error: error,
+          name: 'onMoveToFolder',
+        })
+      }
+    },
+    [word._id],
+  )
 
   return (
     <Background.Container color={COLORS.background}>
@@ -95,10 +126,10 @@ export const Word = () => {
             </Common.ColoredText>
           </S.ExampleContainer>
         ))}
-        <WordFeature.WordScreenFolder
+        <WordFeature.SelectFolder
           folder={folder}
-          wordId={word._id}
-          refresh={getAction}
+          folderId={word.folderId}
+          onChange={onMoveToFolder}
         />
 
         {/* {!!synonims?.length && (

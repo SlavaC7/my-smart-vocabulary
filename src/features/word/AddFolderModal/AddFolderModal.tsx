@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import { FoldersService, useWordStore } from '@/entities/word'
 
-import { Button, Input, Styled, Typography } from '@/shared'
+import { Button, errorHandler, Input, Styled, Typography } from '@/shared'
 import { BottomSheet } from '@/shared/ui/bottomSheet'
 import { TBottomSheetModalRef } from '@/shared/ui/bottomSheet/Modal'
 
@@ -36,7 +36,10 @@ export const AddFolderModal = forwardRef<
       onClearText()
       onClose()
     } catch (error) {
-      console.log('onAddFolder error =>', error)
+      errorHandler({
+        error: error,
+        name: 'onAddFolder',
+      })
     }
   }
 
