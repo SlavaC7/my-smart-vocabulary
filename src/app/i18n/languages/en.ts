@@ -69,6 +69,7 @@ export default {
     move: 'Move',
     delete: 'Delete',
     start: 'Start',
+    answer: 'Answer',
   },
   statistics: {
     title: 'Statistics',
@@ -94,6 +95,12 @@ export default {
   word_type: {
     word: 'Word',
     phrase: 'Phrase',
+  },
+
+  quiz_mode: {
+    multiple_choice: 'Multiple choice',
+    write_word: 'Write word',
+    match: 'Match',
   },
 
   test_success: {

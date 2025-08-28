@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { View } from 'react-native'
 
+import { useTranslation } from 'react-i18next'
+
+import { EQuizItemMode, useQuizStore } from '@/entities/quiz'
+import { QuizService } from '@/entities/quiz/services'
 import { WordEntity } from '@/entities/word'
 
-import { EColors, Typography } from '@/shared'
+import { Button, EColors, errorHandler, Typography } from '@/shared'
 
 import * as C from './components'
 import * as S from './styled'
@@ -14,13 +18,58 @@ export const QuestionCard = ({
   answers,
   word,
   id,
-  onPressItem,
+  onPressItem = () => {},
   flag,
   type,
   quizId,
   wordId,
+  mode,
 }: TQuestionCardProps) => {
-  // const dispatch = useDispatch()
+  const { t } = useTranslation()
+  const { setQuizState, activeQuiz } = useQuizStore()
+
+  const haveAnswer = activeQuiz?.userAnswers.find(
+    item => item.questionId === id,
+  )
+
+  const isMatch = mode === EQuizItemMode.match
+  const isWrite = mode === EQuizItemMode.write_word
+
+  const [answer, setAnswer] = useState('')
+
+  const onAnswer = async () => {
+    try {
+      const currentAnswer = answers.find(item => item.id === answer)
+
+      const isWriteCorrect =
+        word.toLocaleLowerCase().trim() === answer.toLocaleLowerCase().trim()
+
+      const { data } = await QuizService.postQuizAnswer({
+        id: quizId,
+        answerId: isMatch ? currentAnswer?.id || '' : '',
+        isCorrect: isMatch ? currentAnswer?.isCorrect || false : isWriteCorrect,
+        answerText: isWrite ? answer : '',
+        questionId: id,
+        wordId: wordId,
+        mode,
+      })
+
+      console.log('data =>', data)
+
+      setQuizState({ activeQuiz: data })
+
+      console.log('setQuizState')
+
+      onPressItem()
+
+      console.log('onPressItem')
+    } catch (error) {
+      errorHandler({
+        error: error,
+        name: 'Answer',
+      })
+    }
+  }
   return (
     <View style={S.styles.container}>
       <S.SVGContainer>
@@ -36,7 +85,23 @@ export const QuestionCard = ({
 
           <WordEntity.TypeCard type={type} mTop={'8px'} active />
 
-          <C.Answers {...{ id, answers, onPressItem, quizId, wordId }} />
+          {isMatch && (
+            <C.Answers
+              {...{
+                answer,
+                answers,
+                onPressItem: setAnswer,
+                haveAnswer,
+              }}
+            />
+          )}
+
+          <Button.Standard
+            mTop={'16px'}
+            disabled={!answer || !!haveAnswer}
+            text={t('button.answer')}
+            onPress={onAnswer}
+          />
         </S.ContentContainer>
       </S.SVGContainer>
 

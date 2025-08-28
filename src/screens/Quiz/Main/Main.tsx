@@ -70,6 +70,18 @@ export const Main = () => {
     //   }),
     // )
   }
+
+  const onCompleteActiveTest = () => {
+    QuizService.getQuizzes({ status: EQuizStatus.in_progress }).then(data => {
+      if (data.data.docs[0]) {
+        QuizService.postQuizCancel({ id: data.data.docs[0]._id })
+        setQuizState({
+          activeQuiz: null,
+        })
+        setHaveActiveQuiz(false)
+      }
+    })
+  }
   return (
     <Background.Container>
       <StatusBar barStyle={'dark-content'} />
@@ -87,6 +99,13 @@ export const Main = () => {
             mTop={'16px'}
             onPress={onGoConfiguring}
             text={t('button.start')}
+          />
+
+          <Button.Standard
+            width={'auto'}
+            mTop={'16px'}
+            onPress={onCompleteActiveTest}
+            text={'Complete active test (TEST)'}
           />
         </Styled.FlexWrapper>
 

@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { FlatList, ListRenderItem } from 'react-native'
 
+import { useIsFocused } from '@react-navigation/native'
 import { useTranslation } from 'react-i18next'
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -28,17 +29,24 @@ export const MyWordsList = ({ search }: TMyWordsListProps) => {
 
   const { bottom } = useSafeAreaInsets()
 
+  const isFocused = useIsFocused()
+
   const [selectedFolder, setSelectedFolder] = useState<TFolder | null>(null)
 
   const {
     docs: wordsData,
     flatListProps,
     refresh,
+    mutate,
   } = useInfiniteApiQuery(WordsService.getWords, {
     limit: 10,
     payload: { search, folderId: selectedFolder?._id },
     persist: true,
   })
+
+  useEffect(() => {
+    isFocused && mutate()
+  }, [isFocused])
 
   const renderItem: ListRenderItem<TWord> = ({ item }) => (
     <WordEntity.MyCard

@@ -2,7 +2,7 @@
 
 import { TQuery, TQueryListData } from '@/shared/api/types'
 
-import { EQuizStatus, TQuiz, TQuizConfig } from '../../models'
+import { EQuizItemMode, EQuizStatus, TQuiz, TQuizConfig } from '../../models'
 
 export type TPostCreateQuizApi = TQuery<TGetUserMePayload, TGetUserMeResponse>
 type TGetUserMePayload = TQuizConfig
@@ -23,8 +23,10 @@ type TPostQuizAnswerPayload = {
   id: string
   wordId: string
   answerId: string
+  answerText: string
   questionId: string
   isCorrect: boolean
+  mode: EQuizItemMode
 }
 type TPostQuizAnswerResponse = TQuiz
 

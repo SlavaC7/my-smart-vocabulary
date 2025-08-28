@@ -20,8 +20,6 @@ export const SelectFolders = ({
 
   const folderIds = value.map(item => item._id)
 
-  console.log('value =>', value)
-
   const array = useMemo(
     () => [{ _id: '1', name: 'All Worlds' } as TFolder, ...value],
     [value],

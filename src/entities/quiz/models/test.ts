@@ -20,7 +20,8 @@ export type TAnswer = {
 
 export type TUserAnswer = {
   questionId: string
-  answerId: string
+  answerId?: string
+  answerText?: string
   isCorrect: boolean
   answeredAt: string
 }

@@ -11,9 +11,11 @@ import { Footer } from '@/widgets/footer'
 
 import { WordFeature } from '@/features'
 
-import { useQuizStore } from '@/entities/quiz'
+import { EQuizItemMode, useQuizStore } from '@/entities/quiz'
 import { QuizService } from '@/entities/quiz/services'
-import { TFolder } from '@/entities/word'
+import { EWordType, TFolder } from '@/entities/word'
+
+import { langsArray } from '@/entities/word/utils'
 
 import {
   Background,
@@ -34,16 +36,16 @@ export const ConfiguringForm = () => {
 
   const [maxCount, setMaxCount] = useState(50)
 
-  const { control, setValue, handleSubmit, formState } =
-    useForm<TConfiguringForm>({
-      resolver: zodResolver(createConfigSchema(maxCount)),
-      defaultValues: {
-        count: 50,
-        folders: [],
-        type: [],
-        lang: [],
-      },
-    })
+  const { control, setValue, handleSubmit } = useForm<TConfiguringForm>({
+    resolver: zodResolver(createConfigSchema(maxCount)),
+    defaultValues: {
+      count: 50,
+      folders: [],
+      type: [EWordType.phrase, EWordType.word],
+      lang: langsArray.map(item => item.code),
+      mode: [EQuizItemMode.match, EQuizItemMode.write_word],
+    },
+  })
 
   const onHandleMaxCount = (folders: TFolder[]) => {
     let count = 0
@@ -59,8 +61,6 @@ export const ConfiguringForm = () => {
     }
     setValue('count', count)
 
-    console.log('count', count)
-
     setMaxCount(count)
   }
 
@@ -71,7 +71,6 @@ export const ConfiguringForm = () => {
         ...data,
         folders: data.folders.map(item => item._id),
       })
-
       setQuizState({
         activeQuiz: quiz,
       })
@@ -116,6 +115,14 @@ export const ConfiguringForm = () => {
           name="type"
           render={({ field: { value, onChange } }) => (
             <WordFeature.TypePicker {...{ value, onChange }} />
+          )}
+        />
+
+        <Controller
+          control={control}
+          name="mode"
+          render={({ field: { value, onChange } }) => (
+            <C.ModePicker {...{ value, onChange }} />
           )}
         />
 

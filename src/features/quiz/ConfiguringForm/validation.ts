@@ -1,5 +1,6 @@
 import { z } from 'zod'
 
+import { EQuizItemMode } from '@/entities/quiz'
 import { EWordType } from '@/entities/word'
 import { availableLang } from '@/entities/word/utils'
 
@@ -22,4 +23,7 @@ export const createConfigSchema = (max: number) =>
       .optional(),
     type: z.array(z.enum([EWordType.word, EWordType.phrase])).optional(),
     lang: z.array(z.enum(array)).optional(),
+    mode: z
+      .array(z.enum([EQuizItemMode.match, EQuizItemMode.write_word]))
+      .optional(),
   })

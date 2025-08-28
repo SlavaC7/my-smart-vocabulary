@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 
-import { useRoute } from '@react-navigation/native'
+import { useIsFocused, useRoute } from '@react-navigation/native'
 
 import _ from 'lodash'
 import { useTheme } from 'styled-components'
@@ -37,12 +37,17 @@ export const Word = () => {
   const { COLORS } = useTheme()
   const { existInAnyFolder } = useWordControl()
   const { navigate } = useNavigation()
+  const isFocused = useIsFocused()
 
   const {
     params: { word: paramWord },
   } = useRoute<TScreenQueryProps<EScreens.WordMain>>()
 
   const { word, getAction, folder } = useGetWord(paramWord._id, paramWord)
+
+  useEffect(() => {
+    isFocused && getAction()
+  }, [isFocused])
 
   // const { data: synonimsData } = useQuery(TranslateService.postSynonyms, {
   //   lang: 'english',

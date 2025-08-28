@@ -1,3 +1,4 @@
+import { EQuizItemMode } from '@/entities/quiz'
 import { EWordType, TFolder } from '@/entities/word'
 import { TAvailableLang } from '@/entities/word/utils'
 
@@ -8,4 +9,5 @@ export type TConfiguringForm = {
   count: number
   type: EWordType[]
   lang: TAvailableLang[]
+  mode: EQuizItemMode[]
 }

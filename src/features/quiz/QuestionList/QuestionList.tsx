@@ -26,7 +26,7 @@ export const QuestionList = ({}: TQuestionListProps) => {
   const [disable, setDisable] = useState<boolean>(false)
   const activeIndex = useRef(0)
 
-  const { goBack, navigate } = useNavigation()
+  const { navigate } = useNavigation()
 
   useEffect(() => {
     if (disable) {
@@ -107,13 +107,17 @@ export const QuestionList = ({}: TQuestionListProps) => {
   const onSetActiveIndex = (index: number) => {
     activeIndex.current = index
   }
+
+  const _goBack = () => {
+    navigate(EScreens.TestsMain)
+  }
   return (
     <>
       <PurpleContainer />
 
       <Background.Standard color={'transparent'}>
         <Styled.FlexWrapper justify={'space-between'} style={styles.header}>
-          <Styled.Touchable width={'auto'} onPress={goBack}>
+          <Styled.Touchable width={'auto'} onPress={_goBack}>
             <Icon name={'AngleArrowLeft'} size={32} />
           </Styled.Touchable>
 
