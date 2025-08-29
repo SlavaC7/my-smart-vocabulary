@@ -11,6 +11,7 @@ import { WordEntity } from '@/entities/word'
 import { Button, EColors, errorHandler, Typography } from '@/shared'
 
 import * as C from './components'
+import { onTransString } from './helper'
 import * as S from './styled'
 import { TQuestionCardProps } from './types'
 
@@ -24,6 +25,7 @@ export const QuestionCard = ({
   quizId,
   wordId,
   mode,
+  correctWriteWord = [],
 }: TQuestionCardProps) => {
   const { t } = useTranslation()
   const { setQuizState, activeQuiz } = useQuizStore()
@@ -41,8 +43,9 @@ export const QuestionCard = ({
     try {
       const currentAnswer = answers.find(item => item.id === answer)
 
-      const isWriteCorrect =
-        word.toLocaleLowerCase().trim() === answer.toLocaleLowerCase().trim()
+      const isWriteCorrect = correctWriteWord
+        .map(item => onTransString(item))
+        .includes(onTransString(answer))
 
       const { data } = await QuizService.postQuizAnswer({
         id: quizId,
@@ -96,6 +99,15 @@ export const QuestionCard = ({
             />
           )}
 
+          {isWrite && (
+            <C.AnswerText
+              {...{
+                haveAnswer,
+                answer,
+                setAnswer,
+              }}
+            />
+          )}
           <Button.Standard
             mTop={'16px'}
             disabled={!answer || !!haveAnswer}

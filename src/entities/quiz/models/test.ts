@@ -22,6 +22,7 @@ export type TUserAnswer = {
   questionId: string
   answerId?: string
   answerText?: string
+  correctText?: string
   isCorrect: boolean
   answeredAt: string
 }
@@ -30,6 +31,7 @@ export type TQuizItem = {
   id: string
   wordId: string
   word: string
+  correctWriteWord?: string[]
   answers: TAnswer[]
   flag: string
   type: EWordType
