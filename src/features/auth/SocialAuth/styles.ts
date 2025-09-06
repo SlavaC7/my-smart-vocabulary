@@ -13,5 +13,5 @@ export const ButtonContainer = styled(Styled.Touchable)`
 export const Line = styled(View)`
   height: 1px;
   flex: 1;
-  border: 1px solid ${EColors.placeholder_light}50;
+  border: 1px solid ${EColors.placeholder}50;
 `

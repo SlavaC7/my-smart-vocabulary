@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import { Header } from '@/widgets/header'
 
-import { TestFeatures } from '@/features'
+import { QuizFeatures } from '@/features'
 
 import { Background } from '@/shared'
 
@@ -15,7 +15,7 @@ export const Config = () => {
     <Background.Container>
       <Header.Standard title={t('tests.configuring')} goBack />
 
-      <TestFeatures.ConfiguringForm />
+      <QuizFeatures.ConfiguringForm />
     </Background.Container>
   )
 }

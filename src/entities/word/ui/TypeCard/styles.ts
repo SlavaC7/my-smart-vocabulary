@@ -6,14 +6,14 @@ export const ItemContainer = styled(Styled.Touchable).attrs({
   width: 'auto',
 })<{ active: boolean; size: 'small' | 'standard' }>`
   background-color: ${({ theme: { COLORS }, active }) =>
-    active ? COLORS.black : COLORS.transparent};
-  border: 1px solid ${({ theme: { COLORS } }) => COLORS.black};
+    active ? COLORS.neutral_300 : COLORS.transparent};
+  border: 1px solid ${({ theme: { COLORS } }) => COLORS.neutral_300};
 
   ${({ size }) =>
     size === 'small' &&
     css`
-      border-radius: 40px;
-      padding: 5px 7px;
+      border-radius: 10px;
+      padding: 3px 7px;
     `}
 
   ${({ size }) =>

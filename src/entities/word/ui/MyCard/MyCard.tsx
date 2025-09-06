@@ -7,7 +7,7 @@ import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable'
 
 import { EScreens } from '@/app/navigation'
 
-import { Icon, Styled, Typography, useNavigation } from '@/shared'
+import { Styled, Typography, useNavigation } from '@/shared'
 
 import { WordEntity } from '../..'
 

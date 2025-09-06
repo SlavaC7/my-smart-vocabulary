@@ -9,7 +9,7 @@ export const Header = styled(View)`
   padding-top: ${({ theme: { insets } }) => insets.top + 16}px;
   width: 100%;
   padding-bottom: 50px;
-  background-color: ${({ theme: { COLORS } }) => COLORS.black};
+  background-color: ${({ theme: { COLORS } }) => COLORS.primary_500};
   z-index: 10;
   margin-bottom: 20px;
 `

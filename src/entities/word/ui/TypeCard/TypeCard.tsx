@@ -25,7 +25,9 @@ export const TypeCard = ({
       size={size}
       active={active}
       onPress={() => onPress(type)}>
-      <Text color={active ? 'white' : 'black'}>{t(`word_type.${type}`)}</Text>
+      <Text color={active ? 'neutral_700' : 'black'}>
+        {t(`word_type.${type}`)}
+      </Text>
     </S.ItemContainer>
   )
 }

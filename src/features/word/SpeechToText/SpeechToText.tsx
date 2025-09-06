@@ -70,7 +70,7 @@ export const SpeechToText = ({
           disabled
             ? COLORS.primary_300
             : listen
-            ? COLORS.primary_500
+            ? COLORSprimary_300
             : COLORS.neutral_300
         }
       />

@@ -105,6 +105,7 @@ export const QuestionCard = ({
                 haveAnswer,
                 answer,
                 setAnswer,
+                correctWriteWord,
               }}
             />
           )}

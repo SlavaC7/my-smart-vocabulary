@@ -9,5 +9,5 @@ export const Container = styled(Styled.Touchable).attrs({
 })`
   border-radius: 12px;
 
-  background-color: ${({ theme: { COLORS } }) => COLORS.red_15};
+  background-color: ${({ theme: { COLORS } }) => COLORS.red_100};
 `

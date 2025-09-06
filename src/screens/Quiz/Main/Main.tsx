@@ -1,115 +1,62 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import { StatusBar } from 'react-native'
 
-import { useIsFocused } from '@react-navigation/native'
 import { useTranslation } from 'react-i18next'
 
-// import { Confetti } from 'react-native-fast-confetti'
+import LinearGradient from 'react-native-linear-gradient'
 
-import { EScreens, EStacks } from '@/app/navigation'
+import { QuizEntity, useGetActiveQuiz } from '@/entities/quiz'
 
-import { Header } from '@/widgets/header'
+import { Background, EColors, Icon, Styled, Typography } from '@/shared'
 
-import { EQuizStatus } from '@/entities/quiz'
-import { QuizService } from '@/entities/quiz/services'
-import { useQuizStore } from '@/entities/quiz/store'
+import { PaddingContainer, styles } from './styles'
 
-import {
-  Background,
-  Button,
-  EColors,
-  Icon,
-  Styled,
-  Typography,
-  useNavigation,
-} from '@/shared'
+import * as UI from './ui'
 
 export const Main = () => {
   const { t } = useTranslation()
-  const { navigate } = useNavigation()
-  const { setQuizState, activeQuiz } = useQuizStore()
-  const isFocused = useIsFocused()
 
-  const [haveActiveQuiz, setHaveActiveQuiz] = useState(false)
+  const { activeQuiz, loading, onCompleteActiveTest } = useGetActiveQuiz()
 
-  useEffect(() => {
-    if (!isFocused) return
-
-    QuizService.getQuizzes({ status: EQuizStatus.in_progress }).then(data => {
-      console.log('getQuizzes', data.data.docs)
-      setHaveActiveQuiz(!!data.data.docs[0])
-      setQuizState({
-        activeQuiz: data.data.docs[0] || null,
-      })
-    })
-  }, [isFocused])
-
-  const onGoHome = () => {
-    navigate(EStacks.Home)
-  }
-
-  const onGoConfiguring = () => {
-    if (!haveActiveQuiz) {
-      navigate(EScreens.TestsConfig)
-
-      return
-    }
-
-    if (activeQuiz) {
-      navigate(EScreens.TestsQuestion)
-    }
-  }
-
-  const onClear = () => {
-    // dispatch(
-    //   testsActions.setState({
-    //     correctAnswers: 0,
-    //     incorrectAnswers: 0,
-    //     totalAnswers: 0,
-    //   }),
-    // )
-  }
-
-  const onCompleteActiveTest = () => {
-    QuizService.getQuizzes({ status: EQuizStatus.in_progress }).then(data => {
-      if (data.data.docs[0]) {
-        QuizService.postQuizCancel({ id: data.data.docs[0]._id })
-        setQuizState({
-          activeQuiz: null,
-        })
-        setHaveActiveQuiz(false)
-      }
-    })
-  }
   return (
-    <Background.Container>
+    <Background.Container color={EColors.white}>
+      <LinearGradient
+        colors={[
+          EColors.primary_500,
+          EColors.primary_400,
+          EColors.primary_300,
+          EColors.primary_200,
+          EColors.primary_100,
+          EColors.white,
+        ]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0, y: 1 }}
+        style={styles.gradient}
+      />
       <StatusBar barStyle={'dark-content'} />
 
-      <Header.Standard goBack onGoBack={onGoHome} />
-      <Background.Standard>
+      <Background.Standard color={'transparent'} style={styles.index}>
         <Styled.FlexWrapper flexDirection={'column'}>
-          <Icon name={'Test'} size={100} />
-          <Typography.H1 mTop={'16px'}>
-            {t('tests.test_your_knowledge')}
+          <Icon name={'Test'} size={120} fill="white" />
+          <Typography.H1 color={'white'} mTop={'16px'}>
+            {t('tests.ready_to_test')}
           </Typography.H1>
 
-          <Button.Standard
-            width={'auto'}
-            mTop={'16px'}
-            onPress={onGoConfiguring}
-            text={t('button.start')}
-          />
+          <Typography.H2 color={'white'} mTop={'10px'} mBottom={'30px'}>
+            {t('tests.choose_mode')}
+          </Typography.H2>
 
-          <Button.Standard
-            width={'auto'}
-            mTop={'16px'}
-            onPress={onCompleteActiveTest}
-            text={'Complete active test (TEST)'}
-          />
+          <PaddingContainer>
+            <UI.Modes loading={loading} quiz={!!activeQuiz} />
+
+            <QuizEntity.ActiveQuiz
+              loading={loading}
+              quiz={activeQuiz}
+              onComplete={onCompleteActiveTest}
+            />
+          </PaddingContainer>
         </Styled.FlexWrapper>
-
-        <Styled.Hr mTop={'16px'} height={6} color={EColors.neutral_200} />
       </Background.Standard>
     </Background.Container>
   )

@@ -37,12 +37,32 @@ export default {
   tests: {
     title: 'Tests',
     configuring: 'Configuring',
-    test_your_knowledge: 'Test your knowledge',
+    ready_to_test: 'Ready to test your knowledge?',
+    choose_mode: 'Choose a training mode',
     total_answers: 'Total answers',
     correct_answers: 'Correct answers',
     incorrect_answers: 'Incorrect answers',
     select_folders: 'Select a folders',
     count: 'Count',
+    modes: {
+      config: {
+        title: 'Configuring',
+        description: 'Customize the test the way you want',
+      },
+      match: {
+        title: 'Match',
+        description: '10 tests to find matches',
+      },
+      writing: {
+        title: 'Writing',
+        description: '10 word spelling tests',
+      },
+      quick: {
+        title: 'Quick',
+        description: '10 randomly generated tests',
+      },
+    },
+    active_test_found: 'Active test found',
   },
   common: {
     other: 'Other',
@@ -70,6 +90,8 @@ export default {
     delete: 'Delete',
     start: 'Start',
     answer: 'Answer',
+    continue: 'Continue',
+    complete: 'Complete',
   },
   statistics: {
     title: 'Statistics',

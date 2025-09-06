@@ -9,7 +9,7 @@ import { TTextProps } from './types'
 export const Text = ({
   width = 'auto',
   text,
-  textColor = EColors.primary_500,
+  textColor = EColors.primary_300,
   leftIcon,
   leftIconProps,
   rightIcon,
@@ -18,7 +18,7 @@ export const Text = ({
   fontSize = 16,
   ...props
 }: TTextProps) => {
-  const color = disabled ? EColors.primary_500 : textColor
+  const color = disabled ? EColors.primary_300 : textColor
 
   return (
     <S.StyledButton

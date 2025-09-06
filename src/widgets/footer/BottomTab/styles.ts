@@ -19,7 +19,7 @@ export const Container = styled(View)`
 
 export const TabContainer = styled(View)`
   flex-direction: row;
-  background-color: ${EColors.black};
+  background-color: ${EColors.primary_500};
   border-radius: 32px;
   padding: 8px 20px;
   width: 100%;
