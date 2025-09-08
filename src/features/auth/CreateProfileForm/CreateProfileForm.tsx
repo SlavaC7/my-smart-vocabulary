@@ -37,8 +37,6 @@ export const CreateProfileForm = () => {
       errorHandler({
         error: error,
         name: 'CreateUser',
-        withSentry: true,
-        withToast: true,
       })
     }
   })

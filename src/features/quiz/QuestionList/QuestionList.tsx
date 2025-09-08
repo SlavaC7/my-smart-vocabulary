@@ -15,14 +15,14 @@ import { Background, errorHandler, Icon, Styled, useNavigation } from '@/shared'
 
 import { QuestionCard } from '../QuestionCard'
 
-import { PurpleContainer, styles } from './styled'
+import { styles } from './styled'
 import { TQuestionListProps } from './types'
 
 const { width: viewportWidth, height } = Dimensions.get('window')
 
 export const QuestionList = ({}: TQuestionListProps) => {
   const { activeQuiz, setQuizState } = useQuizStore()
-  const ref = useRef<Carousel<TQuizItem>>(null)
+  const ref = useRef<Carousel<TQuizItem | null>>(null)
   const [disable, setDisable] = useState<boolean>(false)
   const activeIndex = useRef(0)
 
@@ -44,7 +44,7 @@ export const QuestionList = ({}: TQuestionListProps) => {
     loop: false,
     sliderWidth: viewportWidth,
     itemWidth: viewportWidth,
-    slideStyle: [{ width: viewportWidth, height: height }],
+    slideStyle: [{ width: viewportWidth, height: height, opacity: 1 }],
     enableMomentum: false,
     scrollEnabled: true,
     decelerationRate: 'fast',
@@ -113,8 +113,6 @@ export const QuestionList = ({}: TQuestionListProps) => {
   }
   return (
     <>
-      <PurpleContainer />
-
       <Background.Standard color={'transparent'}>
         <Styled.FlexWrapper justify={'space-between'} style={styles.header}>
           <Styled.Touchable width={'auto'} onPress={_goBack}>
@@ -131,10 +129,8 @@ export const QuestionList = ({}: TQuestionListProps) => {
             ref={ref}
             data={activeQuiz.quiz}
             renderItem={renderItem}
-            scrollEnabled={false}
             onSnapToItem={onSetActiveIndex}
             pagingEnabled
-            // ListEmptyComponent={renderEmpty}
             {...sliderParams}
           />
         )}

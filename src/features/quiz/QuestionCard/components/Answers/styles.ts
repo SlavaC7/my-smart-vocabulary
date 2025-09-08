@@ -9,7 +9,6 @@ export const ItemContainer = styled(Styled.Touchable).attrs({
 })<{ isCorrect: boolean; isActive: boolean; thisAnswer: boolean }>`
   padding: 5px 10px;
   border-radius: 8px;
-  border: 1px solid ${({ theme: { COLORS } }) => COLORS.black};
   background-color: ${({
     thisAnswer,
     disabled,
@@ -18,7 +17,7 @@ export const ItemContainer = styled(Styled.Touchable).attrs({
     theme: { COLORS },
   }) => {
     if (isActive && !thisAnswer) {
-      return COLORS.neutral_400
+      return COLORS.primary_200
     }
 
     if (thisAnswer) {
@@ -31,6 +30,6 @@ export const ItemContainer = styled(Styled.Touchable).attrs({
       return COLORS.green_200
     }
 
-    return COLORS.transparent
+    return COLORS.primary_100
   }};
 `

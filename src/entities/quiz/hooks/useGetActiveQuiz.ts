@@ -26,8 +26,6 @@ export const useGetActiveQuiz = () => {
     } catch (error) {
       errorHandler({
         error,
-        withToast: true,
-        withSentry: true,
         name: 'getActiveTest',
       })
     } finally {
@@ -48,8 +46,6 @@ export const useGetActiveQuiz = () => {
     } catch (error) {
       errorHandler({
         error,
-        withToast: true,
-        withSentry: true,
         name: 'getActiveTest',
       })
     } finally {

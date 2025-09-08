@@ -1,8 +1,6 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
 
 import { EColors } from '@/shared/ui/styled'
-
-const { height } = Dimensions.get('window')
 
 export const styles = StyleSheet.create({
   toastContainer: {
@@ -18,13 +16,17 @@ export const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: EColors.white,
   },
+  infoToast: {
+    borderLeftColor: EColors.primary_600,
+    padding: 10,
+    backgroundColor: EColors.white,
+  },
   text1: {
-    fontSize: height,
+    fontSize: 18,
     color: EColors.black,
   },
   text2: {
-    fontSize: height,
-    marginTop: 5,
-    color: EColors.neutral_300,
+    fontSize: 16,
+    color: EColors.neutral_600,
   },
 })

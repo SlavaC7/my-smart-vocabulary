@@ -2,6 +2,7 @@ import React from 'react'
 import { createContext } from 'react'
 
 import { useTranslation } from 'react-i18next'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import Toast, {
   BaseToast,
   BaseToastProps,
@@ -33,6 +34,7 @@ export const ToastContext = createContext<TToastContext>({
 
 export const ToastWrapper = ({ children }: TToastContextProps) => {
   const { t, keys } = useTranslation()
+  const { top } = useSafeAreaInsets()
 
   const toastConfig: ToastConfig = {
     [EToastType.success]: props => (
@@ -45,6 +47,19 @@ export const ToastWrapper = ({ children }: TToastContextProps) => {
         }
         text2={props?.text2 ? t(props?.text2 as keyof typeof keys) : ''}
         style={styles.successToast}
+        {...toastConfigProps}
+      />
+    ),
+    [EToastType.info]: props => (
+      <BaseToast
+        {...props}
+        text1={
+          props?.text1
+            ? t(props?.text1 as keyof typeof keys)
+            : t('toasts.success')
+        }
+        text2={props?.text2 ? t(props?.text2 as keyof typeof keys) : ''}
+        style={styles.infoToast}
         {...toastConfigProps}
       />
     ),
@@ -74,7 +89,7 @@ export const ToastWrapper = ({ children }: TToastContextProps) => {
   return (
     <ToastContext.Provider value={{ actions }}>
       {children}
-      <Toast config={toastConfig} />
+      <Toast config={toastConfig} topOffset={top + 10} />
     </ToastContext.Provider>
   )
 }

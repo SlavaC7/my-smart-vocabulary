@@ -10,7 +10,7 @@ import { EScreens } from '@/app/navigation'
 
 import { WordFeature } from '@/features'
 
-import { Icon, Styled, Typography, useNavigation, wp } from '@/shared'
+import { EColors, Icon, Styled, Typography, useNavigation, wp } from '@/shared'
 import { Background } from '@/shared/ui/background'
 
 import * as UI from './components'
@@ -28,7 +28,10 @@ export const Main = () => {
 
   return (
     <Background.Container top={0} bottom={0} color={COLORS.background}>
-      <StatusBar barStyle={'light-content'} />
+      <StatusBar
+        barStyle={'light-content'}
+        backgroundColor={EColors.primary_500}
+      />
       <S.Header>
         <Styled.FlexWrapper justify={'space-between'}>
           <Typography.H1 color="white">{t('app.name')}</Typography.H1>

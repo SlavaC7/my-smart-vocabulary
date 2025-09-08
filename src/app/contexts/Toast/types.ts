@@ -14,5 +14,6 @@ export type TToastContextActions = {
 
 export enum EToastType {
   error = 'error',
+  info = 'info',
   success = 'success',
 }

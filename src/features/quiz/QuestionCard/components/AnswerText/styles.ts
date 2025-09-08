@@ -3,12 +3,18 @@ import { StyleSheet } from 'react-native'
 import { EColors } from '@/shared'
 
 export const styles = StyleSheet.create({
+  default: {
+    borderWidth: 0,
+    backgroundColor: EColors.neutral_200,
+  },
   correct: {
-    borderColor: EColors.green_200,
     backgroundColor: EColors.green_100,
   },
   incorrect: {
-    borderColor: EColors.red_300,
     backgroundColor: EColors.red_100,
+  },
+  incorrectInputText: {
+    textDecorationColor: 'black',
+    textDecorationLine: 'line-through',
   },
 })

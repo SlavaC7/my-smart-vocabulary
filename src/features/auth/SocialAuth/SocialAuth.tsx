@@ -24,8 +24,6 @@ export const SocialAuth = () => {
       errorHandler({
         error: error,
         name: 'onGoogle',
-        withSentry: true,
-        withToast: true,
       })
     }
   }

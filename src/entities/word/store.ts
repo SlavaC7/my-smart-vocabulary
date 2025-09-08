@@ -46,8 +46,6 @@ export const useWordStore = create<TWordStore>()(
           errorHandler({
             error: error,
             name: 'updateFolders',
-            withSentry: true,
-            withToast: true,
           })
         }
       },
@@ -77,8 +75,6 @@ export const useWordStore = create<TWordStore>()(
           errorHandler({
             error: error,
             name: 'deleteFolder',
-            withSentry: true,
-            withToast: true,
           })
         }
       },

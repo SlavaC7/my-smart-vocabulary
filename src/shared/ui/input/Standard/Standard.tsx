@@ -125,7 +125,7 @@ export const Standard = ({
             style={[{}, inputStyle]}
             placeholder={!value?.length ? placeholder : ''}
             textAlignVertical={'center'}
-            placeholderTextColor={COLORS.placeholder_light}
+            placeholderTextColor={COLORS.neutral_500}
             value={value}
             editable={!disabled && editable}
             hasLeftIcon={!!leftIcon || !!leftAction}
@@ -143,7 +143,8 @@ export const Standard = ({
               onBlur?.()
               onBottomSheetBlur()
             }}
-            cursorColor={COLORS.neutral_300}
+            cursorColor={COLORS.black}
+            selectionColor={COLORS.black}
             maxLength={maxLength || maxSigns}
             {...inputProps}
           />

@@ -4,6 +4,8 @@ export default {
   toasts: {
     success: 'Success!',
     error: 'Error!',
+    ops: 'Ooops',
+    exist_quiz: 'Complete an existing test first',
   },
   errors: {
     min: 'This field must be greater than {{value}}',
@@ -44,6 +46,7 @@ export default {
     incorrect_answers: 'Incorrect answers',
     select_folders: 'Select a folders',
     count: 'Count',
+    correctly: 'Correctly',
     modes: {
       config: {
         title: 'Configuring',

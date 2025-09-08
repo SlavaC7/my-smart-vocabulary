@@ -2,8 +2,9 @@ import React from 'react'
 
 import { TAnswer } from '@/entities/quiz'
 
-import { Styled, TEColors, Typography } from '@/shared'
+import { Styled, Typography } from '@/shared'
 
+import { getCorrectTextColor } from './helper'
 import * as S from './styles'
 import { TAnswersProps } from './types'
 
@@ -17,11 +18,12 @@ export const Answers = ({
     const isActive = answer === item.id
     const thisAnswer = item.id === haveAnswer?.answerId
 
-    const color: TEColors = thisAnswer
-      ? 'white'
-      : !!haveAnswer && item.isCorrect
-      ? 'white'
-      : 'black'
+    const color = getCorrectTextColor(
+      isActive,
+      thisAnswer,
+      item.isCorrect,
+      !!haveAnswer,
+    )
 
     return (
       <S.ItemContainer

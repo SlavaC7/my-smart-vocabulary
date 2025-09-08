@@ -21,9 +21,9 @@ type ErrorInfo = {
 
 export const errorHandler = ({
   error,
+  name = 'unknown',
   withToast = true,
   withSentry = true,
-  name = 'unknown',
 }: ErrorHandlerProps) => {
   // Нормализация ошибки
   const errorInfo = normalizeError(error)

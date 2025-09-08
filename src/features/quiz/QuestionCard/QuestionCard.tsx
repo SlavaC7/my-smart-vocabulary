@@ -34,6 +34,8 @@ export const QuestionCard = ({
     item => item.questionId === id,
   )
 
+  const isCorrect = haveAnswer?.isCorrect
+
   const isMatch = mode === EQuizItemMode.match
   const isWrite = mode === EQuizItemMode.write_word
 
@@ -57,11 +59,7 @@ export const QuestionCard = ({
         mode,
       })
 
-      console.log('data =>', data)
-
       setQuizState({ activeQuiz: data })
-
-      console.log('setQuizState')
 
       onPressItem()
 
@@ -73,6 +71,12 @@ export const QuestionCard = ({
       })
     }
   }
+
+  const color = haveAnswer
+    ? isCorrect
+      ? EColors.green_400
+      : EColors.red_400
+    : EColors.primary_200
   return (
     <View style={S.styles.container}>
       <S.SVGContainer>
@@ -122,7 +126,7 @@ export const QuestionCard = ({
         style={S.styles.backgroundLayer}
         circle={2}
         minusWidth={40}
-        color={EColors.blue_opacity}
+        color={color}
       />
       <S.SmileContainer>
         <S.Flag>{flag}</S.Flag>

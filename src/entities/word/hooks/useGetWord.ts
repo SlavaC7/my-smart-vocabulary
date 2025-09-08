@@ -24,8 +24,6 @@ export const useGetWord = (id: string, initialState: TWord) => {
       errorHandler({
         error: error,
         name: 'getFolder',
-        withSentry: true,
-        withToast: true,
       })
     }
   }
@@ -52,8 +50,6 @@ export const useGetWord = (id: string, initialState: TWord) => {
       errorHandler({
         error: error,
         name: 'useGetWord',
-        withSentry: true,
-        withToast: true,
       })
     }
   }
