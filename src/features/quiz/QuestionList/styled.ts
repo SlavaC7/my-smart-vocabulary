@@ -24,7 +24,7 @@ export const EmptyView = styled(Styled.FlexWrapper).attrs({
 
 export const styles = StyleSheet.create({
   header: {
-    paddingHorizontal: 16,
+    paddingHorizontal: 20,
     paddingVertical: 10,
   },
 })

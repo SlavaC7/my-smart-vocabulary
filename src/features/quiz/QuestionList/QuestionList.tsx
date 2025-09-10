@@ -6,12 +6,21 @@ import Carousel, { CarouselProperties } from 'react-native-snap-carousel'
 
 import { EScreens } from '@/app/navigation'
 
+import { QuizFeatures } from '@/features'
+
 import { TQuizItem } from '@/entities/quiz'
 
 import { QuizService } from '@/entities/quiz/services'
 import { useQuizStore } from '@/entities/quiz/store'
 
-import { Background, errorHandler, Icon, Styled, useNavigation } from '@/shared'
+import {
+  Background,
+  errorHandler,
+  Icon,
+  Styled,
+  useNavigation,
+  wp,
+} from '@/shared'
 
 import { QuestionCard } from '../QuestionCard'
 
@@ -67,6 +76,8 @@ export const QuestionList = ({}: TQuestionListProps) => {
         id: activeQuiz._id,
       })
 
+      console.log('postQuizComplete =>', data)
+
       setQuizState({ activeQuiz: data })
 
       navigate(EScreens.TestsSuccess)
@@ -89,7 +100,7 @@ export const QuestionList = ({}: TQuestionListProps) => {
       console.log('snapToNext')
 
       ref.current?.snapToNext()
-    }, 500)
+    }, 1000)
   }
 
   const renderItem: ListRenderItem<TQuizItem> = useCallback(
@@ -118,6 +129,12 @@ export const QuestionList = ({}: TQuestionListProps) => {
           <Styled.Touchable width={'auto'} onPress={_goBack}>
             <Icon name={'AngleArrowLeft'} size={32} />
           </Styled.Touchable>
+
+          <QuizFeatures.Progress
+            width={wp(78)}
+            total={activeQuiz?.quiz.length || 1}
+            count={(activeIndex.current || 0) + 1}
+          />
 
           {/* <Styled.Touchable width={'auto'} onPress={goBack}>
             <Icon name={'AngleArrowLeft'} size={32} />

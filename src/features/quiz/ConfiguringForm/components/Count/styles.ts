@@ -4,8 +4,8 @@ import { Styled } from '@/shared'
 
 export const AddCount = styled(Styled.Touchable).attrs({
   width: 'auto',
-  mLeft: '16px',
 })`
+  flex: 1;
   padding: 5px 10px;
 
   background-color: ${({ theme: { COLORS } }) => COLORS.neutral_200};

@@ -14,6 +14,7 @@ import { TActiveQuizProps } from './types'
 export const ActiveQuiz = ({ quiz, loading, onComplete }: TActiveQuizProps) => {
   const { t } = useTranslation()
   const { navigate } = useNavigation()
+  console.log('[TEST]:Props:', loading, quiz)
   if (loading) return <ActivityIndicator color={EColors.primary_500} />
 
   if (!quiz && !loading) return <></>

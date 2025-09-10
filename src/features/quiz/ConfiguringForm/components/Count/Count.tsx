@@ -24,9 +24,15 @@ export const Count = ({
     onChange(value + num)
   }
 
-  const renderItem = (item: number) => {
+  const renderItem = (item: number, index: number) => {
+    const isFirst = index === 0
+    const isLast = index + 1 === addCount.length
     return (
-      <S.AddCount key={item} onPress={() => onAddCount(item)}>
+      <S.AddCount
+        key={item}
+        mLeft={isFirst ? '0px' : '8px'}
+        mRight={isLast ? '0px' : '8px'}
+        onPress={() => onAddCount(item)}>
         <Typography.Body1R>+{item}</Typography.Body1R>
       </S.AddCount>
     )
@@ -34,22 +40,21 @@ export const Count = ({
 
   return (
     <>
-      <Typography.Body2R mBottom={'8px'} color={'neutral_500'}>
+      <Typography.Body1R mBottom={'8px'} color={'neutral_600'}>
         {t('tests.count')}
-      </Typography.Body2R>
+      </Typography.Body1R>
 
       <Styled.FlexWrapper mBottom={'16px'} justify={'flex-start'}>
         <Input.Standard
-          width={'30%'}
           value={value + ''}
           onChange={_onChange}
           keyboardType={'numeric'}
           withClear={false}
         />
+      </Styled.FlexWrapper>
 
-        <Styled.FlexWrapper width={'auto'}>
-          {addCount.map(renderItem)}
-        </Styled.FlexWrapper>
+      <Styled.FlexWrapper mBottom={'16px'} width={'auto'}>
+        {addCount.map(renderItem)}
       </Styled.FlexWrapper>
 
       {!!error && (

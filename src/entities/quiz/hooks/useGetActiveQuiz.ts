@@ -15,21 +15,40 @@ export const useGetActiveQuiz = () => {
   const [loading, setLoading] = useState(false)
 
   const getAction = async () => {
+    if (activeQuiz?.status === EQuizStatus.completed) {
+      setQuizState({
+        activeQuiz: null,
+      })
+    }
+
     try {
+      console.log('[TEST]:start')
       setLoading(true)
       const data = await QuizService.getQuizzes({
         status: EQuizStatus.in_progress,
       })
-      setQuizState({
-        activeQuiz: data.data.docs[0] || null,
-      })
+
+      console.log('getQuizzes =>', data.data, data.data.docs[0])
+
+      if (data.data.docs[0]) {
+        setQuizState({
+          activeQuiz: data.data.docs[0],
+        })
+        console.log('[TEST]:docs')
+      } else {
+        setQuizState({
+          activeQuiz: null,
+        })
+        console.log('[TEST]:else')
+      }
     } catch (error) {
       errorHandler({
         error,
         name: 'getActiveTest',
       })
     } finally {
-      setLoading(true)
+      console.log('[TEST]:finally')
+      setLoading(false)
     }
   }
 
@@ -54,8 +73,11 @@ export const useGetActiveQuiz = () => {
   }
 
   useEffect(() => {
-    isFocused && getAction
+    isFocused && getAction()
   }, [isFocused])
+
+  console.log('activeQuiz =>', activeQuiz)
+
   return {
     onCompleteActiveTest,
     activeQuiz,
