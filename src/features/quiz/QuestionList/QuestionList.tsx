@@ -100,7 +100,7 @@ export const QuestionList = ({}: TQuestionListProps) => {
       console.log('snapToNext')
 
       ref.current?.snapToNext()
-    }, 1000)
+    }, 1500)
   }
 
   const renderItem: ListRenderItem<TQuizItem> = useCallback(
