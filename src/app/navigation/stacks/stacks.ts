@@ -7,4 +7,5 @@ export enum EStacks {
 
   Tests = 'TestsStack',
   Auth = 'AuthStack',
+  Profile = 'ProfileStack',
 }

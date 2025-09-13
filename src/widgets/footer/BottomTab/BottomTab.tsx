@@ -74,6 +74,7 @@ export const BottomTab = ({
                     title={tab.title}
                     // if have counter in bottom tab
                     icon={tab.Icon}
+                    grande={route.name === EStacks.Tests}
                     active={isFocused}
                     activeIcon={tab.ActiveIcon}
                   />

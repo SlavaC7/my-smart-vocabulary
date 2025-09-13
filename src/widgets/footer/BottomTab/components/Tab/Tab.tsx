@@ -7,7 +7,7 @@ import { TIconsKeys } from '@assets/svg'
 import { Icon } from '@/shared/ui/Icon'
 import { Styled, Typography } from '@/shared/ui/styled'
 
-import { Container, Title, CountContainer, styles } from './styles'
+import { Container, CountContainer, styles } from './styles'
 
 export type TTab = {
   active?: boolean
@@ -15,9 +15,10 @@ export type TTab = {
   icon: TIconsKeys
   activeIcon: TIconsKeys
   count?: number
+  grande: boolean
 }
 
-export const Tab = ({ title, icon, active, activeIcon, count }: TTab) => {
+export const Tab = ({ icon, active, activeIcon, count, grande }: TTab) => {
   const { COLORS } = useTheme()
   const color = active ? COLORS.white : COLORS.neutral_300
 
@@ -28,7 +29,10 @@ export const Tab = ({ title, icon, active, activeIcon, count }: TTab) => {
       <Container>
         <Styled.FlexWrapper
           flexDirection={'column'}
-          style={styles.main}
+          style={[
+            styles.main,
+            // grande && { backgroundColor: 'red', width: 100, height: 100 },
+          ]}
           width={'auto'}>
           {!!count && (
             <CountContainer>
@@ -41,12 +45,7 @@ export const Tab = ({ title, icon, active, activeIcon, count }: TTab) => {
             </CountContainer>
           )}
 
-          <Icon
-            name={CurrentIcon}
-            size={24}
-            fill={color}
-            stroke={activeIcon === 'Waterfall' ? color : undefined}
-          />
+          <Icon name={CurrentIcon} size={24} fill={color} />
         </Styled.FlexWrapper>
       </Container>
     </>

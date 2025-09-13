@@ -1,8 +1,11 @@
 import { ReactNode } from 'react'
-import { ScrollViewProps } from 'react-native'
+
+import { KeyboardAwareScrollViewProps } from 'react-native-keyboard-aware-scroll-view'
+
+import { TEColors } from '../../styled'
 
 export type ScrollProps = {
-  pTop?: number
   children?: ReactNode
   pHorizontal?: number
-} & ScrollViewProps
+  color: TEColors
+} & KeyboardAwareScrollViewProps

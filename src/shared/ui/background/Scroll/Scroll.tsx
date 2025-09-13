@@ -1,36 +1,33 @@
 import React from 'react'
 
-import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import { appPadding } from '@/shared/lib'
+import { EColors } from '../../styled'
 
-import { scrollViewProps } from './config'
+import { keyboardAwareViewProps } from './config'
 import { ScrollContainer, styles } from './styled'
 import { ScrollProps } from './types'
 
 export const Scroll = ({
   children,
-  pTop = 0,
-  pHorizontal = appPadding,
+  pHorizontal = 0,
+  color = 'background',
   ...props
 }: ScrollProps) => {
   return (
     <>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={{ flex: 1 }}>
-        <ScrollView
-          style={[
-            { paddingHorizontal: pHorizontal, paddingTop: pTop },
-            styles.container,
-          ]}
-          keyboardShouldPersistTaps="handled"
-          {...scrollViewProps}
-          bounces={false}
-          {...props}>
-          <ScrollContainer>{children}</ScrollContainer>
-        </ScrollView>
-      </KeyboardAvoidingView>
+      <KeyboardAwareScrollView
+        style={[
+          { paddingHorizontal: pHorizontal, backgroundColor: EColors[color] },
+          styles.container,
+        ]}
+        extraScrollHeight={70}
+        enableOnAndroid
+        {...keyboardAwareViewProps}
+        {...props}
+        bounces={true}>
+        <ScrollContainer>{children}</ScrollContainer>
+      </KeyboardAwareScrollView>
     </>
   )
 }

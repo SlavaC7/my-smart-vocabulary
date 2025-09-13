@@ -82,7 +82,7 @@ export const OwnTranslation = () => {
       setLoading(true)
       const data: TPostWordsApi['payload'] = {
         ...formData,
-        folderId: '',
+        folderId: formData.folderId || '',
       }
 
       if (isEdit) {

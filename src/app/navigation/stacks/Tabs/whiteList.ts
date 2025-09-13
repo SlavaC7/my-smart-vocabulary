@@ -2,7 +2,6 @@ import { EScreens } from '../../screens'
 
 export const whiteList: Array<EScreens> = [
   EScreens.HomeMain,
-  EScreens.SearchMain,
+  EScreens.ProfileMain,
   EScreens.TestsMain,
-  EScreens.StatisticsMain,
 ]

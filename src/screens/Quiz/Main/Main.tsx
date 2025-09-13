@@ -28,7 +28,7 @@ export const Main = () => {
 
       <Background.Standard color={'transparent'} style={styles.index}>
         <Styled.FlexWrapper flexDirection={'column'}>
-          <Icon name={'Test'} size={120} fill="white" />
+          <Icon name={'AppIconWhite'} size={120} />
           <Typography.H1 color={'white'} mTop={'16px'}>
             {t('tests.ready_to_test')}
           </Typography.H1>

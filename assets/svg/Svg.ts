@@ -39,3 +39,8 @@ export { default as EditDocument } from './sources/edit-document.svg'
 export { default as Target } from './sources/target.svg'
 export { default as Settings } from './sources/settings.svg'
 export { default as QuickClock } from './sources/quick-clock.svg'
+
+export { default as User } from './sources/user.svg'
+export { default as AppIcon } from './sources/app-icon.svg'
+export { default as AppIconWhite } from './sources/app-icon-white.svg'
+export { default as AppIconGray } from './sources/app-icon-gray.svg'
