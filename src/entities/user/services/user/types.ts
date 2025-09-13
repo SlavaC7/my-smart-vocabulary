@@ -19,6 +19,16 @@ export type TPatchUserMeApi = TQuery<TPatchUserMPayload, TPatchUserMResponse>
 type TPatchUserMPayload = {}
 type TPatchUserMResponse = TUser
 
+export type TGetUserMeStatsApi = TQuery<
+  TGetUserMeStatsPayload,
+  TGetUserMeStatsResponse
+>
+type TGetUserMeStatsPayload = {}
+type TGetUserMeStatsResponse = {
+  words: number
+  folders: number
+}
+
 export type TDeleteUserMeApi = TQuery<TDeleteUserMPayload, TDeleteUserMResponse>
 type TDeleteUserMPayload = {}
 type TDeleteUserMResponse = {}

@@ -19,6 +19,11 @@ export class UserService {
   ): TResponse<T.TPostUserMeApi['response']> {
     return apiPrivate.patch(`/user/me`, data)
   }
+
+  static async getUserStats(): TResponse<T.TGetUserMeStatsApi['response']> {
+    return apiPrivate.get(`/user/me/stats`)
+  }
+
   static async deleteUser(): TResponse<T.TDeleteUserMeApi['response']> {
     return apiPrivate.delete(`/user/me`)
   }

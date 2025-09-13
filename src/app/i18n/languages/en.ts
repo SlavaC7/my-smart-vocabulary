@@ -29,6 +29,15 @@ export default {
     phone_placeholder: 'Phone number',
     simple_auth: 'Complete a simple registration process',
   },
+  profile: {
+    total_words: 'Total Words',
+    total_folders: 'Total Folders',
+    menu: {
+      change_profile: 'Change profile',
+      about_app: 'About app',
+      quiz_history: 'Quiz history',
+    },
+  },
   home: {
     title: 'Home',
   },
