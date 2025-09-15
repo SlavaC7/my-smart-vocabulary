@@ -19,4 +19,6 @@ export enum EScreens {
   AuthCreateProfile = 'AuthCreateProfileScreen',
 
   ProfileMain = 'ProfileMainScreen',
+  ProfileAboutApp = 'ProfileAboutAppScreen',
+  ProfileQuizHistory = 'ProfileQuizHistoryScreen',
 }

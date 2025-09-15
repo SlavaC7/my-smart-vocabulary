@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { appVersion, Typography } from '@/shared'
+
 import { MenuItem } from '../MenuItem'
 
 import * as S from './styles'
@@ -14,6 +16,12 @@ export const Menu = () => {
     return <MenuItem key={item.title} {...item} isLast={isLast} />
   }
   return (
-    <S.Container style={S.styles.shadow}>{data.map(renderItem)}</S.Container>
+    <>
+      <S.Container style={S.styles.shadow}>{data.map(renderItem)}</S.Container>
+
+      <Typography.Body1R color={'neutral_500'} mTop={'16px'}>
+        Version: {appVersion}
+      </Typography.Body1R>
+    </>
   )
 }

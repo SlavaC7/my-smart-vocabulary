@@ -12,6 +12,8 @@ export const Header = styled(View)`
   background-color: ${({ theme: { COLORS } }) => COLORS.primary_500};
   z-index: 10;
   margin-bottom: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 `
 
 export const SearchContainer = styled(View)`

@@ -22,6 +22,16 @@ export const ProfileStack = () => {
         component={ProfileScreens.Main}
         name={EScreens.ProfileMain}
       />
+
+      <Stack.Screen
+        component={ProfileScreens.AboutApp}
+        name={EScreens.ProfileAboutApp}
+      />
+
+      <Stack.Screen
+        component={ProfileScreens.QuizHistory}
+        name={EScreens.ProfileQuizHistory}
+      />
     </Stack.Navigator>
   )
 }

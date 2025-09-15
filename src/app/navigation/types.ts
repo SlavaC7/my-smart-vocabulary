@@ -9,8 +9,8 @@ import { TAuthStack } from './stacks/Auth'
 import type {
   THomeStack,
   TMainStack,
+  TProfileStack,
   TSearchStack,
-  TStatisticsStack,
   TTestsStack,
 } from './stacks'
 import type {
@@ -24,7 +24,7 @@ export type TScreens = TMainStack &
   THomeStack &
   TSearchStack &
   TTestsStack &
-  TStatisticsStack &
+  TProfileStack &
   TAuthStack
 
 /**

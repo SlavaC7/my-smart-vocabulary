@@ -10,7 +10,7 @@ import { ScrollProps } from './types'
 
 export const Scroll = ({
   children,
-  pHorizontal = 0,
+  pHorizontal = 16,
   color = 'background',
   ...props
 }: ScrollProps) => {

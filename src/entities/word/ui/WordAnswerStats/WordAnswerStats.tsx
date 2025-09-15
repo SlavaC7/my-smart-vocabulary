@@ -21,13 +21,13 @@ export const WordAnswerStats = ({
           <Typography.H2>{correct}</Typography.H2>
 
           <Typography.Body1R color={'neutral_500'} mTop={'5px'}>
-            {correctRecent}%
+            {correctRecent.toFixed(2)}%
           </Typography.Body1R>
         </S.TypeContainer>
         <S.TypeContainer color={'red_400'}>
           <Typography.H2 color={'red_400'}>{incorrect}</Typography.H2>
           <Typography.Body1R color={'neutral_500'} mTop={'5px'}>
-            {incorrectRecent}%
+            {incorrectRecent.toFixed(2)}%
           </Typography.Body1R>
         </S.TypeContainer>
       </S.Container>

@@ -10,7 +10,7 @@ import { EScreens } from '@/app/navigation'
 
 import { WordFeature } from '@/features'
 
-import { EColors, Icon, Styled, Typography, useNavigation, wp } from '@/shared'
+import { EColors, Icon, Styled, Typography, useNavigation } from '@/shared'
 import { Background } from '@/shared/ui/background'
 
 import * as UI from './components'

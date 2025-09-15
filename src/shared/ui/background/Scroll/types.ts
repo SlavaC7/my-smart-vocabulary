@@ -7,5 +7,5 @@ import { TEColors } from '../../styled'
 export type ScrollProps = {
   children?: ReactNode
   pHorizontal?: number
-  color: TEColors
+  color?: TEColors
 } & KeyboardAwareScrollViewProps

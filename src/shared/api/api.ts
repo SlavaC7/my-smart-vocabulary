@@ -2,7 +2,6 @@ import { HOST } from '@env'
 import auth from '@react-native-firebase/auth'
 import axios from 'axios'
 
-console.log('HOST: ', HOST)
 const privateInstance = axios.create({
   baseURL: HOST,
   headers: {
