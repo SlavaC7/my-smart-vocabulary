@@ -6,7 +6,7 @@ import { CountryPicker } from 'react-native-country-codes-picker'
 
 import { availableLang } from '@/entities/word/utils'
 
-import { Typography } from '@/shared'
+import { Styled, Typography } from '@/shared'
 
 import * as S from './styles'
 import { TLangPickerProps } from './types'
@@ -17,15 +17,17 @@ export const LangPicker = ({ onChange, value, flag }: TLangPickerProps) => {
 
   return (
     <>
-      <Typography.Body2R mTop={'20px'} mBottom={'8px'} color={'neutral_500'}>
-        {t('own_translation.language')}
-      </Typography.Body2R>
+      <Styled.FlexWrapper flexDirection="column" align="flex-start">
+        <Typography.Body2R mBottom={'8px'} color={'neutral_500'}>
+          {t('own_translation.language')}
+        </Typography.Body2R>
 
-      <S.Container onPress={() => setVisible(true)}>
-        <Typography.Body1R>
-          {flag} {value}
-        </Typography.Body1R>
-      </S.Container>
+        <S.Container onPress={() => setVisible(true)}>
+          <Typography.Body1R>
+            {flag} {value}
+          </Typography.Body1R>
+        </S.Container>
+      </Styled.FlexWrapper>
 
       <CountryPicker
         show={visible}

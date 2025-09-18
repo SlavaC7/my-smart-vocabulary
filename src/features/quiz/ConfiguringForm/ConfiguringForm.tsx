@@ -9,6 +9,8 @@ import { EScreens } from '@/app/navigation'
 
 import { Footer } from '@/widgets/footer'
 
+import { WordFeature } from '@/features'
+
 import { EQuizItemMode, useQuizStore } from '@/entities/quiz'
 import { QuizService } from '@/entities/quiz/services'
 import { EWordType, TFolder } from '@/entities/word'
@@ -112,7 +114,7 @@ export const ConfiguringForm = () => {
           control={control}
           name="type"
           render={({ field: { value, onChange } }) => (
-            <C.TypePicker {...{ value, onChange }} />
+            <WordFeature.TypePicker {...{ value, onChangeArray: onChange }} />
           )}
         />
 

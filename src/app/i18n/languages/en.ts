@@ -83,6 +83,7 @@ export default {
   own_translation: {
     title: 'Own translation',
     create: 'Create own translation',
+    description: 'Description',
     add: 'Add translation',
     translation: 'Translation',
     your_word: 'Your word',

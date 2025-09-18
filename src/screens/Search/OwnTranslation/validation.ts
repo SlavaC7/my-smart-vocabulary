@@ -16,4 +16,5 @@ export const createOwnTranslationSchema = validationSchema(schema => ({
   lang: schema.requiredString,
   flag: schema.requiredString,
   folderId: schema.optionalText,
+  description: schema.optionalText,
 }))

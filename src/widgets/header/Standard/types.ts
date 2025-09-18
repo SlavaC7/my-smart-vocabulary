@@ -3,7 +3,7 @@ import { StatusBarStyle } from 'react-native'
 import { TIconsKeys } from '@assets/svg'
 
 import { TIconProps } from '@/shared/ui/Icon/types'
-import { EColors, Typography } from '@/shared/ui/styled'
+import { EColors, TEColors, Typography } from '@/shared/ui/styled'
 import { TMargin } from '@/shared/ui/utils'
 
 export type TStandardProps = {
@@ -21,6 +21,7 @@ export type TStandardProps = {
   leftAction?: React.ReactElement
   topInset?: boolean
   titleAlign?: `${ETitleAlign}`
+  titleColor?: TEColors
   TitleComponent?: typeof Typography.H2
 } & TMargin
 

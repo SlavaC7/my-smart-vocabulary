@@ -10,7 +10,13 @@ import { TTypePickerProps } from './types'
 
 const data = [EWordType.word, EWordType.phrase]
 
-export const TypePicker = ({ onChange, value }: TTypePickerProps) => {
+export const TypePicker = ({
+  onChange = () => {},
+  onChangeArray = () => {},
+  value,
+  hideLabel = false,
+  ...props
+}: TTypePickerProps) => {
   const { t } = useTranslation()
 
   const validateActive = (item: EWordType) => {
@@ -24,38 +30,40 @@ export const TypePicker = ({ onChange, value }: TTypePickerProps) => {
   const _onChange = (item: EWordType, isActive: boolean) => {
     if (Array.isArray(value)) {
       if (isActive) {
-        onChange(value.filter(fil => fil !== item))
+        onChangeArray(value.filter(fil => fil !== item))
         return
       }
-      onChange([...value, item])
+      onChangeArray([...value, item])
       return
     }
 
     onChange(item)
   }
-  const renderItem = (item: EWordType) => {
+  const renderItem = (item: EWordType, index: number) => {
     const active = validateActive(item)
+
+    const isMLeft = index % 2 === 0
     return (
-      <WordEntity.TypeCard
-        key={item}
+      <WordEntity.SelectType
+        mRight={isMLeft ? '8px' : '0px'}
+        mLeft={!isMLeft ? '8px' : '0px'}
         active={active}
-        mRight={'16px'}
-        type={item}
-        size={'standard'}
         onPress={() => _onChange(item, active)}
-        textComponent={'Body2R'}
+        text={item}
       />
     )
   }
   return (
-    <>
-      <Typography.Body2R mBottom={'8px'} color={'neutral_500'}>
-        {t('own_translation.type')}
-      </Typography.Body2R>
+    <Styled.FlexWrapper flexDirection="column" align="flex-start" {...props}>
+      {!hideLabel && (
+        <Typography.Body2R mBottom={'8px'} color={'neutral_500'}>
+          {t('own_translation.type')}
+        </Typography.Body2R>
+      )}
 
       <Styled.FlexWrapper justify={'flex-start'}>
         {data.map(renderItem)}
       </Styled.FlexWrapper>
-    </>
+    </Styled.FlexWrapper>
   )
 }

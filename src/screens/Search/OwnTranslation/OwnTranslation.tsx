@@ -24,9 +24,9 @@ import {
   Background,
   Button,
   errorHandler,
-  Icon,
   Input,
   Styled,
+  Typography,
   useLoader,
   useNavigation,
 } from '@/shared'
@@ -38,6 +38,7 @@ import { createOwnTranslationSchema } from './validation'
 
 export const OwnTranslation = () => {
   const { COLORS } = useTheme()
+  // const {} = use
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { setLoading } = useLoader()
@@ -57,6 +58,7 @@ export const OwnTranslation = () => {
   } = useForm<TCreateOwnTranslationForm>({
     resolver: createOwnTranslationSchema(t),
     defaultValues: {
+      description: params?.description || '',
       word: params?.word || '',
       type: params?.type ? params.type : EWordType.word,
       translations: params?.translations?.length ? params.translations : [''],
@@ -113,152 +115,184 @@ export const OwnTranslation = () => {
   }
 
   return (
-    <Background.Container color={COLORS.neutral_200}>
+    <Background.Container color={COLORS.primary_500}>
       <Header.Standard
         goBack
         title={t('own_translation.title')}
-        color={COLORS.neutral_200}
+        color={COLORS.primary_500}
+        titleColor={'white'}
+        TitleComponent={Typography.H2}
         rightAction={
           <Button.Text
+            textColor={COLORS.white}
             text={t('button.save')}
             disabled={!isValid}
             onPress={handleSubmit(onSave)}
           />
         }
       />
+      <Background.Scroll bounces={false} pHorizontal={0} color="neutral_100">
+        <S.BlueContainer>
+          <Styled.FlexWrapper>
+            <Typography.H3 mBottom="16px" color="white">
+              {t('own_translation.your_word')}
+            </Typography.H3>
+          </Styled.FlexWrapper>
 
-      <Background.Scroll>
-        <S.LogoWrapper mTop="12px" mBottom="32px">
-          <Icon name="FileDock" size={52} />
-        </S.LogoWrapper>
-
-        <Controller
-          control={control}
-          name="word"
-          render={({ field: { value, onChange } }) => (
-            <Styled.FlexWrapper>
+          <Controller
+            control={control}
+            name="word"
+            render={({ field: { value, onChange } }) => (
               <Input.Standard
-                label={t('own_translation.your_word')}
                 inputContainerStyle={styles.inputContainer}
                 style={styles.flex1}
                 value={value}
                 onChange={onChange}
                 mBottom={'20px'}
               />
-              {/* <WordFeature.SpeechToText
-                mTop="22px"
-                mLeft="12px"
-                onChange={onChange}
-              /> */}
-            </Styled.FlexWrapper>
-          )}
-        />
-        <Controller
-          control={control}
-          name="folderId"
-          render={({ field: { value, onChange } }) => (
-            <WordFeature.SelectFolder
-              mBottom={'16px'}
-              folderId={value}
-              onChange={item => {
-                if (!item) {
-                  onChange('')
-                  return
-                }
+            )}
+          />
 
-                onChange(item._id)
-              }}
-            />
-          )}
-        />
-        <Controller
-          control={control}
-          name="type"
-          render={({ field: { value, onChange } }) => (
-            <WordFeature.TypePicker {...{ value, onChange }} />
-          )}
-        />
+          <Styled.FlexWrapper>
+            <Typography.H3 mBottom="16px" color="white">
+              {t('own_translation.description')}
+            </Typography.H3>
+          </Styled.FlexWrapper>
 
-        <Controller
-          control={control}
-          name="lang"
-          render={({ field: { value, onChange } }) => (
-            <Controller
-              control={control}
-              name="flag"
-              render={({
-                field: { value: flagValue, onChange: onChangeFlag },
-              }) => (
-                <WordFeature.LangPicker
+          <Controller
+            control={control}
+            name="description"
+            render={({ field: { value, onChange } }) => (
+              <Styled.FlexWrapper>
+                <Input.Standard
+                  inputContainerStyle={styles.inputContainer}
+                  style={styles.flex1}
+                  height={'70px'}
                   value={value}
-                  flag={flagValue}
-                  onChange={item => {
-                    onChange(item.value)
-                    onChangeFlag(item.flag)
-                  }}
+                  multiline
+                  onChange={onChange}
+                  mBottom={'20px'}
                 />
-              )}
-            />
-          )}
-        />
+              </Styled.FlexWrapper>
+            )}
+          />
+        </S.BlueContainer>
+        <S.PaddingWrapper mTop="12px" mBottom="32px">
+          <Controller
+            control={control}
+            name="type"
+            render={({ field: { value, onChange } }) => (
+              <WordFeature.TypePicker
+                mTop="16px"
+                mBottom="16px"
+                hideLabel
+                {...{ value, onChange: onChange }}
+              />
+            )}
+          />
 
-        <Controller
-          control={control}
-          name="translations"
-          render={({ field: { value, onChange } }) => (
-            <>
-              {value.map((item, idx) => (
-                <Styled.FlexWrapper
-                  key={idx.toString()}
-                  mTop="20px"
-                  align="center">
-                  <Styled.FlexWrapper width="auto" style={styles.flex1}>
-                    <Input.Standard
-                      style={styles.flex1}
-                      label={t('own_translation.translation')}
-                      inputContainerStyle={styles.inputContainer}
-                      value={item}
-                      onChange={e =>
-                        onChange(
-                          value.map((val, index) => (index === idx ? e : val)),
-                        )
-                      }
-                    />
+          <Controller
+            control={control}
+            name="folderId"
+            render={({ field: { value, onChange } }) => (
+              <WordFeature.SelectFolder
+                folderId={value}
+                mBottom="16px"
+                onChange={item => {
+                  if (!item) {
+                    onChange('')
+                    return
+                  }
+
+                  onChange(item._id)
+                }}
+              />
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="lang"
+            render={({ field: { value, onChange } }) => (
+              <Controller
+                control={control}
+                name="flag"
+                render={({
+                  field: { value: flagValue, onChange: onChangeFlag },
+                }) => (
+                  <WordFeature.LangPicker
+                    value={value}
+                    flag={flagValue}
+                    onChange={item => {
+                      onChange(item.value)
+                      onChangeFlag(item.flag)
+                    }}
+                  />
+                )}
+              />
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="translations"
+            render={({ field: { value, onChange } }) => (
+              <>
+                {value.map((item, idx) => (
+                  <Styled.FlexWrapper
+                    key={idx.toString()}
+                    mTop="20px"
+                    align="center">
+                    <Styled.FlexWrapper width="auto" style={styles.flex1}>
+                      <Input.Standard
+                        style={styles.flex1}
+                        label={t('own_translation.translation')}
+                        inputContainerStyle={styles.inputContainer}
+                        value={item}
+                        onChange={e =>
+                          onChange(
+                            value.map((val, index) =>
+                              index === idx ? e : val,
+                            ),
+                          )
+                        }
+                      />
+                    </Styled.FlexWrapper>
+
+                    {value.length !== 1 && (
+                      <Button.Text
+                        mTop="22px"
+                        text={t('button.remove')}
+                        mLeft="12px"
+                        onPress={() =>
+                          onChange(value.filter((val, index) => index !== idx))
+                        }
+                      />
+                    )}
                   </Styled.FlexWrapper>
+                ))}
+              </>
+            )}
+          />
 
-                  {value.length !== 1 && (
-                    <Button.Text
-                      mTop="22px"
-                      text={t('button.remove')}
-                      mLeft="12px"
-                      onPress={() =>
-                        onChange(value.filter((val, index) => index !== idx))
-                      }
-                    />
-                  )}
-                </Styled.FlexWrapper>
-              ))}
-            </>
-          )}
-        />
-
-        <Controller
-          control={control}
-          name="translations"
-          render={({ field: { value } }) => (
-            <>
-              {value.length !== maxTranslationLenght && (
-                <Button.Standard
-                  text={t('own_translation.add')}
-                  type="tertiary"
-                  icon="Plus"
-                  mTop="12px"
-                  onPress={onPressAdd}
-                />
-              )}
-            </>
-          )}
-        />
+          <Controller
+            control={control}
+            name="translations"
+            render={({ field: { value } }) => (
+              <>
+                {value.length !== maxTranslationLenght && (
+                  <Button.Standard
+                    text={t('own_translation.add')}
+                    type="tertiary"
+                    icon="Plus"
+                    mTop="12px"
+                    onPress={onPressAdd}
+                  />
+                )}
+              </>
+            )}
+          />
+        </S.PaddingWrapper>
       </Background.Scroll>
     </Background.Container>
   )

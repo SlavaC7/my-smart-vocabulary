@@ -23,6 +23,7 @@ export const Standard = ({
   leftAction,
   titleAlign = ETitleAlign.center,
   TitleComponent = Typography.H3,
+  titleColor = 'black',
   ...props
 }: TStandardProps) => {
   const navigation = useNavigation()
@@ -69,7 +70,7 @@ export const Standard = ({
 
         <Styled.FlexWrapper width={'auto'} height={'100%'}>
           {titleAlign === ETitleAlign.start && _leftAction}
-          <TitleComponent>{title}</TitleComponent>
+          <TitleComponent color={titleColor}>{title}</TitleComponent>
         </Styled.FlexWrapper>
 
         {icon && (

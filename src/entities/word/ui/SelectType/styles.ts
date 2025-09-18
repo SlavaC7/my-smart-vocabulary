@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import { Styled } from '@/shared'
 
-export const FilterSelectItem = styled(Styled.Touchable)<{ active: boolean }>`
+export const SelectItem = styled(Styled.Touchable)<{ active: boolean }>`
   width: auto;
   flex: 1;
   border-radius: 8px;
