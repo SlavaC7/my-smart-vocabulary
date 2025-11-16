@@ -10,6 +10,7 @@ export type TStandardProps = {
   title?: string
   goBack?: boolean
   icon?: TIconsKeys
+  backIcon?: TIconsKeys
   iconProps?: Omit<TIconProps, 'name'>
   backIconProps?: Omit<TIconProps, 'name'>
   onPress?: () => void

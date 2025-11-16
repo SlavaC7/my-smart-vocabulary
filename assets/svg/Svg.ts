@@ -1,6 +1,7 @@
 export { default as Index } from './sources/index.svg'
 export { default as Back } from './sources/back.svg'
 export { default as ArrowLeft } from './sources/arrow-left.svg'
+export { default as ArrowLeftWhite } from './sources/arrow-left-white.svg'
 export { default as ArrowUpRight } from './sources/arrow-up-right.svg'
 export { default as CloseFilled } from './sources/close-filled.svg'
 export { default as DoneAll } from './sources/done-all.svg'

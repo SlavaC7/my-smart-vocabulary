@@ -10,6 +10,7 @@ export type TWord = {
   createdAt?: string
   examples?: Array<TTranslationExample>
   voice?: string
+  description?: string
   type: EWordType
   code: TAvailableLang
   flag: string

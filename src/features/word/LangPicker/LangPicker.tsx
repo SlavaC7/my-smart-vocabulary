@@ -4,7 +4,8 @@ import { useTranslation } from 'react-i18next'
 
 import { CountryPicker } from 'react-native-country-codes-picker'
 
-import { availableLang } from '@/entities/word/utils'
+import { useUserStore } from '@/entities/user'
+import { availableLang, TAvailableLang } from '@/entities/word/utils'
 
 import { Styled, Typography } from '@/shared'
 
@@ -13,7 +14,14 @@ import { TLangPickerProps } from './types'
 
 export const LangPicker = ({ onChange, value, flag }: TLangPickerProps) => {
   const { t } = useTranslation()
+  const { defaultLanguage, setDefaultLang } = useUserStore()
   const [visible, setVisible] = useState(false)
+
+  const showSetDefault = value !== defaultLanguage
+
+  const onSetDefault = () => {
+    setDefaultLang(value as TAvailableLang)
+  }
 
   return (
     <>
@@ -27,6 +35,17 @@ export const LangPicker = ({ onChange, value, flag }: TLangPickerProps) => {
             {flag} {value}
           </Typography.Body1R>
         </S.Container>
+
+        {!!showSetDefault && (
+          <Styled.Touchable
+            onPress={onSetDefault}
+            justify="flex-start"
+            mTop="16px">
+            <Typography.H4 color="primary_500">
+              {t('own_translation.set_lang_as_default', { value })}
+            </Typography.H4>
+          </Styled.Touchable>
+        )}
       </Styled.FlexWrapper>
 
       <CountryPicker

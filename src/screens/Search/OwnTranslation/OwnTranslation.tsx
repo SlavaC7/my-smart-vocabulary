@@ -4,6 +4,7 @@ import { useRoute } from '@react-navigation/native'
 import { Controller, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
+import { countryCodes } from 'react-native-country-codes-picker'
 import { useTheme } from 'styled-components'
 
 import { EScreens } from '@/app/navigation'
@@ -13,6 +14,7 @@ import { Header } from '@/widgets/header'
 
 import { WordFeature } from '@/features'
 
+import { useUserStore } from '@/entities/user'
 import {
   EWordType,
   TPostWordsApi,
@@ -24,6 +26,7 @@ import {
   Background,
   Button,
   errorHandler,
+  getFlag,
   Input,
   Styled,
   Typography,
@@ -43,11 +46,14 @@ export const OwnTranslation = () => {
   const navigation = useNavigation()
   const { setLoading } = useLoader()
   const { setWord } = useWordStore()
+  const { defaultLanguage } = useUserStore()
+
   const { params } =
     useRoute<TScreenQueryProps<EScreens.SearchOwnTranslation>>()
 
   const isHome = !!params.isHome
   const isEdit = !!params._id
+  const flag = defaultLanguage ? getFlag(defaultLanguage) : '🇺🇸'
 
   const {
     control,
@@ -62,8 +68,8 @@ export const OwnTranslation = () => {
       word: params?.word || '',
       type: params?.type ? params.type : EWordType.word,
       translations: params?.translations?.length ? params.translations : [''],
-      lang: params.lang || 'US',
-      flag: params.flag || '🇺🇸',
+      lang: params.lang || defaultLanguage || 'US',
+      flag: params.flag || flag,
       folderId: '',
     },
   })
@@ -115,9 +121,10 @@ export const OwnTranslation = () => {
   }
 
   return (
-    <Background.Container color={COLORS.primary_500}>
+    <Background.Container bottom={0} color={COLORS.primary_500}>
       <Header.Standard
         goBack
+        backIcon={'ArrowLeftWhite'}
         title={t('own_translation.title')}
         color={COLORS.primary_500}
         titleColor={'white'}

@@ -89,6 +89,7 @@ export default {
     your_word: 'Your word',
     type: 'Type of word',
     language: 'Language of word',
+    set_lang_as_default: 'Set {{value}} as default',
   },
   word: {
     synonyms: 'Synonyms',

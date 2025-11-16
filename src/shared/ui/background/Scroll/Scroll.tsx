@@ -24,8 +24,8 @@ export const Scroll = ({
         extraScrollHeight={70}
         enableOnAndroid
         {...keyboardAwareViewProps}
-        {...props}
-        bounces={true}>
+        bounces={true}
+        {...props}>
         <ScrollContainer>{children}</ScrollContainer>
       </KeyboardAwareScrollView>
     </>

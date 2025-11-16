@@ -24,6 +24,7 @@ export const Standard = ({
   titleAlign = ETitleAlign.center,
   TitleComponent = Typography.H3,
   titleColor = 'black',
+  backIcon = 'ArrowLeft',
   ...props
 }: TStandardProps) => {
   const navigation = useNavigation()
@@ -48,7 +49,7 @@ export const Standard = ({
         {goBack && (
           <TouchableOpacity style={styles.touch} onPress={_onGoBack}>
             <Icon
-              name="ArrowLeft"
+              name={backIcon}
               stroke={EColors.black}
               size={24}
               {...backIconProps}

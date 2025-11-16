@@ -109,6 +109,14 @@ export const Word = () => {
           </Styled.FlexWrapper>
         )}
 
+        {!!word.description && (
+          <Styled.FlexWrapper mTop={'16px'} mBottom={'16px'}>
+            <Typography.Body2R color="neutral_600">
+              {word.description}
+            </Typography.Body2R>
+          </Styled.FlexWrapper>
+        )}
+
         <S.TranslationContainer mTop="8px" mBottom="24px">
           <Icon name="Translate" size={16} />
           <Typography.Body1R mLeft="12px" style={S.styles.flex1}>
