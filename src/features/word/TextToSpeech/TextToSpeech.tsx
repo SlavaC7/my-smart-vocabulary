@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 
-import Tts from 'react-native-tts' // Import the TTS library
+import Tts from '@mhpdev/react-native-speech' 
 
 import { Icon } from '@/shared'
 
@@ -10,16 +10,18 @@ import { TTextToSpeechProps } from './types'
 export const TextToSpeech = ({ text, ...props }: TTextToSpeechProps) => {
   const onPress = useCallback(() => {
     if (text) {
-      Tts.setDefaultLanguage('it')
-      Tts.speak(text, {
-        iosVoiceId: 'com.apple.ttsbundle.Moira-compact',
-        rate: 0.5,
-        androidParams: {
-          KEY_PARAM_PAN: 0,
-          KEY_PARAM_VOLUME: 1,
-          KEY_PARAM_STREAM: 'STREAM_MUSIC',
-        },
+      Tts.initialize({
+        language:'it'
       })
+      // Tts.speak(text, {
+      //   iosVoiceId: 'com.apple.ttsbundle.Moira-compact',
+      //   rate: 0.5,
+      //   androidParams: {
+      //     KEY_PARAM_PAN: 0,
+      //     KEY_PARAM_VOLUME: 1,
+      //     KEY_PARAM_STREAM: 'STREAM_MUSIC',
+      //   },
+      // })
     }
   }, [text])
 
