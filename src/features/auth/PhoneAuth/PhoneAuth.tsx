@@ -14,7 +14,7 @@ export const PhoneAuth = () => {
 
       <Typography.H1>{t('auth.welcome')}</Typography.H1>
 
-      <Input.CountryPhone />
+      {/* <Input.CountryPhone /> */}
     </Styled.FlexWrapper>
   )
 }

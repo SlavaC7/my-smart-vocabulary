@@ -28,14 +28,14 @@ export const SocialAuth = () => {
     }
   }
   return (
-    <Styled.FlexWrapper flexDirection="column">
-      <Styled.FlexWrapper mBottom={'16px'}>
+    <Styled.FlexWrapper mTop="16px" flexDirection="column">
+      {/* <Styled.FlexWrapper mBottom={'16px'}>
         <S.Line />
         <Typography.Body2R mLeft={'16px'} mRight={'16px'}>
           {t('auth.or')}
         </Typography.Body2R>
         <S.Line />
-      </Styled.FlexWrapper>
+      </Styled.FlexWrapper> */}
       <S.ButtonContainer onPress={onGoogle}>
         <Icon name={'Google'} />
 

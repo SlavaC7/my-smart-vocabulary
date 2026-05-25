@@ -86,7 +86,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.6"
+        versionName "1.9"
     }
     signingConfigs {
         debug {
@@ -110,6 +110,7 @@ android {
     }
 }
 
+
 def getAppName = {
     def stringFile = file('src/main/res/values/strings.xml')
 
@@ -118,110 +119,43 @@ def getAppName = {
         return "UnknownApp"
     }
 
-    def xml = new XmlParser().parse(stringFile)
+    def xml = new groovy.xml.XmlParser().parse(stringFile)
+
     def appName = xml.string.find { it.@name == 'app_name' }
 
     return appName ? appName.text() : "UnknownApp" 
 }
 
-def incrementVersion = { versionName ->
+
+def updateVersion = { versionName ->
     def versionParts = versionName.split('\\.')
-    if (versionParts.length < 2) {
-        println("[Warning]: Неправильный формат версии: $versionName. Используем 1.0")
-        return "1.1"
-    }
-    
     int major = versionParts[0].toInteger()
     int minor = versionParts[1].toInteger() + 1
     def newVersionName = "$major.$minor"
 
-    println("[incrementVersion]: Увеличиваем версию с $versionName до $newVersionName")    
+    println("[updateVersion]: Увеличиваем версию до: " + newVersionName)    
     return newVersionName
 }
 
-def updateVersionInFile = { newVersionName ->
-    File buildFile = file('build.gradle')
-    if (!buildFile.exists()) {
-        println("[Error]: build.gradle не найден")
-        return false
-    }
-
-    String buildFileContent = buildFile.text
-    String oldContent = buildFileContent
-
-    // Обновляем versionName
-    buildFileContent = buildFileContent.replaceAll(
-        /versionName\s+"[\d.]+"/, 
-        'versionName "' + newVersionName + '"'
-    )
-
-    // Проверяем что что-то изменилось
-    if (oldContent == buildFileContent) {
-        println("[Warning]: Версия не была обновлена. Проверьте формат versionName в build.gradle")
-        return false
-    }
-
-    buildFile.write(buildFileContent)
-    println("[Success]: Версия обновлена в build.gradle на $newVersionName")
-    return true
-}
-
-task incrementVersionForRelease {
-    doFirst {
-        println("[incrementVersionForRelease]: Проверяем тип сборки...")
-        
-        def isReleaseBuild = gradle.startParameter.taskNames.any { 
-            it.contains('Release') || it.contains('release')
-        }
-
-        if (isReleaseBuild) {
-            println("[incrementVersionForRelease]: Это Release сборка, увеличиваем версию...")
-            
+task increaseVersion {
+     doLast {
+        if (gradle.startParameter.taskNames.any { it.contains('Release') }) {
             def currentVersionName = android.defaultConfig.versionName
-            def newVersionName = incrementVersion(currentVersionName)
-            
-            // Обновляем версию в файле
-            if (updateVersionInFile(newVersionName)) {
-                // Обновляем текущую версию для этой сборки
-                android.defaultConfig.versionName = newVersionName
-            }
+            def newVersionName = updateVersion(currentVersionName) 
+
+            File buildFile = file('build.gradle')
+            String buildFileContent = buildFile.text
+
+            buildFileContent = buildFileContent.replaceAll(/versionName "\d+\.\d+"/, 'versionName "' + newVersionName + '"')
+
+            buildFile.write(buildFileContent)
         } else {
-            println("[incrementVersionForRelease]: Debug сборка — версия не изменяется")
+            println("Debug сборка — версия не будет изменена")
         }
     }
 }
 
-tasks.whenTaskAdded { task ->
-    if (task.name.contains('assemble') && task.name.contains('Release')) {
-        task.dependsOn incrementVersionForRelease
-    }
-    if (task.name.contains('bundle') && task.name.contains('Release')) {
-        task.dependsOn incrementVersionForRelease
-    }
-}
-
-android.applicationVariants.all { variant ->
-    variant.outputs.all { output ->
-        if (variant.buildType.name == 'release') {
-            def appName = getAppName()
-            def versionName = variant.versionName
-            def versionCode = variant.versionCode
-            
-            // Для APK
-            if (output.outputFileName.endsWith('.apk')) {
-                outputFileName = "${appName}-v${versionName}-${versionCode}-release.apk"
-            }
-            
-            // Для AAB (Android App Bundle)
-            if (output.outputFileName.endsWith('.aab')) {
-                outputFileName = "${appName}-v${versionName}-${versionCode}-release.aab"
-            }
-            
-            println("[Output]: Файл будет называться: $outputFileName")
-        }
-    }
-}
-
+preBuild.dependsOn increaseVersion
 
 dependencies {
     implementation platform('com.google.firebase:firebase-bom:33.13.0')
