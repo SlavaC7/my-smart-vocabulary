@@ -17,7 +17,7 @@ export const Main = () => {
       <Background.Container color={COLORS.background}>
         <StatusBar barStyle={'dark-content'} />
         <Background.Standard pHorizontal={16}>
-          <AuthFeature.PhoneAuth />
+          {/* <AuthFeature.PhoneAuth /> */}
 
           <AuthFeature.SocialAuth />
         </Background.Standard>
