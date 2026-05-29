@@ -1,7 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react'
 
-import Voice from '@react-native-voice/voice'
-
 import { useIsFocused } from '@react-navigation/native'
 import { useTheme } from 'styled-components'
 
@@ -30,23 +28,23 @@ export const SpeechToText = ({
       }
     }
 
-    // Register voice handlers
-    Voice.onSpeechResults = onSpeechResults
-    Voice.onSpeechError = error => {
-      console.error('Speech error:', error)
-      setListen(false)
-    }
+    // // Register voice handlers
+    // Voice.onSpeechResults = onSpeechResults
+    // Voice.onSpeechError = error => {
+    //   console.error('Speech error:', error)
+    //   setListen(false)
+    // }
 
-    Voice.start('en-US') // Set language as needed
-      .catch(err => console.error('Voice start error:', err))
+    // Voice.start('en-US') // Set language as needed
+    //   .catch(err => console.error('Voice start error:', err))
   }, [])
 
   const onEnd = useCallback(() => {
     setListen(false)
 
-    Voice.stop().catch(err => console.error('Voice stop error:', err))
+    // Voice.stop().catch(err => console.error('Voice stop error:', err))
 
-    Voice.destroy().catch(err => console.error('Voice destroy error:', err))
+    // Voice.destroy().catch(err => console.error('Voice destroy error:', err))
   }, [])
 
   useEffect(() => {
@@ -65,16 +63,16 @@ export const SpeechToText = ({
       width="auto"
       disabled={disabled}
       onPress={listen ? onEnd : onStart}>
-      <Icon
+      {/* <Icon
         name="SpeechToText"
         fill={
           disabled
             ? COLORS.primary_300
             : listen
-            ? COLORSprimary_300
-            : COLORS.neutral_300
+              ? COLORSprimary_300
+              : COLORS.neutral_300
         }
-      />
+      /> */}
     </Styled.Touchable>
   )
 }
