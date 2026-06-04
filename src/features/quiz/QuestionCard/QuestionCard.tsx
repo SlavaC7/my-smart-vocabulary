@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { View } from 'react-native'
+import { Keyboard, View } from 'react-native'
 
 import { useTranslation } from 'react-i18next'
 
@@ -43,6 +43,8 @@ export const QuestionCard = ({
 
   const onAnswer = async () => {
     try {
+      if (isWrite) Keyboard.dismiss()
+
       const currentAnswer = answers.find(item => item.id === answer)
 
       const isWriteCorrect = correctWriteWord

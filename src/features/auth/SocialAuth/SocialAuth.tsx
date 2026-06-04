@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import { useAuth } from '@/entities/auth'
 
-import { errorHandler, Icon, Styled, Typography } from '@/shared'
+import { errorHandler, Icon, isIos, Styled, Typography } from '@/shared'
 
 import { FirebaseService } from '@/shared/services/firebase'
 
@@ -17,7 +17,6 @@ export const SocialAuth = () => {
   const onGoogle = async () => {
     try {
       await FirebaseService.signInWithGoogle()
-      console.log('SUCCESS')
 
       auth()
     } catch (error) {
@@ -42,10 +41,12 @@ export const SocialAuth = () => {
         <Typography.H3 mLeft={'10px'}>{t('auth.google')}</Typography.H3>
       </S.ButtonContainer>
 
-      <S.ButtonContainer mTop={'10px'}>
-        <Icon name={'Apple'} />
-        <Typography.H3 mLeft={'10px'}>{t('auth.apple')}</Typography.H3>
-      </S.ButtonContainer>
+      {isIos && (
+        <S.ButtonContainer mTop={'10px'}>
+          <Icon name={'Apple'} />
+          <Typography.H3 mLeft={'10px'}>{t('auth.apple')}</Typography.H3>
+        </S.ButtonContainer>
+      )}
     </Styled.FlexWrapper>
   )
 }
