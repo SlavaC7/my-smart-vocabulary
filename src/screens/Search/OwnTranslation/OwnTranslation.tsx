@@ -38,6 +38,7 @@ import { maxTranslationLenght } from './config'
 import * as S from './styles'
 import { TCreateOwnTranslationForm } from './types'
 import { createOwnTranslationSchema } from './validation'
+import { Divider } from '@/shared/ui/styled/Styled'
 
 export const OwnTranslation = () => {
   const { COLORS } = useTheme()
@@ -300,6 +301,7 @@ export const OwnTranslation = () => {
             )}
           />
         </S.PaddingWrapper>
+        <Styled.Divider height={70} />
       </Background.Scroll>
     </Background.Container>
   )

@@ -29,7 +29,6 @@ export const Base = forwardRef<TBaseModalRef, TBaseModalProps>(
     const [modalVisible, setModalVisible] = useState(false)
 
     const close = () => {
-      console.log('close')
       setModalVisible(false)
       onClose?.()
     }

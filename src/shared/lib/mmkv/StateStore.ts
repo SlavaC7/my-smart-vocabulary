@@ -11,14 +11,27 @@ export const storage = new MMKV({
 // Configure Zustand to use MMKV for state persistence
 export const zustandStorage: StateStorage = {
   setItem: (name, value) => {
-    storage.set(name, value)
+    try {
+      storage.set(name, value)
+    } catch (e) {
+      console.error('[MMKV] setItem failed', e)
+    }
   },
   getItem: name => {
-    const value = storage.getString(name)
-    return value ?? null
+    try {
+      const value = storage.getString(name)
+      return value ?? null
+    } catch (e) {
+      console.error('[MMKV] getItem failed', e)
+      return null
+    }
   },
   removeItem: name => {
-    storage.delete(name)
+    try {
+      storage.delete(name)
+    } catch (e) {
+      console.error('[MMKV] removeItem failed', e)
+    }
   },
 }
 

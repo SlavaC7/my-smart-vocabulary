@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-import { KeyboardAwareScrollViewProps } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollViewProps } from 'react-native-keyboard-controller'
 
 import { TEColors } from '../../styled'
 

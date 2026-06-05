@@ -22,8 +22,6 @@ const Stack = createNativeStackNavigator<TMainStack>()
 export const MainStack = () => {
   const { user } = useUserStore()
 
-  console.log('USER =>', user, !!user)
-
   const isUser = !!user
   return (
     <Stack.Navigator

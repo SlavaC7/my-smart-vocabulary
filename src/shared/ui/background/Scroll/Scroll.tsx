@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller'
 
 import { EColors } from '../../styled'
 
@@ -21,8 +21,7 @@ export const Scroll = ({
           { paddingHorizontal: pHorizontal, backgroundColor: EColors[color] },
           styles.container,
         ]}
-        extraScrollHeight={70}
-        enableOnAndroid
+        bottomOffset={50}
         {...keyboardAwareViewProps}
         bounces={true}
         {...props}>

@@ -7,10 +7,9 @@ import React, {
 
 import { Keyboard } from 'react-native'
 
-import { BottomSheetModal } from '@gorhom/bottom-sheet'
+import { BottomSheetBackdrop, BottomSheetModal } from '@gorhom/bottom-sheet'
 import { BottomSheetBackdropProps } from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types'
 
-import * as UI from './components'
 import * as S from './styles'
 import { TBottomSheetModalRef, TBottomSheetModalProps } from './types'
 
@@ -29,7 +28,6 @@ export const Modal = forwardRef<TBottomSheetModalRef, TBottomSheetModalProps>(
 
     const _onClose = async () => {
       props?.onDismiss?.()
-      bottomSheetRef.current?.dismiss()
     }
 
     useImperativeHandle(
@@ -56,7 +54,7 @@ export const Modal = forwardRef<TBottomSheetModalRef, TBottomSheetModalProps>(
 
     const renderBackdrop = useCallback(
       (backdropProps: BottomSheetBackdropProps) => (
-        <UI.AntiFlickerBottomSheetBackdrop
+        <BottomSheetBackdrop
           {...backdropProps}
           disappearsOnIndex={-1}
           appearsOnIndex={0}

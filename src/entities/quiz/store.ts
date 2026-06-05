@@ -40,8 +40,11 @@ export const useQuizStore = create<TQuizStore>()(
       clear: () => set({}),
     }),
     {
-      name: EStores.user,
-      partialize: () => ({}),
+      name: EStores.quiz,
+      partialize: state => ({
+        quizzes: state.quizzes,
+        activeQuiz: state.activeQuiz,
+      }),
       storage: createJSONStorage(() => zustandStorage),
     },
   ),

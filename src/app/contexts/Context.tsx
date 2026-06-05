@@ -15,6 +15,7 @@ import { LanguageProvider } from './Language'
 import { LoaderWrapper } from './Loader'
 import { ThemeWrapper } from './Theme'
 import { ToastWrapper } from './Toast'
+import { KeyboardProvider } from 'react-native-keyboard-controller'
 
 type TContext = {
   children: ReactNode
@@ -23,29 +24,31 @@ type TContext = {
 export const Contexts = ({ children }: TContext) => {
   const cache = useSwrCache()
 
-  if (!cache) return null
   return (
     <>
-      <SWRConfig value={{ provider: cache ? () => cache : undefined }}>
+      <SWRConfig value={{ provider: () => cache }}>
         {/*  SaveAreaView */}
         <SafeAreaProvider>
           {/* GestureHandler */}
           <GestureHandlerRootView style={styles.gestureHandlerContainer}>
-            {/* Theme */}
-            <ThemeWrapper>
-              {/* Loader */}
-              <LoaderWrapper>
-                {/* Language */}
-                <LanguageProvider>
-                  {/* Toast */}
-                  <ToastWrapper>
-                    <BottomSheetModalProvider>
-                      {children}
-                    </BottomSheetModalProvider>
-                  </ToastWrapper>
-                </LanguageProvider>
-              </LoaderWrapper>
-            </ThemeWrapper>
+            {/* KeyboardController */}
+            <KeyboardProvider>
+              {/* Theme */}
+              <ThemeWrapper>
+                {/* Loader */}
+                <LoaderWrapper>
+                  {/* Language */}
+                  <LanguageProvider>
+                    {/* Toast */}
+                    <ToastWrapper>
+                      <BottomSheetModalProvider>
+                        {children}
+                      </BottomSheetModalProvider>
+                    </ToastWrapper>
+                  </LanguageProvider>
+                </LoaderWrapper>
+              </ThemeWrapper>
+            </KeyboardProvider>
           </GestureHandlerRootView>
         </SafeAreaProvider>
       </SWRConfig>

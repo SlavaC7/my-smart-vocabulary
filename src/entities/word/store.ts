@@ -83,7 +83,7 @@ export const useWordStore = create<TWordStore>()(
       name: EStores.word,
       partialize: state => ({
         words: state.words,
-        folder: state.folders,
+        folders: state.folders,
       }),
       storage: createJSONStorage(() => zustandStorage),
     },
