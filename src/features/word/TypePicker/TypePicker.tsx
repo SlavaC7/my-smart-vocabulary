@@ -45,6 +45,7 @@ export const TypePicker = ({
     const isMLeft = index % 2 === 0
     return (
       <WordEntity.SelectType
+        key={item}
         mRight={isMLeft ? '8px' : '0px'}
         mLeft={!isMLeft ? '8px' : '0px'}
         active={active}

@@ -1,9 +1,10 @@
 import { Platform } from 'react-native'
 
-import { SENTRY_DNS } from '@env'
 import { getFocusedRouteNameFromRoute, Route } from '@react-navigation/native'
 import * as Sentry from '@sentry/react-native'
 import DeviceInfo from 'react-native-device-info'
+
+import Toast from 'react-native-toast-message'
 
 import { EScreens, Navigation } from '@/app/navigation'
 
@@ -19,7 +20,7 @@ export interface ILogMessage {
   message: string
   module?: string
   screen?: string
-  metadata?: Record<string, unknown>
+  metadata?: unknown
   timestamp: string
 }
 
@@ -39,7 +40,7 @@ const getCurrentScreenName = (): string | undefined => {
       currentRoute.name.replace('Stack', 'Main')
     ).replace('Screen', '') + 'Screen') as EScreens
     return focusedScreen
-  } catch {}
+  } catch { }
   return undefined
 }
 
@@ -69,16 +70,23 @@ const logToConsole = (msg: ILogMessage) => {
     const screenInfo = msg.screen ? `[${msg.screen}]` : ''
 
     console.log(
-      `%c${
-        msg.timestamp
+      `%c${msg.timestamp
       } ${msg.level.toUpperCase()} ${moduleInfo}${screenInfo}: ${msg.message}`,
       style,
+      { ...msg.metadata },
     )
 
-    if (msg.metadata) {
-      console.log('Metadata:', msg.metadata)
-    }
+    // if (msg.metadata) {
+    //   console.log('Metadata:', msg.metadata)
+    // }
   }
+}
+const logToToast = (msg: ILogMessage) => {
+  Toast.show({
+    type: 'error',
+    text1: msg.message,
+    text2: msg.metadata ? JSON.stringify(msg.metadata) : 'NONE',
+  })
 }
 
 const logToSentry = (msg: ILogMessage) => {
@@ -88,21 +96,17 @@ const logToSentry = (msg: ILogMessage) => {
   ) {
     Sentry.withScope(scope => {
       scope.setLevel(msg.level === LogLevel.ERROR ? 'error' : 'warning')
-
       scope.setContext('logger', {
         module: msg.module,
         screen: msg.screen,
         timestamp: msg.timestamp,
       })
-
       scope.setContext('device', getDeviceMetadata())
-
       if (msg.metadata) {
         Object.entries(msg.metadata).forEach(([key, value]) => {
           scope.setExtra(key, value)
         })
       }
-
       if (msg.level === LogLevel.ERROR) {
         Sentry.captureException(new Error(msg.message))
       } else {
@@ -140,7 +144,7 @@ const logMessage = (
   level: LogLevel,
   message: string,
   module?: string,
-  metadata?: Record<string, unknown>,
+  metadata?: unknown,
 ) => {
   const screen = getCurrentScreenName()
   const msg: ILogMessage = {
@@ -154,21 +158,22 @@ const logMessage = (
 
   logToConsole(msg)
   logToSentry(msg)
+  logToToast(msg)
   // logToLogRocket(msg)
 }
 
 export const getLogger = (moduleName?: string) => {
   return {
-    error: (message: string, metadata?: Record<string, unknown>) => {
-      logMessage(LogLevel.ERROR, message, moduleName, metadata)
+    error: (message: string, metadata?: unknown, module?: string) => {
+      logMessage(LogLevel.ERROR, message, module || moduleName, metadata)
     },
-    warn: (message: string, metadata?: Record<string, unknown>) => {
+    warn: (message: string, metadata?: unknown) => {
       logMessage(LogLevel.WARN, message, moduleName, metadata)
     },
-    info: (message: string, metadata?: Record<string, unknown>) => {
+    info: (message: string, metadata?: unknown) => {
       logMessage(LogLevel.INFO, message, moduleName, metadata)
     },
-    debug: (message: string, metadata?: Record<string, unknown>) => {
+    debug: (message: string, metadata?: unknown) => {
       if (__DEV__) {
         logMessage(LogLevel.DEBUG, message, moduleName, metadata)
       }
@@ -179,7 +184,7 @@ export const getLogger = (moduleName?: string) => {
 export const logError = (
   error: unknown,
   context?: string,
-  additionalMetadata?: Record<string, unknown>,
+  additionalMetadata?: unknown,
 ) => {
   const logger = getLogger(context)
   const screen = getCurrentScreenName()
@@ -189,28 +194,30 @@ export const logError = (
       errorName: error.name,
       stack: error.stack,
       screen,
-      ...additionalMetadata,
+      ...(typeof additionalMetadata === 'object' && additionalMetadata
+        ? additionalMetadata
+        : {}),
     })
   } else {
     logger.error(String(error), {
       screen,
-      ...additionalMetadata,
+      ...(typeof additionalMetadata === 'object' && additionalMetadata
+        ? additionalMetadata
+        : {}),
     })
   }
 }
 
 export const initializeLogging = (userId?: string) => {
-  Sentry.init({
-    dsn: SENTRY_DNS,
-    environment: __DEV__ ? 'development' : 'production',
-  })
-
+  // Sentry.init({
+  //   dsn: SENTRY_DNS,
+  //   environment: __DEV__ ? 'development' : 'production',
+  // })
   //   LogRocket.init(LOGROCKET_KEY)
-
-  if (userId) {
-    Sentry.setUser({ id: userId })
-    // LogRocket.identify(userId)
-  }
+  // if (userId) {
+  //   Sentry.setUser({ id: userId })
+  //   // LogRocket.identify(userId)
+  // }
 }
 
 export const logger = getLogger('App')

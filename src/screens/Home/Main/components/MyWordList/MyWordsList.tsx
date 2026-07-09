@@ -13,6 +13,7 @@ import { TFolder, TWord, WordEntity, WordsService } from '@/entities/word'
 
 import {
   appPadding,
+  Button,
   Icon,
   Styled,
   Typography,
@@ -58,17 +59,19 @@ export const MyWordsList = ({ search }: TMyWordsListProps) => {
   )
 
   const renderHeader = () => (
-    <Styled.Touchable
-      mTop="22px"
-      mBottom="12px"
-      justify="flex-start"
-      onPress={() => foldersBSRef.current?.open()}
-      width="auto">
-      <Typography.H2 mRight="4px">
-        {selectedFolder?.name || t('folder.my_words')}
-      </Typography.H2>
-      <Icon name="ExpandDown" />
-    </Styled.Touchable>
+    <Styled.FlexWrapper mBottom="12px" mTop="22px" justify="space-between">
+      <Styled.Touchable
+        justify="flex-start"
+        onPress={() => foldersBSRef.current?.open()}
+        width="70%">
+        <Typography.H2 mRight="4px">
+          {selectedFolder?.name || t('folder.my_words')}
+        </Typography.H2>
+        <Icon name="ExpandDown" />
+      </Styled.Touchable>
+
+      <WordFeature.DeleteAllWords onRefresh={refresh} />
+    </Styled.FlexWrapper>
   )
 
   return (

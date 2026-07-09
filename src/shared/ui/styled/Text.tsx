@@ -29,10 +29,12 @@ export const StyledText = styled(Text).attrs<{ style?: StyleProp<TextStyle> }>(
   ${props => css`
     ${MARGIN(props)}
 
-    ${props.size &&
-    css`
-      font-size: ${props.size};
-    `}
+    ${
+      props.size &&
+      css`
+        font-size: ${props.size};
+      `
+    }
 
     color: ${({ theme: { COLORS } }) =>
       Object.keys(COLORS).includes(props?.color as EColors)

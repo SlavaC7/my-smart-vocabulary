@@ -16,7 +16,7 @@ export const Standard = ({
   width = '100%',
   color = 'black',
   text,
-  textColor = 'font_dark_blue',
+  textColor = 'black',
   disabled = false,
   radius = 70,
   icon,
@@ -43,7 +43,7 @@ export const Standard = ({
         return {
           color: 'neutral_400',
           iconProps: {
-            fill: COLORS.font_dark_blue,
+            fill: COLORS.black,
             ...iconProps,
           },
           textColor: 'white',
@@ -51,9 +51,9 @@ export const Standard = ({
       }
 
       return {
-        color: 'black',
+        color: 'primary_500',
         iconProps: {
-          fill: COLORS.font_dark_blue,
+          fill: COLORS.black,
           ...iconProps,
         },
         textColor: 'white',
@@ -80,7 +80,7 @@ export const Standard = ({
           fill: COLORS.neutral_700,
           ...iconProps,
         },
-        textColor: 'white',
+        textColor: 'primary_500',
         borderColor: 'primary_500',
         borderWidth: 1,
       }

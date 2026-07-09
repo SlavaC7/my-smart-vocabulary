@@ -11,7 +11,6 @@ export const ModalContainer = styled(TouchableOpacity).attrs({
   width: 100%;
   justify-content: center;
   align-items: center;
-  background-color: red;
 `
 
 export const CloseButton = styled(TouchableOpacity).attrs({

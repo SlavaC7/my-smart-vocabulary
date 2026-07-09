@@ -4,6 +4,8 @@ import { Keyboard, View } from 'react-native'
 
 import { useTranslation } from 'react-i18next'
 
+import { useShallow } from 'zustand/react/shallow'
+
 import { EQuizItemMode, useQuizStore } from '@/entities/quiz'
 import { QuizService } from '@/entities/quiz/services'
 import { WordEntity } from '@/entities/word'
@@ -15,7 +17,7 @@ import { onTransString } from './helper'
 import * as S from './styled'
 import { TQuestionCardProps } from './types'
 
-export const QuestionCard = ({
+const QuestionCardComponent = ({
   answers,
   word,
   id,
@@ -28,10 +30,16 @@ export const QuestionCard = ({
   correctWriteWord = [],
 }: TQuestionCardProps) => {
   const { t } = useTranslation()
-  const { setQuizState, activeQuiz } = useQuizStore()
 
-  const haveAnswer = activeQuiz?.userAnswers.find(
-    item => item.questionId === id,
+  // Select only what this card needs. setQuizState is a stable action, and
+  // haveAnswer is scoped to THIS question via useShallow, so the card
+  // re-renders exactly when its own answer changes — not when other cards
+  // are answered (which only replaces the activeQuiz reference).
+  const setQuizState = useQuizStore(state => state.setQuizState)
+  const haveAnswer = useQuizStore(
+    useShallow(state =>
+      state.activeQuiz?.userAnswers.find(item => item.questionId === id),
+    ),
   )
 
   const isCorrect = haveAnswer?.isCorrect
@@ -136,3 +144,9 @@ export const QuestionCard = ({
     </View>
   )
 }
+
+// Questions are immutable during a run, so with stable props (frozen item +
+// stable onPressItem) this memo skips re-renders on unrelated store updates
+// and carousel swipes. The internal haveAnswer selector still triggers a
+// re-render when this card's own answer arrives.
+export const QuestionCard = React.memo(QuestionCardComponent)

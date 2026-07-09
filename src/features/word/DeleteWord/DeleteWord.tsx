@@ -16,7 +16,6 @@ export const DeleteWord = ({ id: wordId, onDelete }: TDeleteWordProps) => {
 
       if (onDelete) {
         onDelete()
-        console.log('Word deleted')
         return
       }
     } catch (error) {

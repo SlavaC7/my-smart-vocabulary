@@ -93,6 +93,10 @@ export default {
   },
   word: {
     synonyms: 'Synonyms',
+    delete_all: 'Delete all',
+    are_u_sure: 'Are you sure?',
+    delete_all_description:
+      'Are you sure you want to delete all words? This action cannot be undone.',
   },
   button: {
     save: 'Save',
@@ -106,6 +110,7 @@ export default {
     answer: 'Answer',
     continue: 'Continue',
     complete: 'Complete',
+    cancel: 'Cancel',
   },
   statistics: {
     title: 'Statistics',
@@ -139,6 +144,12 @@ export default {
     match: 'Match',
   },
 
+  empty: {
+    quiz: {
+      title: 'No words found',
+      description: 'Add min 10 words to and start a new quiz',
+    }
+  },
   test_success: {
     congratulations: 'Congratulations!',
     new_quiz: 'Add new words and consolidate your score in a new quiz!',
@@ -154,7 +165,7 @@ export default {
     norm: {
       title: '😏Way to go!😍',
       description:
-        ' But you can do better!\nTake the test again to memorize more words.',
+        'But you can do better!\nTake the test again to memorize more words.',
     },
   },
 }

@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useMemo, useRef, useState } from 'react'
 
 import { Dimensions } from 'react-native'
 
@@ -30,21 +30,36 @@ import { TQuestionListProps } from './types'
 const { width: viewportWidth, height } = Dimensions.get('window')
 
 export const QuestionList = ({}: TQuestionListProps) => {
-  const { activeQuiz, setQuizState } = useQuizStore()
+  const activeQuiz = useQuizStore(state => state.activeQuiz)
+  const setQuizState = useQuizStore(state => state.setQuizState)
+
   const ref = useRef<ICarouselInstance>(null)
   const [disable, setDisable] = useState<boolean>(false)
   const activeIndex = useRef(0)
 
   const { navigate } = useNavigation()
 
-  const onCompleteTest = async () => {
+  // Questions are immutable during a run. Freeze them per quiz id so that
+  // answering (which replaces activeQuiz in the store) does not churn the
+  // carousel data or the item identities passed to each memoized QuestionCard.
+  const questions = useMemo(
+    () => activeQuiz?.quiz ?? [],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [activeQuiz?._id],
+  )
+
+  // Keep latest values reachable from the stable callbacks below, so those
+  // callbacks never have to be recreated (which would break QuestionCard memo).
+  const latest = useRef({ activeQuiz, setQuizState, navigate, questions })
+  latest.current = { activeQuiz, setQuizState, navigate, questions }
+
+  const onCompleteTest = useCallback(async () => {
+    const { activeQuiz, setQuizState, navigate } = latest.current
     if (!activeQuiz?._id) return
     try {
       const { data } = await QuizService.postQuizComplete({
         id: activeQuiz._id,
       })
-
-      console.log('postQuizComplete =>', data)
 
       setQuizState({ activeQuiz: data })
 
@@ -55,41 +70,37 @@ export const QuestionList = ({}: TQuestionListProps) => {
         name: 'onCompleteTest',
       })
     }
-  }
+  }, [])
 
-  const onPress = () => {
-    console.log('NEXT', activeIndex.current + 1, activeQuiz?.quiz.length)
-
+  const onPress = useCallback(() => {
     setTimeout(() => {
-      if (activeIndex.current + 1 === activeQuiz?.quiz.length) {
+      if (activeIndex.current + 1 === latest.current.questions.length) {
         onCompleteTest()
         return
       }
-      console.log('snapToNext')
 
       ref.current?.next()
     }, 1500)
-  }
+  }, [onCompleteTest])
 
   const renderItem = useCallback(
     ({ item }: { item: TQuizItem }) => {
-      if (!activeQuiz) {
+      const quizId = latest.current.activeQuiz?._id
+      if (!quizId) {
         return <></>
       }
-      return (
-        <QuestionCard {...item} quizId={activeQuiz._id} onPressItem={onPress} />
-      )
+      return <QuestionCard {...item} quizId={quizId} onPressItem={onPress} />
     },
-    [activeQuiz],
+    [onPress],
   )
 
-  const onSetActiveIndex = (index: number) => {
+  const onSetActiveIndex = useCallback((index: number) => {
     activeIndex.current = index
-  }
+  }, [])
 
-  const _goBack = () => {
+  const _goBack = useCallback(() => {
     navigate(EScreens.TestsMain)
-  }
+  }, [navigate])
 
   return (
     <>
@@ -101,15 +112,15 @@ export const QuestionList = ({}: TQuestionListProps) => {
 
           <QuizFeatures.Progress
             width={wp(78)}
-            total={activeQuiz?.quiz.length || 1}
+            total={questions.length || 1}
             count={(activeIndex.current || 0) + 1}
           />
         </Styled.FlexWrapper>
 
-        {!!activeQuiz?.quiz.length && (
+        {!!questions.length && (
           <Carousel
             ref={ref}
-            data={activeQuiz.quiz}
+            data={questions}
             renderItem={renderItem}
             onSnapToItem={onSetActiveIndex}
             width={viewportWidth}

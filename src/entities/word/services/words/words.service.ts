@@ -38,4 +38,9 @@ export class WordsService {
   }: T.TGetWordByIdApi['payload']): TResponse<T.TGetWordByIdApi['response']> {
     return apiPrivate.delete(`/words/${id}`)
   }
+
+  //delete all Word
+  static async deleteAllWord(): TResponse<T.TGetWordByIdApi['response']> {
+    return apiPrivate.delete(`/words`)
+  }
 }
